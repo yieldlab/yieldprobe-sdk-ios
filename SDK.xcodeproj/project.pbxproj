@@ -17,7 +17,11 @@
 		915C8ACC234385DA00746E7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 915C8ACA234385DA00746E7E /* LaunchScreen.storyboard */; };
 		915C8AD42343871400746E7E /* Yieldprobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915C8AAA234384FC00746E7E /* Yieldprobe.framework */; };
 		915C8AD52343871400746E7E /* Yieldprobe.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 915C8AAA234384FC00746E7E /* Yieldprobe.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		915C8ADB2343897600746E7E /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8ADA2343897600746E7E /* HTTPClient.swift */; };
+		915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8ADC234389BA00746E7E /* URLSession+YLD.swift */; };
 		915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE023438BAD00746E7E /* YieldprobeTests.swift */; };
+		915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE223438C0800746E7E /* HTTPMock.swift */; };
+		91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646823477BF4006E6563 /* URL+YLD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +77,11 @@
 		915C8AC8234385DA00746E7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		915C8ACB234385DA00746E7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		915C8ACD234385DA00746E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		915C8ADA2343897600746E7E /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		915C8ADC234389BA00746E7E /* URLSession+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+YLD.swift"; sourceTree = "<group>"; };
 		915C8AE023438BAD00746E7E /* YieldprobeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YieldprobeTests.swift; sourceTree = "<group>"; };
+		915C8AE223438C0800746E7E /* HTTPMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMock.swift; sourceTree = "<group>"; };
+		91D8646823477BF4006E6563 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +134,9 @@
 		915C8A7723437B4500746E7E /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				91D8646723477BE4006E6563 /* Extensions */,
 				915C8A7823437B4500746E7E /* CanaryTests.swift */,
+				915C8AE223438C0800746E7E /* HTTPMock.swift */,
 				915C8A7A23437B4500746E7E /* Info.plist */,
 			);
 			path = "Unit Tests";
@@ -135,7 +145,9 @@
 		915C8AAB234384FC00746E7E /* Yieldprobe */ = {
 			isa = PBXGroup;
 			children = (
+				915C8AD92343896600746E7E /* Extensions */,
 				915C8AAD234384FC00746E7E /* Info.plist */,
+				915C8ADA2343897600746E7E /* HTTPClient.swift */,
 				915C8AB72343855400746E7E /* Yieldprobe.swift */,
 				915C8AE023438BAD00746E7E /* YieldprobeTests.swift */,
 			);
@@ -161,6 +173,22 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		915C8AD92343896600746E7E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				915C8ADC234389BA00746E7E /* URLSession+YLD.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		91D8646723477BE4006E6563 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				91D8646823477BF4006E6563 /* URL+YLD.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,8 +334,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
 				915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */,
+				91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +345,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */,
+				915C8ADB2343897600746E7E /* HTTPClient.swift in Sources */,
 				915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

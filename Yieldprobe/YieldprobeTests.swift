@@ -38,4 +38,31 @@ class YieldprobeTests: XCTestCase {
         XCTAssertEqual(sdkVersion, infoVersion as? String)
     }
     
+    // MARK: Bid Requests
+    
+    func testProbeRequest () {
+        // Arrange:
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http)
+        
+        // Act:
+        sut.probe(slot: 1234) {
+            XCTFail("Should not be called.")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        guard let call = http.calls.first else {
+            return
+        }
+        guard case .get(let url, _) = call else {
+            return XCTFail("Unexpected call: \(call)")
+        }
+        XCTAssertEqual(url.scheme, "https")
+        XCTAssertEqual(url.host, "ad.yieldlab.net")
+        XCTAssertEqual(url.pathComponents, ["/", "yp", "1234"])
+        XCTAssertEqual(url.queryValues(for: "content"), ["json"])
+        XCTAssertEqual(url.queryValues(for: "pvid"), ["true"])
+    }
+    
 }

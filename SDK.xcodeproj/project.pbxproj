@@ -22,6 +22,7 @@
 		915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE023438BAD00746E7E /* YieldprobeTests.swift */; };
 		915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE223438C0800746E7E /* HTTPMock.swift */; };
 		91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646823477BF4006E6563 /* URL+YLD.swift */; };
+		91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646A234794DB006E6563 /* URLSessionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		915C8AE023438BAD00746E7E /* YieldprobeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YieldprobeTests.swift; sourceTree = "<group>"; };
 		915C8AE223438C0800746E7E /* HTTPMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMock.swift; sourceTree = "<group>"; };
 		91D8646823477BF4006E6563 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
+		91D8646A234794DB006E6563 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				915C8ADC234389BA00746E7E /* URLSession+YLD.swift */,
+				91D8646A234794DB006E6563 /* URLSessionTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */,
 				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
 				915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */,

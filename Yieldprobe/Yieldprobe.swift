@@ -28,7 +28,7 @@ public class Yieldprobe: NSObject {
             .object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
     }
     
-    init (http: HTTPClient = Self.defaultClient) {
+    init (http: HTTPClient = Yieldprobe.defaultClient) {
         self.http = http
     }
     

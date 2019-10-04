@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8A7823437B4500746E7E /* CanaryTests.swift */; };
-		915C8AAE234384FD00746E7E /* Yieldprobe.h in Headers */ = {isa = PBXBuildFile; fileRef = 915C8AAC234384FC00746E7E /* Yieldprobe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AB72343855400746E7E /* Yieldprobe.swift */; };
 		915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8ABF234385D400746E7E /* AppDelegate.swift */; };
 		915C8AC2234385D400746E7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AC1234385D400746E7E /* SceneDelegate.swift */; };
@@ -64,7 +63,6 @@
 		915C8A7823437B4500746E7E /* CanaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanaryTests.swift; sourceTree = "<group>"; };
 		915C8A7A23437B4500746E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		915C8AAA234384FC00746E7E /* Yieldprobe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Yieldprobe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		915C8AAC234384FC00746E7E /* Yieldprobe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Yieldprobe.h; sourceTree = "<group>"; };
 		915C8AAD234384FC00746E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		915C8AB72343855400746E7E /* Yieldprobe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yieldprobe.swift; sourceTree = "<group>"; };
 		915C8ABD234385D400746E7E /* Test Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				915C8AAD234384FC00746E7E /* Info.plist */,
-				915C8AAC234384FC00746E7E /* Yieldprobe.h */,
 				915C8AB72343855400746E7E /* Yieldprobe.swift */,
 				915C8AE023438BAD00746E7E /* YieldprobeTests.swift */,
 			);
@@ -173,7 +170,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				915C8AAE234384FD00746E7E /* Yieldprobe.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,7 +597,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
+				VERSIONING_SYSTEM = "";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
@@ -676,7 +672,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
+				VERSIONING_SYSTEM = "";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;

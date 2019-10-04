@@ -24,4 +24,18 @@ class YieldprobeTests: XCTestCase {
         XCTAssertTrue(sut1 === sut2)
     }
     
+    // MARK: SDK Version
+    
+    func testSDKVersion () {
+        // Arrange:
+        let sut = Yieldprobe.shared
+        
+        // Act:
+        let sdkVersion = sut.sdkVersion
+        let infoVersion = Bundle(for: Yieldprobe.self).object(forInfoDictionaryKey: kCFBundleVersionKey as String)
+        
+        // Assert:
+        XCTAssertEqual(sdkVersion, infoVersion as? String)
+    }
+    
 }

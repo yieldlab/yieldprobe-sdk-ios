@@ -14,7 +14,7 @@ public class Yieldprobe: NSObject {
     
     public static let shared = Yieldprobe()
     
-    static let session: URLSession = {
+    static let defaultClient: HTTPClient = {
         let configuration = URLSessionConfiguration.default
         return URLSession(configuration: configuration)
     }()
@@ -28,7 +28,7 @@ public class Yieldprobe: NSObject {
             .object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
     }
     
-    init (http: HTTPClient = Yieldprobe.session) {
+    init (http: HTTPClient = Self.defaultClient) {
         self.http = http
     }
     

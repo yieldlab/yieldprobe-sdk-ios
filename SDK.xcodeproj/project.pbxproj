@@ -13,6 +13,10 @@
 		915618CE234B29AD00D5F530 /* URLComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CD234B29AD00D5F530 /* URLComponentsTests.swift */; };
 		915618D0234B2FDB00D5F530 /* ConsentDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CF234B2FDB00D5F530 /* ConsentDecorator.swift */; };
 		915618D2234B30F600D5F530 /* ConsentDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D1234B30F600D5F530 /* ConsentDecoratorTests.swift */; };
+		915618D4234B3D9100D5F530 /* URLDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D3234B3D9100D5F530 /* URLDecorator.swift */; };
+		915618D6234B3DDF00D5F530 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D5234B3DDF00D5F530 /* URL+YLD.swift */; };
+		915618D8234B3F1500D5F530 /* UserDefaults+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D7234B3F1500D5F530 /* UserDefaults+YLD.swift */; };
+		915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D9234B409200D5F530 /* UserDefaultsTests.swift */; };
 		915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8A7823437B4500746E7E /* CanaryTests.swift */; };
 		915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AB72343855400746E7E /* Yieldprobe.swift */; };
 		915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8ABF234385D400746E7E /* AppDelegate.swift */; };
@@ -76,6 +80,10 @@
 		915618CD234B29AD00D5F530 /* URLComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsTests.swift; sourceTree = "<group>"; };
 		915618CF234B2FDB00D5F530 /* ConsentDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDecorator.swift; sourceTree = "<group>"; };
 		915618D1234B30F600D5F530 /* ConsentDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDecoratorTests.swift; sourceTree = "<group>"; };
+		915618D3234B3D9100D5F530 /* URLDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDecorator.swift; sourceTree = "<group>"; };
+		915618D5234B3DDF00D5F530 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
+		915618D7234B3F1500D5F530 /* UserDefaults+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+YLD.swift"; sourceTree = "<group>"; };
+		915618D9234B409200D5F530 /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		915C8A7623437B4500746E7E /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		915C8A7823437B4500746E7E /* CanaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanaryTests.swift; sourceTree = "<group>"; };
 		915C8A7A23437B4500746E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -166,6 +174,7 @@
 				915C8AAD234384FC00746E7E /* Info.plist */,
 				915618C7234B257A00D5F530 /* HighResolutionClock.swift */,
 				915C8ADA2343897600746E7E /* HTTPClient.swift */,
+				915618D3234B3D9100D5F530 /* URLDecorator.swift */,
 				915C8AB72343855400746E7E /* Yieldprobe.swift */,
 				915C8AE023438BAD00746E7E /* YieldprobeTests.swift */,
 			);
@@ -196,10 +205,13 @@
 		915C8AD92343896600746E7E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				915618D5234B3DDF00D5F530 /* URL+YLD.swift */,
 				915618CB234B299C00D5F530 /* URLComponents+YLD.swift */,
 				915618CD234B29AD00D5F530 /* URLComponentsTests.swift */,
 				915C8ADC234389BA00746E7E /* URLSession+YLD.swift */,
 				91D8646A234794DB006E6563 /* URLSessionTests.swift */,
+				915618D7234B3F1500D5F530 /* UserDefaults+YLD.swift */,
+				915618D9234B409200D5F530 /* UserDefaultsTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -359,6 +371,7 @@
 				915618CE234B29AD00D5F530 /* URLComponentsTests.swift in Sources */,
 				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
+				915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */,
 				915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */,
 				915618D2234B30F600D5F530 /* ConsentDecoratorTests.swift in Sources */,
 				91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */,
@@ -369,11 +382,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				915618D6234B3DDF00D5F530 /* URL+YLD.swift in Sources */,
 				915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */,
 				915618C8234B257A00D5F530 /* HighResolutionClock.swift in Sources */,
 				915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */,
+				915618D8234B3F1500D5F530 /* UserDefaults+YLD.swift in Sources */,
 				915618CC234B299C00D5F530 /* URLComponents+YLD.swift in Sources */,
 				915618D0234B2FDB00D5F530 /* ConsentDecorator.swift in Sources */,
+				915618D4234B3D9100D5F530 /* URLDecorator.swift in Sources */,
 				915C8ADB2343897600746E7E /* HTTPClient.swift in Sources */,
 				915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */,
 			);
@@ -477,6 +493,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 38R2LLP8AF;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -550,6 +567,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 38R2LLP8AF;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -619,6 +637,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 38R2LLP8AF;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -700,6 +719,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 38R2LLP8AF;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -773,6 +793,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 38R2LLP8AF;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -844,6 +865,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 38R2LLP8AF;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

@@ -13,20 +13,8 @@ protocol ConsentSource {
     
 }
 
-extension UserDefaults: ConsentSource {
-    
-    static var iabConsentStringKey: String {
-        "IABConsent_ConsentString"
-    }
-    
-    var consent: String? {
-        string(forKey: type(of: self).iabConsentStringKey)
-    }
-    
-}
-
 /// Decorate a URL to include a parameter `consent` containing the [IAB Consent String](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Mobile%20In-App%20Consent%20APIs%20v1.0%20Final.md#cmp-internal-structure-defined-api-).
-struct ConsentDecorator {
+struct ConsentDecorator: URLDecorator {
     
     static let base64URLCharacters: CharacterSet = {
         let lowercaseASCII = CharacterSet(charactersIn: "a"..."z")
@@ -42,8 +30,8 @@ struct ConsentDecorator {
     
     let consentSource: ConsentSource
     
-    init (consentSource: ConsentSource = UserDefaults.standard) {
-        self.consentSource = consentSource
+    init (consentSource: ConsentSource? = nil) {
+        self.consentSource = consentSource ?? UserDefaults.standard
     }
     
     func decorate (_ subject: URL) -> URL {

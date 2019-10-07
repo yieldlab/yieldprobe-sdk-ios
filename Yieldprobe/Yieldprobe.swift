@@ -32,8 +32,10 @@ public class Yieldprobe: NSObject {
             .object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
     }
     
+    // MARK: Object Life-Cycle
+    
     init (http: HTTPClient = Yieldprobe.defaultClient,
-          consentSource: ConsentSource = UserDefaults.standard)
+          consentSource: ConsentSource? = nil)
     {
         self.http = http
         self.consent = ConsentDecorator(consentSource: consentSource)
@@ -43,8 +45,10 @@ public class Yieldprobe: NSObject {
     
     public func probe (slot slotID: Int, completionHandler: @escaping () -> Void) {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
-        let url = baseURL.appendingPathComponent("\(slotID)")
-        http.get(url: consent.decorate(cacheBuster.decorate(url))) { result in
+        let url = baseURL
+            .appendingPathComponent("\(slotID)")
+            .decorate(cacheBuster, consent)
+        http.get(url: url) { result in
             fatalError()
         }
     }

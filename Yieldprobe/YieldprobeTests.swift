@@ -156,4 +156,24 @@ class YieldprobeTests: XCTestCase {
         XCTAssertEqual(url.queryValues(for: "lng"), ["9.990018"])
     }
     
+    func testIDFA () {
+        // Arrange:
+        let idfaSource = DummyIDFASource(idfa: UUID())
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http, idfa: idfaSource)
+        
+        // Act:
+        sut.probe(slot: 1234) {
+            XCTFail("Should not be called.")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        guard case .some(.get(let url, _)) = http.calls.first else {
+            return XCTFail("Unexpected call: \(http.calls.first as Any)")
+        }
+        XCTAssertEqual(url.queryValues(for: "yl_rtb_ifa"),
+                       [idfaSource.advertisingIdentifier.uuidString])
+    }
+    
 }

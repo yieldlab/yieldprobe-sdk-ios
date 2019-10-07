@@ -34,8 +34,9 @@ public class Yieldprobe: NSObject {
     
     // MARK: Bid Requests
     
-    public func probe (slot: Int, completionHandler: @escaping () -> Void) {
-        let url = URL(string: "https://ad.yieldlab.net/yp/1234?content=json&pvid=true")!
+    public func probe (slot slotID: Int, completionHandler: @escaping () -> Void) {
+        let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
+        let url = baseURL.appendingPathComponent("\(slotID)")
         http.get(url: url) { result in
             fatalError()
         }

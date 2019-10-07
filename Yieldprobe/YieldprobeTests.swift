@@ -44,9 +44,10 @@ class YieldprobeTests: XCTestCase {
         // Arrange:
         let http = HTTPMock()
         let sut = Yieldprobe(http: http)
+        let slotID = [1234, 5678].randomElement()!
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: slotID) {
             XCTFail("Should not be called.")
         }
         
@@ -60,7 +61,7 @@ class YieldprobeTests: XCTestCase {
         }
         XCTAssertEqual(url.scheme, "https")
         XCTAssertEqual(url.host, "ad.yieldlab.net")
-        XCTAssertEqual(url.pathComponents, ["/", "yp", "1234"])
+        XCTAssertEqual(url.pathComponents, ["/", "yp", "\(slotID)"])
         XCTAssertEqual(url.queryValues(for: "content"), ["json"])
         XCTAssertEqual(url.queryValues(for: "pvid"), ["true"])
     }

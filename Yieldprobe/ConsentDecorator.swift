@@ -17,6 +17,7 @@ protocol ConsentSource {
 struct ConsentDecorator: URLDecorator {
     
     static let base64URLCharacters: CharacterSet = {
+        // Reference: https://tools.ietf.org/html/rfc4648#section-5
         let lowercaseASCII = CharacterSet(charactersIn: "a"..."z")
         let uppercaseASCII = CharacterSet(charactersIn: "A"..."Z")
         let digitsASCII = CharacterSet(charactersIn: "0"..."9")

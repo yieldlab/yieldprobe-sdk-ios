@@ -5,6 +5,7 @@
 //  Created by Sven Herzberg on 01.10.19.
 //
 
+import CoreLocation
 import Foundation
 import XCTest
 @testable import Yieldprobe
@@ -118,6 +119,41 @@ class YieldprobeTests: XCTestCase {
             return XCTFail("Unexpected call: \(http.calls.first as Any)")
         }
         XCTAssertEqual(url.queryValues(for: "consent"), [consentString])
+    }
+    
+    func testGeolocation () {
+        struct DummyLocationSource: LocationSource {
+            
+            var location: CLLocation? {
+                LocationDecoratorTests.yieldlabLocation
+            }
+            
+            static func authorizationStatus() -> CLAuthorizationStatus {
+                .authorizedAlways
+            }
+            
+            static func locationServicesEnabled() -> Bool {
+                true
+            }
+            
+        }
+        
+        // Arrange:
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http, locationSource: DummyLocationSource.self)
+        
+        // Act:
+        sut.probe(slot: 1234) {
+            XCTFail("Should not be called.")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        guard case .some(.get(let url, _)) = http.calls.first else {
+            return XCTFail("Unexpected call: \(http.calls.first as Any)")
+        }
+        XCTAssertEqual(url.queryValues(for: "lat"), ["53.557038"])
+        XCTAssertEqual(url.queryValues(for: "lng"), ["9.990018"])
     }
     
 }

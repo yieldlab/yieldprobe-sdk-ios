@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		915618C8234B257A00D5F530 /* HighResolutionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighResolutionClock.swift */; };
 		915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C9234B25A200D5F530 /* CacheBuster.swift */; };
+		915618CC234B299C00D5F530 /* URLComponents+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CB234B299C00D5F530 /* URLComponents+YLD.swift */; };
+		915618CE234B29AD00D5F530 /* URLComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CD234B29AD00D5F530 /* URLComponentsTests.swift */; };
 		915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8A7823437B4500746E7E /* CanaryTests.swift */; };
 		915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AB72343855400746E7E /* Yieldprobe.swift */; };
 		915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8ABF234385D400746E7E /* AppDelegate.swift */; };
@@ -68,6 +70,8 @@
 /* Begin PBXFileReference section */
 		915618C7234B257A00D5F530 /* HighResolutionClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighResolutionClock.swift; sourceTree = "<group>"; };
 		915618C9234B25A200D5F530 /* CacheBuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheBuster.swift; sourceTree = "<group>"; };
+		915618CB234B299C00D5F530 /* URLComponents+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+YLD.swift"; sourceTree = "<group>"; };
+		915618CD234B29AD00D5F530 /* URLComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsTests.swift; sourceTree = "<group>"; };
 		915C8A7623437B4500746E7E /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		915C8A7823437B4500746E7E /* CanaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanaryTests.swift; sourceTree = "<group>"; };
 		915C8A7A23437B4500746E7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 		915C8AD92343896600746E7E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				915618CB234B299C00D5F530 /* URLComponents+YLD.swift */,
+				915618CD234B29AD00D5F530 /* URLComponentsTests.swift */,
 				915C8ADC234389BA00746E7E /* URLSession+YLD.swift */,
 				91D8646A234794DB006E6563 /* URLSessionTests.swift */,
 			);
@@ -344,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */,
+				915618CE234B29AD00D5F530 /* URLComponentsTests.swift in Sources */,
 				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
 				915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */,
@@ -358,6 +365,7 @@
 				915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */,
 				915618C8234B257A00D5F530 /* HighResolutionClock.swift in Sources */,
 				915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */,
+				915618CC234B299C00D5F530 /* URLComponents+YLD.swift in Sources */,
 				915C8ADB2343897600746E7E /* HTTPClient.swift in Sources */,
 				915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */,
 			);

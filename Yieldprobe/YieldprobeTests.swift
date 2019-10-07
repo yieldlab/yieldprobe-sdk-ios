@@ -100,4 +100,24 @@ class YieldprobeTests: XCTestCase {
         }
     }
     
+    func testConsentString () {
+        // Arrange:
+        let consentString = ConsentDecoratorTests().consentStringExample
+        let consentSource = DummyConsentSource(consent: consentString)
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http, consentSource: consentSource)
+        
+        // Act:
+        sut.probe(slot: 1234) {
+            XCTFail("Should not be called.")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        guard case .some(.get(let url, _)) = http.calls.first else {
+            return XCTFail("Unexpected call: \(http.calls.first as Any)")
+        }
+        XCTAssertEqual(url.queryValues(for: "consent"), [consentString])
+    }
+    
 }

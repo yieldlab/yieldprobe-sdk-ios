@@ -23,6 +23,8 @@ public class Yieldprobe: NSObject {
     
     let cacheBuster = CacheBuster()
     
+    let consent: ConsentDecorator
+    
     let http: HTTPClient
     
     public var sdkVersion: String {
@@ -30,8 +32,11 @@ public class Yieldprobe: NSObject {
             .object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
     }
     
-    init (http: HTTPClient = Yieldprobe.defaultClient) {
+    init (http: HTTPClient = Yieldprobe.defaultClient,
+          consentSource: ConsentSource = UserDefaults.standard)
+    {
         self.http = http
+        self.consent = ConsentDecorator(consentSource: consentSource)
     }
     
     // MARK: Bid Requests
@@ -39,7 +44,7 @@ public class Yieldprobe: NSObject {
     public func probe (slot slotID: Int, completionHandler: @escaping () -> Void) {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
         let url = baseURL.appendingPathComponent("\(slotID)")
-        http.get(url: cacheBuster.decorate(url)) { result in
+        http.get(url: consent.decorate(cacheBuster.decorate(url))) { result in
             fatalError()
         }
     }

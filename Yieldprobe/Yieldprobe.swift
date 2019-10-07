@@ -21,6 +21,8 @@ public class Yieldprobe: NSObject {
     
     // MARK: Properties
     
+    let cacheBuster = CacheBuster()
+    
     let http: HTTPClient
     
     public var sdkVersion: String {
@@ -37,7 +39,7 @@ public class Yieldprobe: NSObject {
     public func probe (slot slotID: Int, completionHandler: @escaping () -> Void) {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
         let url = baseURL.appendingPathComponent("\(slotID)")
-        http.get(url: url) { result in
+        http.get(url: cacheBuster.decorate(url)) { result in
             fatalError()
         }
     }

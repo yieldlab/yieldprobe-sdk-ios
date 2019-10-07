@@ -66,4 +66,38 @@ class YieldprobeTests: XCTestCase {
         XCTAssertEqual(url.queryValues(for: "pvid"), ["true"])
     }
     
+    func testCacheBusting () {
+        // Arrange:
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http)
+        
+        // Act:
+        for _ in 1...3 {
+            sut.probe(slot: 1234) {
+                XCTFail("Should not be called")
+            }
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 3)
+        for (i, call) in http.calls.enumerated() {
+            guard case .get(let url, _) = call else {
+                XCTFail("unexpected call: \(call)")
+                continue
+            }
+            let ts = url.queryValues(for: "ts")
+            XCTAssert(!ts.isEmpty)
+            for call in http.calls[(i + 1)...] {
+                guard case .get(let url, _) = call else {
+                    XCTFail("unexpected call: \(call)")
+                    continue
+                }
+                
+                XCTAssert(!ts.isEmpty)
+                XCTAssert(!url.queryValues(for: "ts").isEmpty)
+                XCTAssertNotEqual(url.queryValues(for: "ts"), ts)
+            }
+        }
+    }
+    
 }

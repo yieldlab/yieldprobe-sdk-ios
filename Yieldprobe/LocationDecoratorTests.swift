@@ -88,6 +88,38 @@ class LocationDecoratorTests: XCTestCase {
         XCTAssertEqual(result, url)
     }
     
+    func testLocationServicesAuthorizedAlways_WithInvalidLocation () {
+        class DummyLocationSource: LocationSource {
+            var location: CLLocation? {
+                CLLocation(coordinate: CLLocationCoordinate2D(),
+                           altitude: 0,
+                           horizontalAccuracy: -1,
+                           verticalAccuracy: -1,
+                           timestamp: Date())
+            }
+            
+            static func authorizationStatus() -> CLAuthorizationStatus {
+                .authorizedAlways
+            }
+            
+            static func locationServicesEnabled() -> Bool {
+                true
+            }
+            
+            required init () { }
+        }
+        
+        // Arrange:
+        let url = URL(string: "https://example.com/")!
+        let sut = LocationDecorator(locationSource: DummyLocationSource.self)
+        
+        // Act:
+        let result = sut.decorate(url)
+        
+        // Assert:
+        XCTAssertEqual(result, url)
+    }
+    
     func testLocationServicesAuthorizedAlways_WithLocation () {
         class DummyLocationSource: LocationSource {
             var location: CLLocation? {

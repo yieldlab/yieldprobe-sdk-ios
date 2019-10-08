@@ -48,7 +48,9 @@ struct ConsentDecorator: URLDecorator {
                     trimmed = trimmed.dropLast()
                 }
                 
-                if trimmed.isEmpty || trimmed.rangeOfCharacter(from: type(of: self).base64URLCharacters.inverted) != nil {
+                if trimmed.isEmpty ||
+                    trimmed.rangeOfCharacter(from: type(of: self).base64URLCharacters.inverted) != nil
+                {
                     return input
                 }
                 

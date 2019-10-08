@@ -121,6 +121,26 @@ class YieldprobeTests: XCTestCase {
         XCTAssertEqual(url.queryValues(for: "consent"), [consentString])
     }
     
+    func testDeviceType () {
+        // Arrange:
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http)
+        
+        // Act:
+        sut.probe(slot: 1234) {
+            XCTFail("Should not be called.")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        guard case .some(.get(let url, _)) = http.calls.first else {
+            return XCTFail("Unexpected call: \(http.calls.first as Any)")
+        }
+        let deviceType = url.queryValues(for: "yl_rtb_devicetype")
+        XCTAssertTrue(deviceType == ["4"] || deviceType == ["5"],
+                      "Unexpected device type: \(deviceType)")
+    }
+    
     func testGeolocation () {
         struct DummyLocationSource: LocationSource {
             

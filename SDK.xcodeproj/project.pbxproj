@@ -37,6 +37,10 @@
 		915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8ADC234389BA00746E7E /* URLSession+YLD.swift */; };
 		915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE023438BAD00746E7E /* YieldprobeTests.swift */; };
 		915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE223438C0800746E7E /* HTTPMock.swift */; };
+		91793D4A234C6E04004DB72D /* DeviceTypeDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */; };
+		91793D4C234C6E12004DB72D /* DeviceTypeDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D4B234C6E12004DB72D /* DeviceTypeDecoratorTests.swift */; };
+		91793D4E234C80C3004DB72D /* UIDevice+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D4D234C80C3004DB72D /* UIDevice+YLD.swift */; };
+		91793D50234CAA4A004DB72D /* UIDeviceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D4F234CAA4A004DB72D /* UIDeviceTests.swift */; };
 		91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646823477BF4006E6563 /* URL+YLD.swift */; };
 		91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646A234794DB006E6563 /* URLSessionTests.swift */; };
 /* End PBXBuildFile section */
@@ -114,6 +118,10 @@
 		915C8ADC234389BA00746E7E /* URLSession+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+YLD.swift"; sourceTree = "<group>"; };
 		915C8AE023438BAD00746E7E /* YieldprobeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YieldprobeTests.swift; sourceTree = "<group>"; };
 		915C8AE223438C0800746E7E /* HTTPMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMock.swift; sourceTree = "<group>"; };
+		91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeDecorator.swift; sourceTree = "<group>"; };
+		91793D4B234C6E12004DB72D /* DeviceTypeDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeDecoratorTests.swift; sourceTree = "<group>"; };
+		91793D4D234C80C3004DB72D /* UIDevice+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+YLD.swift"; sourceTree = "<group>"; };
+		91793D4F234CAA4A004DB72D /* UIDeviceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceTests.swift; sourceTree = "<group>"; };
 		91D8646823477BF4006E6563 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
 		91D8646A234794DB006E6563 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +191,8 @@
 				915618C9234B25A200D5F530 /* CacheBuster.swift */,
 				915618CF234B2FDB00D5F530 /* ConsentDecorator.swift */,
 				915618D1234B30F600D5F530 /* ConsentDecoratorTests.swift */,
+				91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */,
+				91793D4B234C6E12004DB72D /* DeviceTypeDecoratorTests.swift */,
 				915C8AAD234384FC00746E7E /* Info.plist */,
 				915618C7234B257A00D5F530 /* HighResolutionClock.swift */,
 				915C8ADA2343897600746E7E /* HTTPClient.swift */,
@@ -230,6 +240,8 @@
 				91D8646A234794DB006E6563 /* URLSessionTests.swift */,
 				915618D7234B3F1500D5F530 /* UserDefaults+YLD.swift */,
 				915618D9234B409200D5F530 /* UserDefaultsTests.swift */,
+				91793D4D234C80C3004DB72D /* UIDevice+YLD.swift */,
+				91793D4F234CAA4A004DB72D /* UIDeviceTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -389,8 +401,10 @@
 				915618CE234B29AD00D5F530 /* URLComponentsTests.swift in Sources */,
 				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
+				91793D4C234C6E12004DB72D /* DeviceTypeDecoratorTests.swift in Sources */,
 				915618DE234B6ED600D5F530 /* LocationDecoratorTests.swift in Sources */,
 				915618E4234B956F00D5F530 /* IDFADecoratorTests.swift in Sources */,
+				91793D50234CAA4A004DB72D /* UIDeviceTests.swift in Sources */,
 				915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */,
 				915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */,
 				915618D2234B30F600D5F530 /* ConsentDecoratorTests.swift in Sources */,
@@ -411,11 +425,13 @@
 				915618E0234B6FC100D5F530 /* CLLocationManager+YLD.swift in Sources */,
 				915618D8234B3F1500D5F530 /* UserDefaults+YLD.swift in Sources */,
 				915618CC234B299C00D5F530 /* URLComponents+YLD.swift in Sources */,
+				91793D4A234C6E04004DB72D /* DeviceTypeDecorator.swift in Sources */,
 				915618D0234B2FDB00D5F530 /* ConsentDecorator.swift in Sources */,
 				915618E6234B973600D5F530 /* ASIdentifierManager+YLD.swift in Sources */,
 				915618D4234B3D9100D5F530 /* URLDecorator.swift in Sources */,
 				915C8ADB2343897600746E7E /* HTTPClient.swift in Sources */,
 				915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */,
+				91793D4E234C80C3004DB72D /* UIDevice+YLD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,7 +851,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Test Host/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -901,7 +917,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Test Host/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -25,6 +25,8 @@ public class Yieldprobe: NSObject {
     
     let consent: ConsentDecorator
     
+    let deviceTypeDecorator: DeviceTypeDecorator
+    
     let http: HTTPClient
     
     let idfaDecorator: IDFADecorator
@@ -40,13 +42,15 @@ public class Yieldprobe: NSObject {
     
     init (http: HTTPClient = Yieldprobe.defaultClient,
           consentSource: ConsentSource? = nil,
+          device: Device? = nil,
           idfa: IDFASource? = nil,
           locationSource: LocationSource.Type? = nil)
     {
         self.http = http
-        self.consent = ConsentDecorator(consentSource: consentSource)
-        self.idfaDecorator = IDFADecorator(source: idfa)
-        self.locationDecorator = LocationDecorator(locationSource: locationSource)
+        consent = ConsentDecorator(consentSource: consentSource)
+        deviceTypeDecorator = DeviceTypeDecorator(device: device)
+        idfaDecorator = IDFADecorator(source: idfa)
+        locationDecorator = LocationDecorator(locationSource: locationSource)
     }
     
     // MARK: Bid Requests
@@ -55,7 +59,7 @@ public class Yieldprobe: NSObject {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
         let url = baseURL
             .appendingPathComponent("\(slotID)")
-            .decorate(cacheBuster, consent, locationDecorator, idfaDecorator)
+            .decorate(cacheBuster, consent, deviceTypeDecorator, locationDecorator, idfaDecorator)
         http.get(url: url) { result in
             fatalError()
         }

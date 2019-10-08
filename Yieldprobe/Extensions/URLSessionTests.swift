@@ -118,6 +118,7 @@ class URLSessionTests: XCTestCase {
         XCTAssertNotNil(result)
         do {
             _ = try result?.get()
+            XCTFail("Should not be executed.")
         } catch URLError.notConnectedToInternet {
             XCTAssert(true, "passed")
         } catch {

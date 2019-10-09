@@ -23,6 +23,8 @@ public class Yieldprobe: NSObject {
     
     let cacheBuster = CacheBuster()
     
+    let connectivity: ConnectivityDecorator
+    
     let consent: ConsentDecorator
     
     let deviceTypeDecorator: DeviceTypeDecorator
@@ -41,12 +43,14 @@ public class Yieldprobe: NSObject {
     // MARK: Object Life-Cycle
     
     init (http: HTTPClient = Yieldprobe.defaultClient,
+          connectivitySource: ConnectivitySource? = nil,
           consentSource: ConsentSource? = nil,
           device: Device? = nil,
           idfa: IDFASource? = nil,
           locationSource: LocationSource.Type? = nil)
     {
         self.http = http
+        connectivity = ConnectivityDecorator(source: connectivitySource)
         consent = ConsentDecorator(consentSource: consentSource)
         deviceTypeDecorator = DeviceTypeDecorator(device: device)
         idfaDecorator = IDFADecorator(source: idfa)
@@ -59,7 +63,7 @@ public class Yieldprobe: NSObject {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
         let url = baseURL
             .appendingPathComponent("\(slotID)")
-            .decorate(cacheBuster, consent, deviceTypeDecorator, locationDecorator, idfaDecorator)
+            .decorate(cacheBuster, connectivity, consent, deviceTypeDecorator, locationDecorator, idfaDecorator)
         http.get(url: url) { result in
             fatalError()
         }

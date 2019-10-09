@@ -101,6 +101,25 @@ class YieldprobeTests: XCTestCase {
         }
     }
     
+    func testConnectionType () {
+        // Arrange:
+        let connectivitySource = DummyConnectivitySource(connectionType: .wifi)
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http, connectivitySource: connectivitySource)
+        
+        // Act:
+        sut.probe(slot: 1234) {
+            XCTFail("Should not be called.")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        guard case .some(.get(let url, _)) = http.calls.first else {
+            return XCTFail("Unexpected call: \(http.calls.first as Any)")
+        }
+        XCTAssertEqual(url.queryValues(for: "yl_rtb_connectiontype"), ["2"])
+    }
+    
     func testConsentString () {
         // Arrange:
         let consentString = ConsentDecoratorTests().consentStringExample

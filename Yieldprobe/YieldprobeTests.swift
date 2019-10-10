@@ -128,6 +128,33 @@ class YieldprobeTests: XCTestCase {
         XCTAssertEqual(url.queryValues(for: "pvid"), ["true"])
     }
     
+    func testTooManySlots () {
+        // Arrange:
+        var caught: Error?
+        var expectation: Optional = self.expectation(description: "async call")
+        let sut = Yieldprobe()
+        
+        // Act:
+        sut.probe(slots: [0,1,2,3,4,5,6,7,8,9,10]) { result in
+            do {
+                _ = try result.get()
+                XCTFail("Should not be called")
+            } catch {
+                XCTAssertNil(caught)
+                caught = error
+            }
+            
+            expectation?.fulfill()
+            expectation = nil
+        }
+        wait(for: [expectation!], timeout: 0.1)
+        expectation = nil
+        
+        // Assert:
+        XCTAssertNotNil(caught)
+        XCTAssertEqual(caught as? Yieldprobe.Error, .tooManySlots)
+    }
+    
     // MARK: Bid Request Parameters
     
     func testCacheBusting () {

@@ -15,6 +15,9 @@ public class Yieldprobe: NSObject {
     enum Error: Swift.Error {
         /// The app did not request a single advertising slot.
         case noSlot
+        
+        /// The app requested more than 10 ad slots.
+        case tooManySlots
     }
 
     // MARK: Class Properties
@@ -101,6 +104,14 @@ public class Yieldprobe: NSObject {
             return DispatchQueue.main.async {
                 completionHandler(Result {
                     throw Yieldprobe.Error.noSlot
+                })
+            }
+        }
+        
+        guard slots.count <= 10 else {
+            return DispatchQueue.main.async {
+                completionHandler(Result {
+                    throw Yieldprobe.Error.tooManySlots
                 })
             }
         }

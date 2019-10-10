@@ -217,6 +217,26 @@ class YieldprobeTests: XCTestCase {
     
     // MARK: Tests for Personal Information
     
+    func testNPADisablesConnectionType () {
+        // Arrange:
+        let connection = DummyConnectivitySource(connectionType: .cellular)
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http, connectivitySource: connection)
+        sut.configure(using: Configuration(adPersonalization: false))
+        
+        // Act:
+        sut.probe(slot: 1234) {
+            XCTFail("Should not be called")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        guard let call = http.calls.first, case .get(let url, _) = call else {
+            return XCTFail("Unexpected call: \(http.calls.first as Any)")
+        }
+        XCTAssertEqual(url.queryValues(for: "yl_rtb_connectiontype"), [])
+    }
+    
     func testNPADisablesDeviceType () {
         // Arrange:
         let http = HTTPMock()

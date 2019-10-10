@@ -39,7 +39,34 @@ class YieldprobeTests: XCTestCase {
         XCTAssertEqual(sdkVersion, infoVersion as? String)
     }
     
-    // MARK: Bid Requests
+    // MARK: Bid Request URL
+    
+    func testEmptyProbeRequest () {
+        // Arrange:
+        var caught: Error?
+        var expectation: Optional = self.expectation(description: "async call")
+        let sut = Yieldprobe()
+        
+        // Act:
+        sut.probe(slots: []) { result in
+            do {
+                _ = try result.get()
+                XCTFail("Should not be called.")
+            } catch {
+                XCTAssertNil(caught)
+                caught = error
+            }
+            
+            expectation?.fulfill()
+            expectation = nil
+        }
+        
+        wait(for: [expectation!], timeout: 0.1)
+        expectation = nil
+        
+        // Assert:
+        XCTAssertEqual(caught as? Yieldprobe.Error, .noSlot)
+    }
     
     func testProbeRequest () {
         // Arrange:
@@ -66,6 +93,8 @@ class YieldprobeTests: XCTestCase {
         XCTAssertEqual(url.queryValues(for: "content"), ["json"])
         XCTAssertEqual(url.queryValues(for: "pvid"), ["true"])
     }
+    
+    // MARK: Bid Request Parameters
     
     func testCacheBusting () {
         // Arrange:

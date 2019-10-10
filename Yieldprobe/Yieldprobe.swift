@@ -10,6 +10,13 @@ import Foundation
 @available(swift, introduced: 5.0)
 public class Yieldprobe: NSObject {
     
+    // MARK: Types
+    
+    enum Error: Swift.Error {
+        /// The app did not request a single advertising slot.
+        case noSlot
+    }
+
     // MARK: Class Properties
     
     public static let shared = Yieldprobe()
@@ -84,9 +91,23 @@ public class Yieldprobe: NSObject {
     // MARK: Bid Requests
     
     public func probe (slot slotID: Int, completionHandler: @escaping () -> Void) {
+        probe(slots: [slotID]) { result in
+            completionHandler()
+        }
+    }
+    
+    func probe (slots: Set<Int>, completionHandler: @escaping (Result<Any,Swift.Error>) -> Void) {
+        guard !slots.isEmpty else {
+            return DispatchQueue.main.async {
+                completionHandler(Result {
+                    throw Yieldprobe.Error.noSlot
+                })
+            }
+        }
+        
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
         let url = baseURL
-            .appendingPathComponent("\(slotID)")
+            .appendingPathComponent("\(slots.first!)")
             .decorate(cacheBuster, connectivity, consent, deviceTypeDecorator, locationDecorator, idfaDecorator)
         http.get(url: url) { result in
             fatalError()

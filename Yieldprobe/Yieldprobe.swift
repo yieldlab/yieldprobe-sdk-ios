@@ -37,7 +37,7 @@ public class Yieldprobe: NSObject {
     
     let http: HTTPClient
     
-    private(set) var idfaDecorator: PIIDDecoratorFilter
+    private(set) var idfaDecorator: PIIDDecoratorFilter<IDFADecorator>
     
     private(set) var locationDecorator: LocationDecorator
     

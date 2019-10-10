@@ -33,7 +33,7 @@ public class Yieldprobe: NSObject {
     
     let consent: ConsentDecorator
     
-    let deviceTypeDecorator: DeviceTypeDecorator
+    private(set) var deviceTypeDecorator: PIIDDecoratorFilter<DeviceTypeDecorator>
     
     let http: HTTPClient
     
@@ -60,7 +60,9 @@ public class Yieldprobe: NSObject {
         self.http = http
         connectivity = ConnectivityDecorator(source: connectivitySource)
         consent = ConsentDecorator(consentSource: consentSource)
-        deviceTypeDecorator = DeviceTypeDecorator(device: device)
+        let deviceTypeDecorator = DeviceTypeDecorator(device: device)
+        self.deviceTypeDecorator = PIIDDecoratorFilter(configuration: configuration,
+                                                       wrapped: deviceTypeDecorator)
         idfaDecorator = PIIDDecoratorFilter(configuration: configuration,
                                             wrapped: IDFADecorator(source: idfa))
         let locationDecorator = LocationDecorator(locationSource: locationSource,
@@ -70,6 +72,7 @@ public class Yieldprobe: NSObject {
     }
     
     func configure(using configuration: Configuration) {
+        deviceTypeDecorator.configuration = configuration
         idfaDecorator.configuration = configuration
         locationDecorator.configuration = configuration
         locationDecorator.wrapped.configuration = configuration

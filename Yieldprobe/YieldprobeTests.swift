@@ -10,6 +10,22 @@ import Foundation
 import XCTest
 @testable import Yieldprobe
 
+extension Set {
+    
+    func randomSubset () -> Set<Element> {
+        var generator: RandomNumberGenerator = SystemRandomNumberGenerator()
+        return randomSubset(using: &generator)
+    }
+    
+    func randomSubset (using generator: inout RandomNumberGenerator) -> Set<Element> {
+        filter { _ in
+            // This is a bit wasteful but only used for testing anyway.
+            generator.next().isMultiple(of: 2)
+        }
+    }
+    
+}
+
 class YieldprobeTests: XCTestCase {
     
     // MARK: SDK Singleton
@@ -72,10 +88,22 @@ class YieldprobeTests: XCTestCase {
         // Arrange:
         let http = HTTPMock()
         let sut = Yieldprobe(http: http)
-        let slotID = [1234, 5678].randomElement()!
+        let slotIDs: Set = [
+            2110,
+            2212,
+            2312,
+            2345,
+            2550,
+            2001,
+            2010,
+            2061,
+            3001,
+        ]
+        let selectedSlots = slotIDs.randomSubset().union([2052])
+        let formatter = NumberFormatter()
         
         // Act:
-        sut.probe(slot: slotID) {
+        sut.probe(slots: selectedSlots) { _ in
             XCTFail("Should not be called.")
         }
         
@@ -89,7 +117,13 @@ class YieldprobeTests: XCTestCase {
         }
         XCTAssertEqual(url.scheme, "https")
         XCTAssertEqual(url.host, "ad.yieldlab.net")
-        XCTAssertEqual(url.pathComponents, ["/", "yp", "\(slotID)"])
+        XCTAssertEqual(url.pathComponents.count, 3)
+        XCTAssertEqual(url.pathComponents.prefix(upTo: 2), ["/", "yp"])
+        XCTAssertEqual(Set(url.lastPathComponent
+                           .split(separator: ",")
+                           .map(String.init(_:))
+                           .compactMap({ formatter.number(from: $0)?.intValue })),
+                       selectedSlots)
         XCTAssertEqual(url.queryValues(for: "content"), ["json"])
         XCTAssertEqual(url.queryValues(for: "pvid"), ["true"])
     }

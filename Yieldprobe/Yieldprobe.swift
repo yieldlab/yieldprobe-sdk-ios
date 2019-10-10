@@ -107,7 +107,7 @@ public class Yieldprobe: NSObject {
         
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
         let url = baseURL
-            .appendingPathComponent("\(slots.first!)")
+            .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
             .decorate(cacheBuster, connectivity, consent, deviceTypeDecorator, locationDecorator, idfaDecorator)
         http.get(url: url) { result in
             fatalError()

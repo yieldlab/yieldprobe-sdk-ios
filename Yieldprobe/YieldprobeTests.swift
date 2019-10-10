@@ -215,4 +215,27 @@ class YieldprobeTests: XCTestCase {
                        [idfaSource.advertisingIdentifier.uuidString])
     }
     
+    // MARK: Tests for Personal Information
+    
+    func testNPADisablesIDFA () {
+        // Arrange:
+        let http = HTTPMock()
+        let idfa = UUID()
+        let sut = Yieldprobe(http: http,
+                             idfa: DummyIDFASource(idfa: idfa))
+        sut.configure(using: Configuration(adPersonalization: false))
+        
+        // Act:
+        sut.probe(slot: 1234) {
+            XCTFail("Should not be called.")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        guard let call = http.calls.first, case .get(let url, _) = call else {
+            return XCTFail("Unexpected call: \(http.calls.first as Any)")
+        }
+        XCTAssertEqual(url.queryValues(for: "yl_rtb_ifa"), [])
+    }
+    
 }

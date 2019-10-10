@@ -23,6 +23,12 @@ public class Yieldprobe: NSObject {
     
     let cacheBuster = CacheBuster()
     
+    #if false
+    var configuration: Configuration {
+        locationDecorator.configuration
+    }
+    #endif
+    
     let connectivity: ConnectivityDecorator
     
     let consent: ConsentDecorator
@@ -31,9 +37,9 @@ public class Yieldprobe: NSObject {
     
     let http: HTTPClient
     
-    let idfaDecorator: IDFADecorator
+    private(set) var idfaDecorator: PIIDDecoratorFilter
     
-    let locationDecorator: LocationDecorator
+    private(set) var locationDecorator: LocationDecorator
     
     public var sdkVersion: String {
         Bundle(for: Self.self)
@@ -49,15 +55,21 @@ public class Yieldprobe: NSObject {
           idfa: IDFASource? = nil,
           locationSource: LocationSource.Type? = nil)
     {
+        let configuration = Configuration()
+        
         self.http = http
         connectivity = ConnectivityDecorator(source: connectivitySource)
         consent = ConsentDecorator(consentSource: consentSource)
         deviceTypeDecorator = DeviceTypeDecorator(device: device)
-        idfaDecorator = IDFADecorator(source: idfa)
-        
-        let configuration = Configuration()
+        idfaDecorator = PIIDDecoratorFilter(configuration: configuration,
+                                            wrapped: IDFADecorator(source: idfa))
         locationDecorator = LocationDecorator(locationSource: locationSource,
                                               configuration: configuration)
+    }
+    
+    func configure(using configuration: Configuration) {
+        idfaDecorator.configuration = configuration
+        locationDecorator.configuration = configuration
     }
     
     // MARK: Bid Requests

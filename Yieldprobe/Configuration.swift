@@ -18,4 +18,12 @@ struct Configuration {
     /// Default: `true`
     var useGeolocation: Bool = true
     
+    /// Specify whether Yieldprobe should use personal information.
+    ///
+    /// If set to `false`, personal information such as geolocation, IDFA, device type, and connection
+    /// type will not be sent over the network.
+    ///
+    /// Default: `true`
+    var adPersonalization: Bool = true
+    
 }

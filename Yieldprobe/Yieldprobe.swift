@@ -54,7 +54,10 @@ public class Yieldprobe: NSObject {
         consent = ConsentDecorator(consentSource: consentSource)
         deviceTypeDecorator = DeviceTypeDecorator(device: device)
         idfaDecorator = IDFADecorator(source: idfa)
-        locationDecorator = LocationDecorator(locationSource: locationSource)
+        
+        let configuration = Configuration()
+        locationDecorator = LocationDecorator(locationSource: locationSource,
+                                              configuration: configuration)
     }
     
     // MARK: Bid Requests

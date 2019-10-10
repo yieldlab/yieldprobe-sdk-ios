@@ -46,6 +46,7 @@
 		91B283B5234DB6770055DB7F /* DefaultConnectivitySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B283B4234DB6770055DB7F /* DefaultConnectivitySource.swift */; };
 		91B283B7234DB72B0055DB7F /* DefaultConnectivitySourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B283B6234DB72B0055DB7F /* DefaultConnectivitySourceTests.swift */; };
 		91B283B9234DC1520055DB7F /* NWPathMonitor+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B283B8234DC1520055DB7F /* NWPathMonitor+YLD.swift */; };
+		91C40883234F2AAC00D0DC71 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C40882234F2AAC00D0DC71 /* Configuration.swift */; };
 		91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646823477BF4006E6563 /* URL+YLD.swift */; };
 		91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646A234794DB006E6563 /* URLSessionTests.swift */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,7 @@
 		91B283B4234DB6770055DB7F /* DefaultConnectivitySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultConnectivitySource.swift; sourceTree = "<group>"; };
 		91B283B6234DB72B0055DB7F /* DefaultConnectivitySourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultConnectivitySourceTests.swift; sourceTree = "<group>"; };
 		91B283B8234DC1520055DB7F /* NWPathMonitor+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+YLD.swift"; sourceTree = "<group>"; };
+		91C40882234F2AAC00D0DC71 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		91D8646823477BF4006E6563 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
 		91D8646A234794DB006E6563 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,6 +201,7 @@
 			children = (
 				915C8AD92343896600746E7E /* Extensions */,
 				915618C9234B25A200D5F530 /* CacheBuster.swift */,
+				91C40882234F2AAC00D0DC71 /* Configuration.swift */,
 				91793D51234CB0D6004DB72D /* ConnectivityDecorator.swift */,
 				91793D53234CB0E7004DB72D /* ConnectivityDecoratorTests.swift */,
 				915618CF234B2FDB00D5F530 /* ConsentDecorator.swift */,
@@ -439,6 +442,7 @@
 				915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */,
 				915618C8234B257A00D5F530 /* HighResolutionClock.swift in Sources */,
 				915618E2234B954800D5F530 /* IDFADecorator.swift in Sources */,
+				91C40883234F2AAC00D0DC71 /* Configuration.swift in Sources */,
 				91793D52234CB0D6004DB72D /* ConnectivityDecorator.swift in Sources */,
 				915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */,
 				915618E0234B6FC100D5F530 /* CLLocationManager+YLD.swift in Sources */,

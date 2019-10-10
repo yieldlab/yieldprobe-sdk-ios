@@ -39,7 +39,7 @@ public class Yieldprobe: NSObject {
     
     private(set) var idfaDecorator: PIIDDecoratorFilter<IDFADecorator>
     
-    private(set) var locationDecorator: LocationDecorator
+    private(set) var locationDecorator: PIIDDecoratorFilter<LocationDecorator>
     
     public var sdkVersion: String {
         Bundle(for: Self.self)
@@ -63,13 +63,16 @@ public class Yieldprobe: NSObject {
         deviceTypeDecorator = DeviceTypeDecorator(device: device)
         idfaDecorator = PIIDDecoratorFilter(configuration: configuration,
                                             wrapped: IDFADecorator(source: idfa))
-        locationDecorator = LocationDecorator(locationSource: locationSource,
-                                              configuration: configuration)
+        let locationDecorator = LocationDecorator(locationSource: locationSource,
+                                                  configuration: configuration)
+        self.locationDecorator = PIIDDecoratorFilter(configuration: configuration,
+                                                     wrapped: locationDecorator)
     }
     
     func configure(using configuration: Configuration) {
         idfaDecorator.configuration = configuration
         locationDecorator.configuration = configuration
+        locationDecorator.wrapped.configuration = configuration
     }
     
     // MARK: Bid Requests

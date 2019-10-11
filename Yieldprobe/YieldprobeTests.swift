@@ -415,8 +415,8 @@ class YieldprobeTests: XCTestCase {
         }
         
         // Act:
-        http.handle(http.calls.first!) { url, completionHandler in
-            completionHandler(.failure(URLError(.notConnectedToInternet)))
+        http.handle(http.calls.first!) { _ in
+            throw URLError(.notConnectedToInternet)
         }
         
         // Assert:

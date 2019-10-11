@@ -20,4 +20,11 @@ class HTTPMock: HTTPClient {
         calls.append(.get(url, completionHandler))
     }
     
+    func handle(_ call: Call, processor: (URL, CompletionHandler) -> Void) {
+        switch call {
+        case .get(let url, let completionHandler):
+            processor(url, completionHandler)
+        }
+    }
+    
 }

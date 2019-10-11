@@ -164,7 +164,7 @@ class YieldprobeTests: XCTestCase {
         
         // Act:
         for _ in 1...3 {
-            sut.probe(slot: 1234) {
+            sut.probe(slot: 1234) { _ in
                 XCTFail("Should not be called")
             }
         }
@@ -198,7 +198,7 @@ class YieldprobeTests: XCTestCase {
         let sut = Yieldprobe(http: http, connectivitySource: connectivitySource)
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called.")
         }
         
@@ -218,7 +218,7 @@ class YieldprobeTests: XCTestCase {
         let sut = Yieldprobe(http: http, consentSource: consentSource)
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called.")
         }
         
@@ -236,7 +236,7 @@ class YieldprobeTests: XCTestCase {
         let sut = Yieldprobe(http: http)
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called.")
         }
         
@@ -272,7 +272,7 @@ class YieldprobeTests: XCTestCase {
         let sut = Yieldprobe(http: http, locationSource: DummyLocationSource.self)
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called.")
         }
         
@@ -292,7 +292,7 @@ class YieldprobeTests: XCTestCase {
         let sut = Yieldprobe(http: http, idfa: idfaSource)
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called.")
         }
         
@@ -315,7 +315,7 @@ class YieldprobeTests: XCTestCase {
         sut.configure(using: Configuration(adPersonalization: false))
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called")
         }
         
@@ -334,7 +334,7 @@ class YieldprobeTests: XCTestCase {
         sut.configure(using: Configuration(adPersonalization: false))
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called.")
         }
         
@@ -355,7 +355,7 @@ class YieldprobeTests: XCTestCase {
         sut.configure(using: Configuration(adPersonalization: false))
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called.")
         }
         
@@ -389,7 +389,7 @@ class YieldprobeTests: XCTestCase {
         sut.configure(using: Configuration(adPersonalization: false))
         
         // Act:
-        sut.probe(slot: 1234) {
+        sut.probe(slot: 1234) { _ in
             XCTFail("Should not be called")
         }
         
@@ -400,6 +400,30 @@ class YieldprobeTests: XCTestCase {
         }
         XCTAssertEqual(url.queryValues(for: "lat"), [])
         XCTAssertEqual(url.queryValues(for: "lng"), [])
+    }
+    
+    // MARK: Response Handling
+    
+    func testResponseNetworkError () {
+        // Arrange:
+        let http = HTTPMock()
+        var result: Result<Bid,Error>?
+        let sut = Yieldprobe(http: http)
+        sut.probe(slot: 1234) { _result in
+            XCTAssertNil(result)
+            result = _result
+        }
+        
+        // Act:
+        http.handle(http.calls.first!) { url, completionHandler in
+            completionHandler(.failure(URLError(.notConnectedToInternet)))
+        }
+        
+        // Assert:
+        XCTAssertNotNil(result)
+        XCTAssertThrowsError(try result?.get()) { error in
+            XCTAssertEqual(error as? URLError, URLError(.notConnectedToInternet))
+        }
     }
     
 }

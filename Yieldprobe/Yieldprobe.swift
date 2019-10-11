@@ -93,13 +93,15 @@ public class Yieldprobe: NSObject {
     
     // MARK: Bid Requests
     
-    public func probe (slot slotID: Int, completionHandler: @escaping () -> Void) {
+    public func probe (slot slotID: Int, completionHandler: @escaping (Result<Bid,Swift.Error>) -> Void) {
         probe(slots: [slotID]) { result in
-            completionHandler()
+            completionHandler(result.map { _ in
+                fatalError("Unimplemented")
+            })
         }
     }
     
-    func probe (slots: Set<Int>, completionHandler: @escaping (Result<Any,Swift.Error>) -> Void) {
+    func probe (slots: Set<Int>, completionHandler: @escaping (Result<[Bid],Swift.Error>) -> Void) {
         guard !slots.isEmpty else {
             return DispatchQueue.main.async {
                 completionHandler(Result {
@@ -121,7 +123,11 @@ public class Yieldprobe: NSObject {
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
             .decorate(cacheBuster, connectivity, consent, deviceTypeDecorator, locationDecorator, idfaDecorator)
         http.get(url: url) { result in
-            fatalError()
+            completionHandler(Result {
+                let reply = try result.get()
+                
+                fatalError("Unimplemented.")
+            })
         }
     }
     

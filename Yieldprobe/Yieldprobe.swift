@@ -61,7 +61,7 @@ public class Yieldprobe: NSObject {
     
     // MARK: Object Life-Cycle
     
-    init (http: HTTPClient = Yieldprobe.defaultClient,
+    init (http: HTTPClient? = nil,
           connectivitySource: ConnectivitySource? = nil,
           consentSource: ConsentSource? = nil,
           device: Device? = nil,
@@ -70,7 +70,7 @@ public class Yieldprobe: NSObject {
     {
         let configuration = Configuration()
         
-        self.http = http
+        self.http = http ?? Yieldprobe.defaultClient
         let connectivity = ConnectivityDecorator(source: connectivitySource)
         self.connectivity = PIIDDecoratorFilter(configuration: configuration,
                                                 wrapped: connectivity)

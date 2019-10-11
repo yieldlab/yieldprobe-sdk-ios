@@ -289,7 +289,7 @@ class YieldprobeTests: XCTestCase {
                        [idfaSource.advertisingIdentifier.uuidString])
     }
     
-    // MARK: Tests for Personal Information
+    // MARK: Personal Information
     
     func testNPADisablesConnectionType () {
         // Arrange:
@@ -399,7 +399,7 @@ class YieldprobeTests: XCTestCase {
         }
         
         // Act:
-        http.handle(http.calls.first!) { _ in
+        http.calls.first?.process { _ in
             throw URLError(.notConnectedToInternet)
         }
         

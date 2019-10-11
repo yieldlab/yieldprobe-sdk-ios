@@ -7,9 +7,11 @@
 
 import Foundation
 
+typealias URLReply = (data: Data, response: URLResponse)
+
 protocol HTTPClient {
     
-    typealias CompletionHandler = (Result<(data: Data, response: URLResponse),Error>) -> Void
+    typealias CompletionHandler = (Result<URLReply,Error>) -> Void
     
     func get (url: URL, completionHandler: @escaping CompletionHandler)
     

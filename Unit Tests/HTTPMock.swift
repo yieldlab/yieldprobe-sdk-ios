@@ -30,7 +30,8 @@ class HTTPMock: HTTPClient {
     func handle (_ call: Call,
                  processor: (URL) throws -> (data: Data, response: URLResponse))
     {
-        handle(call) { url, completionHandler in
+        switch call {
+        case .get(let url, let completionHandler):
             completionHandler(Result(catching: { try processor(url) }))
         }
     }

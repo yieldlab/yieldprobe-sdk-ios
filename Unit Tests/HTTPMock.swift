@@ -27,10 +27,4 @@ class HTTPMock: HTTPClient {
         calls.append(.get(url, completionHandler))
     }
     
-    func handle (_ call: Call,
-                 processor: (URL) throws -> (data: Data, response: URLResponse))
-    {
-        call.process(processor)
-    }
-    
 }

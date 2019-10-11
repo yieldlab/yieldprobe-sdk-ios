@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91264F362350B9D90012D871 /* URLReply+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F352350B9D90012D871 /* URLReply+YLD.swift */; };
 		915618C8234B257A00D5F530 /* HighResolutionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighResolutionClock.swift */; };
 		915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C9234B25A200D5F530 /* CacheBuster.swift */; };
 		915618CC234B299C00D5F530 /* URLComponents+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CB234B299C00D5F530 /* URLComponents+YLD.swift */; };
@@ -94,6 +95,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		91264F352350B9D90012D871 /* URLReply+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLReply+YLD.swift"; sourceTree = "<group>"; };
 		915618C7234B257A00D5F530 /* HighResolutionClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighResolutionClock.swift; sourceTree = "<group>"; };
 		915618C9234B25A200D5F530 /* CacheBuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheBuster.swift; sourceTree = "<group>"; };
 		915618CB234B299C00D5F530 /* URLComponents+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+YLD.swift"; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				91D8646823477BF4006E6563 /* URL+YLD.swift */,
+				91264F352350B9D90012D871 /* URLReply+YLD.swift */,
 				91C4088A2350A42B00D0DC71 /* Set+YLD.swift */,
 			);
 			path = Extensions;
@@ -435,6 +438,7 @@
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
 				91793D4C234C6E12004DB72D /* DeviceTypeDecoratorTests.swift in Sources */,
 				915618DE234B6ED600D5F530 /* LocationDecoratorTests.swift in Sources */,
+				91264F362350B9D90012D871 /* URLReply+YLD.swift in Sources */,
 				91C4088B2350A42B00D0DC71 /* Set+YLD.swift in Sources */,
 				915618E4234B956F00D5F530 /* IDFADecoratorTests.swift in Sources */,
 				91793D50234CAA4A004DB72D /* UIDeviceTests.swift in Sources */,

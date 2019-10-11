@@ -12,12 +12,15 @@ public class Yieldprobe: NSObject {
     
     // MARK: Types
     
-    enum Error: Swift.Error {
+    enum Error: Swift.Error, Equatable {
         /// The app did not request a single advertising slot.
         case noSlot
         
         /// The app requested more than 10 ad slots.
         case tooManySlots
+        
+        /// An HTTP error occurred.
+        case httpError(statusCode: Int, localizedMessage: String)
     }
 
     // MARK: Class Properties
@@ -125,6 +128,14 @@ public class Yieldprobe: NSObject {
         http.get(url: url) { result in
             completionHandler(Result {
                 let reply = try result.get()
+                
+                if let http = reply.response as? HTTPURLResponse {
+                    if http.statusCode != 200 {
+                        let message = HTTPURLResponse.localizedString(forStatusCode: http.statusCode)
+                        throw Error.httpError(statusCode: http.statusCode,
+                                              localizedMessage: message)
+                    }
+                }
                 
                 fatalError("Unimplemented.")
             })

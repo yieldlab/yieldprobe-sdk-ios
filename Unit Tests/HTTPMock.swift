@@ -27,4 +27,12 @@ class HTTPMock: HTTPClient {
         }
     }
     
+    func handle (_ call: Call,
+                 processor: (URL) throws -> (data: Data, response: URLResponse))
+    {
+        handle(call) { url, completionHandler in
+            completionHandler(Result(catching: { try processor(url) }))
+        }
+    }
+    
 }

@@ -10,22 +10,6 @@ import Foundation
 import XCTest
 @testable import Yieldprobe
 
-extension Set {
-    
-    func randomSubset () -> Set<Element> {
-        var generator: RandomNumberGenerator = SystemRandomNumberGenerator()
-        return randomSubset(using: &generator)
-    }
-    
-    func randomSubset (using generator: inout RandomNumberGenerator) -> Set<Element> {
-        filter { _ in
-            // This is a bit wasteful but only used for testing anyway.
-            generator.next().isMultiple(of: 2)
-        }
-    }
-    
-}
-
 class YieldprobeTests: XCTestCase {
     
     // MARK: SDK Singleton

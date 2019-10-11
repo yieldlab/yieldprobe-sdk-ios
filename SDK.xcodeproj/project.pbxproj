@@ -50,6 +50,7 @@
 		91C40885234F30B800D0DC71 /* PIIDDecoratorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C40884234F30B800D0DC71 /* PIIDDecoratorFilter.swift */; };
 		91C40887234F7EFE00D0DC71 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C40886234F7EFE00D0DC71 /* Bid.swift */; };
 		91C4088923507B9A00D0DC71 /* BidTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C4088823507B9A00D0DC71 /* BidTests.swift */; };
+		91C4088B2350A42B00D0DC71 /* Set+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C4088A2350A42B00D0DC71 /* Set+YLD.swift */; };
 		91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646823477BF4006E6563 /* URL+YLD.swift */; };
 		91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646A234794DB006E6563 /* URLSessionTests.swift */; };
 /* End PBXBuildFile section */
@@ -140,6 +141,7 @@
 		91C40884234F30B800D0DC71 /* PIIDDecoratorFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIIDDecoratorFilter.swift; sourceTree = "<group>"; };
 		91C40886234F7EFE00D0DC71 /* Bid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
 		91C4088823507B9A00D0DC71 /* BidTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidTests.swift; sourceTree = "<group>"; };
+		91C4088A2350A42B00D0DC71 /* Set+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+YLD.swift"; sourceTree = "<group>"; };
 		91D8646823477BF4006E6563 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
 		91D8646A234794DB006E6563 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				91D8646823477BF4006E6563 /* URL+YLD.swift */,
+				91C4088A2350A42B00D0DC71 /* Set+YLD.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
 				91793D4C234C6E12004DB72D /* DeviceTypeDecoratorTests.swift in Sources */,
 				915618DE234B6ED600D5F530 /* LocationDecoratorTests.swift in Sources */,
+				91C4088B2350A42B00D0DC71 /* Set+YLD.swift in Sources */,
 				915618E4234B956F00D5F530 /* IDFADecoratorTests.swift in Sources */,
 				91793D50234CAA4A004DB72D /* UIDeviceTests.swift in Sources */,
 				915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */,

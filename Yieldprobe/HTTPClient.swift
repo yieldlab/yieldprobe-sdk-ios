@@ -7,7 +7,13 @@
 
 import Foundation
 
-typealias URLReply = (data: Data, response: URLResponse)
+struct URLReply {
+    
+    var data: Data
+    
+    var response: URLResponse
+    
+}
 
 protocol HTTPClient {
     

@@ -78,12 +78,12 @@ class URLSessionTests: XCTestCase {
         XCTAssertEqual(sut.calls.first?.state, .resumed)
     }
     
-    func testGetSuccess () {
+    func testGetSuccess () throws {
         // Arrange:
         let data = Data()
         let response = URLResponse()
         let sut = SpyURLSession()
-        var result: Optional<Result<(data: Data, response: URLResponse),Error>> = nil
+        var result: Result<URLReply,Error>? = nil
         
         // Act:
         sut.get(url: URL(string: "file:///")!) { _result in
@@ -94,18 +94,16 @@ class URLSessionTests: XCTestCase {
         
         // Assert:
         XCTAssertNotNil(result)
-        guard case .some(.success(let d, let r)) = result else {
-            return XCTFail("Unexpected result: \(result as Any)")
-        }
-        XCTAssertEqual(d, data)
-        XCTAssertEqual(r, response)
+        let reply = try result?.get()
+        XCTAssertEqual(reply?.data, data)
+        XCTAssertEqual(reply?.response, response)
     }
     
     func testGetFailure () {
         // Arrange:
         let error = URLError(.notConnectedToInternet)
         let sut = SpyURLSession()
-        var result: Optional<Result<(data: Data, response: URLResponse), Error>> = nil
+        var result: Result<URLReply, Error>? = nil
         
         // Act:
         sut.get(url: URL(string: "file:///")!) { _result in

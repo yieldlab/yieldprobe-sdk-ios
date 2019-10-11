@@ -25,12 +25,12 @@ extension URLSessionProtocol {
     
     func get(url: URL, completionHandler: @escaping HTTPClient.CompletionHandler) {
         dataTask(with: url, completionHandler: { data, response, error in
-            completionHandler(Result(catching: { () -> (data: Data, response: URLResponse) in
+            completionHandler(Result(catching: { () -> URLReply in
                 guard let data = data, let response = response else {
                     throw error!
                 }
                 
-                return (data: data, response: response)
+                return URLReply(data: data, response: response)
             }))
         }).resume()
     }

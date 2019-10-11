@@ -13,7 +13,7 @@ class HTTPMock: HTTPClient {
     enum Call {
         case get(URL, CompletionHandler)
         
-        func process(_ processor: (URL) throws -> (data: Data, response: URLResponse)) {
+        func process(_ processor: (URL) throws -> URLReply) {
             switch self {
             case .get(let url, let completionHandler):
                 completionHandler(Result(catching: { try processor(url) }))

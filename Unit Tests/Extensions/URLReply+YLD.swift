@@ -20,4 +20,13 @@ extension URLReply {
         self.init(data: data, response: response)
     }
     
+    init<T: Encodable> (_ subject: T,
+                        using encoder: JSONEncoder = JSONEncoder(),
+                        response: URLResponse)
+        throws
+    {
+        self.init(data: try encoder.encode(subject),
+                  response: response)
+    }
+    
 }

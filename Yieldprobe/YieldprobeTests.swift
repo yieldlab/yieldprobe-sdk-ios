@@ -10,6 +10,10 @@ import Foundation
 import XCTest
 @testable import Yieldprobe
 
+enum ExampleSlot: Int {
+    case banner300x250 = 6846238
+}
+
 class YieldprobeTests: XCTestCase {
     
     // MARK: SDK Singleton
@@ -494,6 +498,13 @@ class YieldprobeTests: XCTestCase {
     }
     
     struct TestResponse: Encodable {
+        var id: Int
+        var price = 340
+        var advertiser = "yieldlab"
+        var adsize = "300x250"
+        var pid = 6846242
+        var did = 5209027
+        var pvid = "130048b6-6443-418f-9c30-1db968e3cdf2"
     }
     
     func testNoFill () {
@@ -520,6 +531,43 @@ class YieldprobeTests: XCTestCase {
         XCTAssertThrowsError(try result?.get()) { error in
             XCTAssertEqual(error as? Yieldprobe.Error, .noFill)
         }
+    }
+    
+    func testResponse () {
+        // Arrange:
+        var bid: Bid?
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http)
+        
+        // Act:
+        sut.probe(slot: ExampleSlot.banner300x250.rawValue) { result in
+            do {
+                bid = try result.get()
+            } catch {
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
+        http.calls.first?.process { url in
+            try URLReply([TestResponse(id: ExampleSlot.banner300x250.rawValue)],
+                         response: HTTPURLResponse(url: url,
+                                                   statusCode: 200,
+                                                   httpVersion: nil,
+                                                   headerFields: [
+                                                    "Content-Type": "application/json;charset=UTF-8",
+                         ])!)
+        }
+        
+        // Assert:
+        XCTAssertEqual(bid?.slotID, ExampleSlot.banner300x250.rawValue)
+        let customTargeting = bid?.customTargeting()
+        XCTAssertEqual(customTargeting?["id"] as? Int, bid?.slotID)
+        XCTAssertEqual(customTargeting?["price"] as? Int, 340)
+        XCTAssertEqual(customTargeting?["advertiser"] as? String, "yieldlab")
+        XCTAssertEqual(customTargeting?["adsize"] as? String, "300x250")
+        XCTAssertEqual(customTargeting?["pid"] as? Int, 6846242)
+        XCTAssertEqual(customTargeting?["did"] as? Int, 5209027)
+        XCTAssertEqual(customTargeting?["pvid"] as? String,
+                       "130048b6-6443-418f-9c30-1db968e3cdf2")
     }
     
 }

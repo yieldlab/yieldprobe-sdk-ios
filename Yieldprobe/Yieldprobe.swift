@@ -112,7 +112,7 @@ public class Yieldprobe: NSObject {
                     throw Error.noFill
                 }
                 
-                fatalError("Unimplemented")
+                return result
             })
         }
     }
@@ -159,10 +159,17 @@ public class Yieldprobe: NSObject {
                     throw Error.unsupportedFormat
                 }
                 struct BidView: Decodable {
+                    var id: Int
+                    var price: Int?
+                    var advertiser: String?
+                    var curl: String?
                 }
                 let decoder = JSONDecoder()
                 return try bids.map { bid -> Bid in
-                    fatalError("Unimplemented.")
+                    let data = try JSONSerialization.data(withJSONObject: bid, options: [])
+                    let decoded = try decoder.decode(BidView.self, from: data)
+                    return Bid(slotID: decoded.id,
+                               customTargeting: bid)
                 }
             })
         }

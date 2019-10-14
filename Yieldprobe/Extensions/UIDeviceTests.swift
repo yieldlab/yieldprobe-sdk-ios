@@ -8,6 +8,7 @@
 import XCTest
 @testable import Yieldprobe
 
+#if !targetEnvironment(simulator)
 class UIDeviceTests: XCTestCase {
     
     func testPosixCallThrows () {
@@ -28,3 +29,4 @@ class UIDeviceTests: XCTestCase {
     }
     
 }
+#endif

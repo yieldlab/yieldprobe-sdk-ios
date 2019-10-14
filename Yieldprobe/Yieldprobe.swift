@@ -27,6 +27,9 @@ public class Yieldprobe: NSObject {
         
         /// The format of the reponse could not be parsed.
         case unsupportedFormat
+        
+        /// No ad is available for this ad slot.
+        case noFill
     }
 
     // MARK: Class Properties
@@ -104,7 +107,11 @@ public class Yieldprobe: NSObject {
     
     public func probe (slot slotID: Int, completionHandler: @escaping (Result<Bid,Swift.Error>) -> Void) {
         probe(slots: [slotID]) { result in
-            completionHandler(result.map { _ in
+            completionHandler(result.tryMap {
+                guard let result = $0.first else {
+                    throw Error.noFill
+                }
+                
                 fatalError("Unimplemented")
             })
         }
@@ -151,7 +158,12 @@ public class Yieldprobe: NSObject {
                 guard let bids = jsonBids as? [[String: Any]] else {
                     throw Error.unsupportedFormat
                 }
-                fatalError("Unimplemented.")
+                struct BidView: Decodable {
+                }
+                let decoder = JSONDecoder()
+                return try bids.map { bid -> Bid in
+                    fatalError("Unimplemented.")
+                }
             })
         }
     }

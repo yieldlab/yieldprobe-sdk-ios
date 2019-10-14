@@ -467,4 +467,30 @@ class YieldprobeTests: XCTestCase {
         }
     }
     
+    func testUnsupportedFormat () {
+        // Arrange:
+        let http = HTTPMock()
+        var result: Result<Bid,Error>?
+        let sut = Yieldprobe(http: http)
+        sut.probe(slot: 1234) { _result in
+            XCTAssertNil(result)
+            result = _result
+        }
+        
+        // Act:
+        http.calls.first?.process { url in
+            try URLReply(text: "{}",
+                         response: HTTPURLResponse(url: url,
+                                                   statusCode: 200,
+                                                   httpVersion: nil,
+                                                   headerFields: ["Content-Type" : "application/json;charset=UTF-8"])!)
+        }
+        
+        // Assert:
+        XCTAssertNotNil(result)
+        XCTAssertThrowsError(try result?.get()) { error in
+            XCTAssertEqual(error as? Yieldprobe.Error, .unsupportedFormat)
+        }
+    }
+    
 }

@@ -24,6 +24,9 @@ public class Yieldprobe: NSObject {
         
         /// An unexpected value was encountered in the `Content-Type` header.
         case unsupportedContentType(String?)
+        
+        /// The format of the reponse could not be parsed.
+        case unsupportedFormat
     }
 
     // MARK: Class Properties
@@ -144,6 +147,10 @@ public class Yieldprobe: NSObject {
                     }
                 }
                 
+                let jsonBids = try JSONSerialization.jsonObject(with: reply.data, options: [])
+                guard let bids = jsonBids as? [[String: Any]] else {
+                    throw Error.unsupportedFormat
+                }
                 fatalError("Unimplemented.")
             })
         }

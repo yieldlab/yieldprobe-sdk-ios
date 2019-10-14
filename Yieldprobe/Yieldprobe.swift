@@ -21,6 +21,9 @@ public class Yieldprobe: NSObject {
         
         /// An HTTP error occurred.
         case httpError(statusCode: Int, localizedMessage: String)
+        
+        /// An unexpected value was encountered in the `Content-Type` header.
+        case unsupportedContentType(String?)
     }
 
     // MARK: Class Properties
@@ -134,6 +137,10 @@ public class Yieldprobe: NSObject {
                         let message = HTTPURLResponse.localizedString(forStatusCode: http.statusCode)
                         throw Error.httpError(statusCode: http.statusCode,
                                               localizedMessage: message)
+                    }
+                    let contentType = http.allHeaderFields["Content-Type"] as? String
+                    if contentType != "application/json;charset=UTF-8" {
+                        throw Error.unsupportedContentType(contentType)
                     }
                 }
                 

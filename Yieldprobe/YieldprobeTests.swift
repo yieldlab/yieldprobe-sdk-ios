@@ -437,4 +437,34 @@ class YieldprobeTests: XCTestCase {
         }
     }
     
+    func testNonJSONContentType () {
+        // Arrange:
+        let javascript = """
+        var yl=yl||{};yl.YpResult=yl.YpResult||function(){var a={};return{add:function(b){a[b.id]=b},get:function(b) {return a[b]},getAll:function(){return a}}}(); yl.YpResult.add({'id':3418,'advertiser':'werbung. de','curl':'https://www.werbung.de'}); yl.YpResult.add({'id':3419,'advertiser':'werbung.de','curl':'https://www.werbung.de'});
+        """ // from the API documentation
+        let http = HTTPMock()
+        var result: Result<Bid,Error>?
+        let sut = Yieldprobe(http: http)
+        sut.probe(slot: 1234) { _result in
+            XCTAssertNil(result)
+            result = _result
+        }
+        
+        // Act:
+        http.calls.first?.process { url in
+            try URLReply(text: javascript,
+                         response: HTTPURLResponse(url: url,
+                                                   statusCode: 200,
+                                                   httpVersion: nil,
+                                                   headerFields: ["Content-Type" : "text/javascript;charset=UTF-8"])!)
+        }
+        
+        // Assert:
+        XCTAssertNotNil(result)
+        XCTAssertThrowsError(try result?.get()) { error in
+            XCTAssertEqual(error as? Yieldprobe.Error,
+                           .unsupportedContentType("text/javascript;charset=UTF-8"))
+        }
+    }
+    
 }

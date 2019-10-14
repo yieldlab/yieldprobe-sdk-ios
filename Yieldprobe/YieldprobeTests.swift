@@ -7,12 +7,9 @@
 
 import CoreLocation
 import Foundation
+@testable import Test_Host
 import XCTest
 @testable import Yieldprobe
-
-enum ExampleSlot: Int {
-    case banner300x250 = 6846238
-}
 
 class YieldprobeTests: XCTestCase {
     

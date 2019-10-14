@@ -56,6 +56,7 @@
 		91C4088B2350A42B00D0DC71 /* Set+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C4088A2350A42B00D0DC71 /* Set+YLD.swift */; };
 		91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646823477BF4006E6563 /* URL+YLD.swift */; };
 		91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646A234794DB006E6563 /* URLSessionTests.swift */; };
+		91EC3898235462B4003B9831 /* ExampleSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EC3897235462B4003B9831 /* ExampleSlot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		91C4088A2350A42B00D0DC71 /* Set+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+YLD.swift"; sourceTree = "<group>"; };
 		91D8646823477BF4006E6563 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
 		91D8646A234794DB006E6563 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
+		91EC3897235462B4003B9831 /* ExampleSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSlot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,12 +247,13 @@
 			isa = PBXGroup;
 			children = (
 				915C8ABF234385D400746E7E /* AppDelegate.swift */,
+				915C8AC8234385DA00746E7E /* Assets.xcassets */,
+				91EC3897235462B4003B9831 /* ExampleSlot.swift */,
+				915C8ACD234385DA00746E7E /* Info.plist */,
+				915C8ACA234385DA00746E7E /* LaunchScreen.storyboard */,
+				915C8AC5234385D400746E7E /* Main.storyboard */,
 				915C8AC1234385D400746E7E /* SceneDelegate.swift */,
 				915C8AC3234385D400746E7E /* ViewController.swift */,
-				915C8AC5234385D400746E7E /* Main.storyboard */,
-				915C8AC8234385DA00746E7E /* Assets.xcassets */,
-				915C8ACA234385DA00746E7E /* LaunchScreen.storyboard */,
-				915C8ACD234385DA00746E7E /* Info.plist */,
 			);
 			path = "Test Host";
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 			files = (
 				915C8AC4234385D400746E7E /* ViewController.swift in Sources */,
 				915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */,
+				91EC3898235462B4003B9831 /* ExampleSlot.swift in Sources */,
 				915C8AC2234385D400746E7E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

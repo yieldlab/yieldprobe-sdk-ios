@@ -5,6 +5,7 @@
 //  Created by Sven Herzberg on 14.10.19.
 //
 
+import CoreLocation
 import UIKit
 import Yieldprobe
 
@@ -30,6 +31,7 @@ class ValidationViewController: UITableViewController {
     
     enum ConfigureRows: Int, CaseIterable {
         case personalizeAds
+        case useGeolocation
     }
     
     // MARK: - Properties
@@ -48,6 +50,8 @@ class ValidationViewController: UITableViewController {
     let clock = HighResolutionClock()
     
     var personalizeAds = true
+    
+    var useGeolocation = true
     
     private(set) var started: UInt64!
     
@@ -85,7 +89,8 @@ class ValidationViewController: UITableViewController {
     func configure () {
         activities.append(.configure(when: clock.now()))
         
-        let configuration = Configuration(personalizeAds: personalizeAds)
+        let configuration = Configuration(personalizeAds: personalizeAds,
+                                          useGeolocation: useGeolocation)
         yieldprobe.configure(using: configuration)
         
         requestBid()
@@ -168,6 +173,25 @@ class ValidationViewController: UITableViewController {
             case .personalizeAds:
                 cell.textLabel?.text = "Personalize Ads"
                 cell.detailTextLabel?.text = personalizeAds ? "yes" : "no"
+            case .useGeolocation:
+                cell.textLabel?.text = "Geolocation"
+                if !useGeolocation {
+                    cell.detailTextLabel?.text = "no"
+                } else {
+                    switch CLLocationManager.authorizationStatus() {
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        cell.detailTextLabel?.text = "authorized"
+                        cell.detailTextLabel?.text = "authorized"
+                    case .denied:
+                        cell.detailTextLabel?.text = "denied"
+                    case .notDetermined:
+                        cell.detailTextLabel?.text = "not determined"
+                    case .restricted:
+                        cell.detailTextLabel?.text = "restricted"
+                    @unknown default:
+                        cell.detailTextLabel?.text = "unknown"
+                    }
+                }
             }
             return cell
         case .bidError(when: _, let error):

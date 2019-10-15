@@ -16,7 +16,7 @@ public struct Configuration {
     /// has access to it. Yieldprobe will not cause location permission prompts in your application.
     ///
     /// Default: `true`
-    var useGeolocation: Bool = true
+    var useGeolocation: Bool
     
     /// Specify whether Yieldprobe should use personal information.
     ///
@@ -24,10 +24,13 @@ public struct Configuration {
     /// type will not be sent over the network.
     ///
     /// Default: `true`
-    var personalizeAds: Bool = true
+    var personalizeAds: Bool
     
-    public init (personalizeAds: Bool = true) {
+    public init (personalizeAds: Bool = true,
+                 useGeolocation: Bool = true)
+    {
         self.personalizeAds = personalizeAds
+        self.useGeolocation = useGeolocation
     }
     
 }

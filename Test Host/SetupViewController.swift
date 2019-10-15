@@ -24,7 +24,7 @@ class SetupViewController: UITableViewController {
     
     enum SDKRow: Int, CaseIterable {
         case personalizeAds
-        #warning("FIXME: Add Geolocation.")
+        case useGeolocation
     }
     
     // MARK: Properties
@@ -39,6 +39,8 @@ class SetupViewController: UITableViewController {
     }
     
     private(set) var personalizeAds = true
+    
+    private(set) var useGeolocation = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,12 +97,13 @@ class SetupViewController: UITableViewController {
                                                      for: indexPath) as! SwitchCell
             let keyPath: ReferenceWritableKeyPath<SetupViewController,Bool>
             let title: String
-            switch SDKRow(rawValue: indexPath.row) {
+            switch SDKRow(rawValue: indexPath.row)! {
             case .personalizeAds:
                 title = "Personalized Ads"
                 keyPath = \SetupViewController.personalizeAds
-            default:
-                preconditionFailure()
+            case .useGeolocation:
+                title = "Use Geolocation"
+                keyPath = \SetupViewController.useGeolocation
             }
             cell.textLabel?.text = title
             cell.switch.isOn = self[keyPath: keyPath]
@@ -218,6 +221,7 @@ class SetupViewController: UITableViewController {
         case let vc as ValidationViewController:
             vc.adSlot = adSlot?.rawValue
             vc.personalizeAds = personalizeAds
+            vc.useGeolocation = useGeolocation
         default:
             break
         }
@@ -225,9 +229,16 @@ class SetupViewController: UITableViewController {
     
     // MARK: - Interface Builder Actions
     
+    var locationManager = CLLocationManager()
+    
     @IBAction
     func didTapSettings (_ sender: UIBarButtonItem) {
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
                                       options: [:], completionHandler: nil)
+        }
     }
+    
 }

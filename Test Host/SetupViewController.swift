@@ -17,6 +17,7 @@ class ViewController: UITableViewController {
     // MARK: Types
     
     enum Section: Int, CaseIterable {
+        case sdk
         case adSlot
         case submit
     }
@@ -52,6 +53,8 @@ class ViewController: UITableViewController {
         -> String?
     {
         switch Section(rawValue: section) {
+        case .sdk:
+            return "SDK Configuration"
         case .adSlot:
             return "Ad Slot"
         case .submit:
@@ -65,6 +68,8 @@ class ViewController: UITableViewController {
         -> Int
     {
         switch Section(rawValue: section) {
+        case .sdk:
+            return 0
         case .adSlot:
             return 3
         case .submit:
@@ -78,6 +83,8 @@ class ViewController: UITableViewController {
         -> UITableViewCell
     {
         switch Section(rawValue: indexPath.section) {
+        case .sdk:
+            preconditionFailure()
         case .adSlot:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
                                                      for: indexPath)
@@ -171,7 +178,7 @@ class ViewController: UITableViewController {
             default:
                 preconditionFailure()
             }
-        case .submit:
+        case .sdk, .submit:
             break
         case nil:
             preconditionFailure()

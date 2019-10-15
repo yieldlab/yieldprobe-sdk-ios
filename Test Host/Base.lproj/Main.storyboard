@@ -98,7 +98,13 @@
                             <outlet property="delegate" destination="UrM-Ms-seS" id="StY-D3-sSO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Yieldprobe QA" largeTitleDisplayMode="always" id="L2c-nQ-QFV"/>
+                    <navigationItem key="navigationItem" title="Yieldprobe QA" largeTitleDisplayMode="always" id="L2c-nQ-QFV">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="pta-g2-qCF">
+                            <connections>
+                                <action selector="didTapSettings:" destination="UrM-Ms-seS" id="Zjj-lK-nsl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wAg-Ge-bl4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

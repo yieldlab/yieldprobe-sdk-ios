@@ -5,6 +5,7 @@
 //  Created by Sven Herzberg on 14.10.19.
 //
 
+import CoreLocation
 import UIKit
 
 #warning("FIXME: Add custom ad slot option.")
@@ -222,4 +223,11 @@ class SetupViewController: UITableViewController {
         }
     }
     
+    // MARK: - Interface Builder Actions
+    
+    @IBAction
+    func didTapSettings (_ sender: UIBarButtonItem) {
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                      options: [:], completionHandler: nil)
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SetupViewController.swift
 //  Test Host
 //
 //  Created by Sven Herzberg on 14.10.19.
@@ -7,12 +7,11 @@
 
 import UIKit
 
-#warning("FIXME: Add SDK configuration.")
 #warning("FIXME: Add custom ad slot option.")
 
 let checkmark = "\u{2713}" // U+2713, CHECKMARK: ✓
 
-class ViewController: UITableViewController {
+class SetupViewController: UITableViewController {
     
     // MARK: Types
     
@@ -20,6 +19,11 @@ class ViewController: UITableViewController {
         case sdk
         case adSlot
         case submit
+    }
+    
+    enum SDKRow: Int, CaseIterable {
+        case personalizeAds
+        #warning("FIXME: Add Geolocation.")
     }
     
     // MARK: Properties
@@ -32,6 +36,8 @@ class ViewController: UITableViewController {
                                      with: .automatic)
         }
     }
+    
+    private(set) var personalizeAds = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +75,7 @@ class ViewController: UITableViewController {
     {
         switch Section(rawValue: section) {
         case .sdk:
-            return 0
+            return SDKRow.allCases.count
         case .adSlot:
             return 3
         case .submit:
@@ -84,7 +90,23 @@ class ViewController: UITableViewController {
     {
         switch Section(rawValue: indexPath.section) {
         case .sdk:
-            preconditionFailure()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "switch",
+                                                     for: indexPath) as! SwitchCell
+            let keyPath: ReferenceWritableKeyPath<SetupViewController,Bool>
+            let title: String
+            switch SDKRow(rawValue: indexPath.row) {
+            case .personalizeAds:
+                title = "Personalized Ads"
+                keyPath = \SetupViewController.personalizeAds
+            default:
+                preconditionFailure()
+            }
+            cell.textLabel?.text = title
+            cell.switch.isOn = self[keyPath: keyPath]
+            cell.onToggle = { flag in
+                self[keyPath: keyPath] = flag
+            }
+            return cell
         case .adSlot:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
                                                      for: indexPath)
@@ -194,6 +216,7 @@ class ViewController: UITableViewController {
         switch segue.destination {
         case let vc as ValidationViewController:
             vc.adSlot = adSlot?.rawValue
+            vc.personalizeAds = personalizeAds
         default:
             break
         }

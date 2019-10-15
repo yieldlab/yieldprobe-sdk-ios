@@ -28,6 +28,10 @@ class ValidationViewController: UITableViewController {
         case targetingError(when: UInt64, Error)
     }
     
+    enum ConfigureRows: Int, CaseIterable {
+        case personalizeAds
+    }
+    
     // MARK: - Properties
     
     private(set) var activities = [Activity]() {
@@ -42,6 +46,8 @@ class ValidationViewController: UITableViewController {
     var adSlot: Int!
 
     let clock = HighResolutionClock()
+    
+    var personalizeAds = true
     
     private(set) var started: UInt64!
     
@@ -79,7 +85,7 @@ class ValidationViewController: UITableViewController {
     func configure () {
         activities.append(.configure(when: clock.now()))
         
-        let configuration = Configuration()
+        let configuration = Configuration(personalizeAds: personalizeAds)
         yieldprobe.configure(using: configuration)
         
         requestBid()
@@ -133,7 +139,7 @@ class ValidationViewController: UITableViewController {
         case .started:
             return 1
         case .configure:
-            return 1
+            return 1 + ConfigureRows.allCases.count
         case .requestBid:
             return 1
         case .bid:
@@ -155,6 +161,20 @@ class ValidationViewController: UITableViewController {
         }
         
         switch activities[indexPath.section] {
+        case .configure(_):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "key-value",
+                                                     for: indexPath)
+            switch ConfigureRows(rawValue: indexPath.row - 1)! {
+            case .personalizeAds:
+                cell.textLabel?.text = "Personalize Ads"
+                cell.detailTextLabel?.text = personalizeAds ? "yes" : "no"
+            }
+            return cell
+        case .bidError(when: _, let error):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "error",
+                                                     for: indexPath)
+            cell.textLabel?.text = error.localizedDescription
+            return cell
         case .targeting(when: _, let targeting):
             let key = targeting.keys.sorted()[indexPath.row - 1]
             let value = targeting[key]
@@ -162,11 +182,6 @@ class ValidationViewController: UITableViewController {
                                                      for: indexPath)
             cell.textLabel?.text = key
             cell.detailTextLabel?.text = value.map(String.init(describing:)) ?? "null"
-            return cell
-        case .bidError(when: _, let error):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "error",
-                                                     for: indexPath)
-            cell.textLabel?.text = error.localizedDescription
             return cell
         case let `default`:
             fatalError("FIXME: Handle: \(`default`)")

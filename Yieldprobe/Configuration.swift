@@ -24,8 +24,10 @@ public struct Configuration {
     /// type will not be sent over the network.
     ///
     /// Default: `true`
-    var adPersonalization: Bool = true
+    var personalizeAds: Bool = true
     
-    public init () { }
+    public init (personalizeAds: Bool = true) {
+        self.personalizeAds = personalizeAds
+    }
     
 }

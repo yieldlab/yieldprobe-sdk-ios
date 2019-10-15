@@ -16,7 +16,7 @@ struct PIIDDecoratorFilter<Wrapped: URLDecorator>: URLDecorator {
     var wrapped: Wrapped
     
     func decorate(_ subject: URL) -> URL {
-        guard configuration.adPersonalization else {
+        guard configuration.personalizeAds else {
             return subject
         }
         

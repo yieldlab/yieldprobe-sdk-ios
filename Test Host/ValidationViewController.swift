@@ -20,6 +20,7 @@ class ValidationViewController: UITableViewController {
     
     enum Activity {
         case started(when: UInt64)
+        case requestBid(when: UInt64)
         case bid(when: UInt64, Bid)
         case bidError(when: UInt64, Error)
         case targeting(when: UInt64, [String: Any])
@@ -71,16 +72,16 @@ class ValidationViewController: UITableViewController {
             .started(when: started)
         ]
         
-        DispatchQueue.main.async {
-            self.sendRequest()
-        }
+        requestBid()
     }
     
-    func sendRequest () {
-        yieldprobe.probe(slot: adSlot, completionHandler: on(result:))
+    func requestBid () {
+        activities.append(.requestBid(when: clock.now()))
+        
+        yieldprobe.probe(slot: adSlot, completionHandler: receive(bid:))
     }
     
-    func on(result: Result<Bid,Error>) {
+    func receive(bid result: Result<Bid,Error>) {
         let now = clock.now()
         var activity: Activity
         var bid: Bid!
@@ -120,6 +121,8 @@ class ValidationViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch activities[section] {
         case .started:
+            return 1
+        case .requestBid:
             return 1
         case .bid:
             return 1
@@ -165,10 +168,14 @@ class ValidationViewController: UITableViewController {
                                                  for: indexPath)
         switch activities[indexPath.section] {
         case .started:
-            cell.textLabel?.text = "Started"
+            cell.textLabel?.text = "Start"
             cell.detailTextLabel?.isHidden = true
+        case .requestBid(let when):
+            cell.textLabel?.text = "Request Bid"
+            cell.detailTextLabel?.isHidden = false
+            cell.detailTextLabel?.text = durationText(for: when)
         case .bid(let when, _):
-            cell.textLabel?.text = "Received Bid"
+            cell.textLabel?.text = "Receive Bid"
             cell.detailTextLabel?.isHidden = false
             cell.detailTextLabel?.text = durationText(for: when)
         case .bidError(let when, _):
@@ -240,6 +247,10 @@ class ValidationViewController: UITableViewController {
         return true
     }
     */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     /*
     // MARK: - Navigation

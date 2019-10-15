@@ -12,7 +12,7 @@ public class Yieldprobe: NSObject {
     
     // MARK: Types
     
-    enum Error: Swift.Error, Equatable {
+    public enum Error: Swift.Error, Equatable {
         /// The app did not request a single advertising slot.
         case noSlot
         
@@ -173,6 +173,39 @@ public class Yieldprobe: NSObject {
                 }
             })
         }
+    }
+    
+}
+
+extension Yieldprobe.Error: LocalizedError {
+    
+    public var errorDescription: String? {
+        switch self {
+        case .httpError(let statusCode, let localizedMessage):
+            return "Server returned \(statusCode): \(localizedMessage)"
+        case .noFill:
+            return "No Bid available. Please try again later."
+        case .noSlot:
+            return "No ad slot provided."
+        case .tooManySlots:
+            return "Too many ad slots provided."
+        case .unsupportedContentType(_):
+            return "Server returned unexpected data format."
+        case .unsupportedFormat:
+            return "Server returned invalid data."
+        }
+    }
+    
+    public var failureReason: String? {
+        nil
+    }
+    
+    public var recoverySuggestion: String? {
+        nil
+    }
+    
+    public var helpAnchor: String? {
+        nil
     }
     
 }

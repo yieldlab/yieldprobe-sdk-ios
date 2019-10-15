@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Configuration {
+public struct Configuration {
     
     /// Specify whether Yieldprobe should use Geolocation data.
     ///
@@ -25,5 +25,7 @@ struct Configuration {
     ///
     /// Default: `true`
     var adPersonalization: Bool = true
+    
+    public init () { }
     
 }

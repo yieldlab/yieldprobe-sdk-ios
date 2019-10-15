@@ -20,6 +20,7 @@ class ValidationViewController: UITableViewController {
     
     enum Activity {
         case started(when: UInt64)
+        case configure(when: UInt64)
         case requestBid(when: UInt64)
         case bid(when: UInt64, Bid)
         case bidError(when: UInt64, Error)
@@ -72,6 +73,15 @@ class ValidationViewController: UITableViewController {
             .started(when: started)
         ]
         
+        self.configure()
+    }
+    
+    func configure () {
+        activities.append(.configure(when: clock.now()))
+        
+        let configuration = Configuration()
+        yieldprobe.configure(using: configuration)
+        
         requestBid()
     }
     
@@ -122,6 +132,8 @@ class ValidationViewController: UITableViewController {
         switch activities[section] {
         case .started:
             return 1
+        case .configure:
+            return 1
         case .requestBid:
             return 1
         case .bid:
@@ -170,6 +182,10 @@ class ValidationViewController: UITableViewController {
         case .started:
             cell.textLabel?.text = "Start"
             cell.detailTextLabel?.isHidden = true
+        case .configure(let when):
+            cell.textLabel?.text = "Configure SDK"
+            cell.detailTextLabel?.isHidden = false
+            cell.detailTextLabel?.text = durationText(for: when)
         case .requestBid(let when):
             cell.textLabel?.text = "Request Bid"
             cell.detailTextLabel?.isHidden = false

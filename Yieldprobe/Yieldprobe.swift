@@ -95,7 +95,7 @@ public class Yieldprobe: NSObject {
                                                      wrapped: locationDecorator)
     }
     
-    func configure(using configuration: Configuration) {
+    public func configure(using configuration: Configuration) {
         connectivity.configuration = configuration
         deviceTypeDecorator.configuration = configuration
         idfaDecorator.configuration = configuration

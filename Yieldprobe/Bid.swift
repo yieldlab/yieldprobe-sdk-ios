@@ -16,7 +16,7 @@ public class Bid {
         _customTargeting = customTargeting
     }
     
-    func customTargeting () -> [String: Any] {
+    public func customTargeting () -> [String: Any] {
         _customTargeting
     }
     

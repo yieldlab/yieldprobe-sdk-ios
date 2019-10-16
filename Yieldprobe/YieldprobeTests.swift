@@ -111,6 +111,7 @@ class YieldprobeTests: XCTestCase {
                        selectedSlots)
         XCTAssertEqual(url.queryValues(for: "content"), ["json"])
         XCTAssertEqual(url.queryValues(for: "pvid"), ["true"])
+        XCTAssertEqual(url.queryValues(for: "sdk"), ["1"])
     }
     
     func testTooManySlots () {

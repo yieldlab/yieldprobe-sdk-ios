@@ -134,7 +134,7 @@ public class Yieldprobe: NSObject {
             }
         }
         
-        let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true")!
+        let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true&sdk=1")!
         let url = baseURL
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
             .decorate(cacheBuster, connectivity, consent, deviceTypeDecorator, locationDecorator, idfaDecorator)

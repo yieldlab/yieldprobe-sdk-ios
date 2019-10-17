@@ -7,8 +7,19 @@
 
 import Foundation
 
+extension URL: ExpressibleByStringLiteral {
+    
+    public init(stringLiteral value: StaticString) {
+        self.init(string: String(describing: value))!
+    }
+    
+}
+
 extension URL {
     
+    /// The URL representation of `https://example.com/`.
+    static let example: URL = "https://example.com/"
+
     var queryItems: [URLQueryItem]? {
         URLComponents(url: self, resolvingAgainstBaseURL: false)?.queryItems
     }

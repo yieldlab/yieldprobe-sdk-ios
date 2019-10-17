@@ -12,7 +12,7 @@ class URLComponentsTests: XCTestCase {
     
     func testEmptyQuery () {
         // Arrange:
-        let url = URL(string: "https://example.com/")!
+        let url = URL.example
         let sut = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         
         // Act:
@@ -28,7 +28,7 @@ class URLComponentsTests: XCTestCase {
     
     func testDisjunctQuery () {
         // Arrange:
-        let url = URL(string: "https://example.com/?baz")!
+        let url: URL = "https://example.com/?baz"
         let sut = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         
         // Act:
@@ -44,7 +44,7 @@ class URLComponentsTests: XCTestCase {
     
     func testConjunctQuery () {
         // Arrange:
-        let url = URL(string: "https://example.com/?foo")!
+        let url: URL = "https://example.com/?foo"
         let sut = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         
         // Act:

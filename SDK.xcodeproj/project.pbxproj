@@ -46,6 +46,8 @@
 		91793D50234CAA4A004DB72D /* UIDeviceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D4F234CAA4A004DB72D /* UIDeviceTests.swift */; };
 		91793D52234CB0D6004DB72D /* ConnectivityDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D51234CB0D6004DB72D /* ConnectivityDecorator.swift */; };
 		91793D54234CB0E7004DB72D /* ConnectivityDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D53234CB0E7004DB72D /* ConnectivityDecoratorTests.swift */; };
+		9184845223561CF30040C53E /* CacheBusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9184845123561CF30040C53E /* CacheBusterTests.swift */; };
+		91AA09372356227D00D521D8 /* Collection+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AA09362356227D00D521D8 /* Collection+YLD.swift */; };
 		91ACB8C42355D884002FD908 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ACB8C32355D884002FD908 /* SwitchCell.swift */; };
 		91ACB8C62355ECAA002FD908 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 91ACB8C52355ECAA002FD908 /* Settings.bundle */; };
 		91B283B5234DB6770055DB7F /* DefaultConnectivitySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B283B4234DB6770055DB7F /* DefaultConnectivitySource.swift */; };
@@ -145,6 +147,8 @@
 		91793D4F234CAA4A004DB72D /* UIDeviceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceTests.swift; sourceTree = "<group>"; };
 		91793D51234CB0D6004DB72D /* ConnectivityDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityDecorator.swift; sourceTree = "<group>"; };
 		91793D53234CB0E7004DB72D /* ConnectivityDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityDecoratorTests.swift; sourceTree = "<group>"; };
+		9184845123561CF30040C53E /* CacheBusterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheBusterTests.swift; sourceTree = "<group>"; };
+		91AA09362356227D00D521D8 /* Collection+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+YLD.swift"; sourceTree = "<group>"; };
 		91ACB8C32355D884002FD908 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		91ACB8C52355ECAA002FD908 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		91B283B4234DB6770055DB7F /* DefaultConnectivitySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultConnectivitySource.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 				91C40886234F7EFE00D0DC71 /* Bid.swift */,
 				91C4088823507B9A00D0DC71 /* BidTests.swift */,
 				915618C9234B25A200D5F530 /* CacheBuster.swift */,
+				9184845123561CF30040C53E /* CacheBusterTests.swift */,
 				91C40882234F2AAC00D0DC71 /* Configuration.swift */,
 				91793D51234CB0D6004DB72D /* ConnectivityDecorator.swift */,
 				91793D53234CB0E7004DB72D /* ConnectivityDecoratorTests.swift */,
@@ -299,9 +304,10 @@
 		91D8646723477BE4006E6563 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				91AA09362356227D00D521D8 /* Collection+YLD.swift */,
+				91C4088A2350A42B00D0DC71 /* Set+YLD.swift */,
 				91D8646823477BF4006E6563 /* URL+YLD.swift */,
 				91264F352350B9D90012D871 /* URLReply+YLD.swift */,
-				91C4088A2350A42B00D0DC71 /* Set+YLD.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -454,6 +460,7 @@
 				91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */,
 				91B283B7234DB72B0055DB7F /* DefaultConnectivitySourceTests.swift in Sources */,
 				915618CE234B29AD00D5F530 /* URLComponentsTests.swift in Sources */,
+				91AA09372356227D00D521D8 /* Collection+YLD.swift in Sources */,
 				91C4088923507B9A00D0DC71 /* BidTests.swift in Sources */,
 				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
@@ -462,6 +469,7 @@
 				91264F362350B9D90012D871 /* URLReply+YLD.swift in Sources */,
 				91C4088B2350A42B00D0DC71 /* Set+YLD.swift in Sources */,
 				915618E4234B956F00D5F530 /* IDFADecoratorTests.swift in Sources */,
+				9184845223561CF30040C53E /* CacheBusterTests.swift in Sources */,
 				91793D50234CAA4A004DB72D /* UIDeviceTests.swift in Sources */,
 				91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */,
 				915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */,

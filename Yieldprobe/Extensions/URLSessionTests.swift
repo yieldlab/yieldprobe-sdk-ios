@@ -64,7 +64,7 @@ class URLSessionTests: XCTestCase {
     
     func testGetRequest () {
         // Arrange:
-        let url = URL(string: "file:///")!
+        let url = URL.example
         let sut = SpyURLSession()
         
         // Act:
@@ -86,7 +86,7 @@ class URLSessionTests: XCTestCase {
         var result: Result<URLReply,Error>? = nil
         
         // Act:
-        sut.get(url: URL(string: "file:///")!) { _result in
+        sut.get(url: .example) { _result in
             XCTAssertNil(result)
             result = _result
         }
@@ -106,7 +106,7 @@ class URLSessionTests: XCTestCase {
         var result: Result<URLReply, Error>? = nil
         
         // Act:
-        sut.get(url: URL(string: "file:///")!) { _result in
+        sut.get(url: .example) { _result in
             XCTAssertNil(result)
             result = _result
         }

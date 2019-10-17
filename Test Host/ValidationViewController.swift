@@ -23,7 +23,7 @@ class ValidationViewController: UITableViewController {
         case started(when: HighPrecisionClock.Time)
         case configure(duration: TimeInterval)
         case requestBid(duration: TimeInterval, when: HighPrecisionClock.Time)
-        case bid(when: HighPrecisionClock.Time, Bid)
+        case bid(duration: TimeInterval, Bid)
         case bidError(when: HighPrecisionClock.Time, Error)
         case targeting(when: HighPrecisionClock.Time, [String: Any])
         case targetingError(when: HighPrecisionClock.Time, Error)
@@ -102,7 +102,7 @@ class ValidationViewController: UITableViewController {
         yieldprobe.probe(slot: adSlot, completionHandler: receive(bid:))
         let end = clock.now()
         
-        activities.append(.requestBid(duration: end &- start, when: start))
+        activities.append(.requestBid(duration: end &- start, when: end))
     }
     
     func receive(bid result: Result<Bid,Error>) {
@@ -110,9 +110,13 @@ class ValidationViewController: UITableViewController {
         var activity: Activity
         var bid: Bid!
         
+        guard let last = activities.last, case .requestBid(_, let start) = last else {
+            fatalError()
+        }
+        
         do {
             bid = try result.get()
-            activity = .bid(when: now, bid)
+            activity = .bid(duration: now &- start, bid)
         } catch {
             activity = .bidError(when: now, error)
         }
@@ -232,10 +236,10 @@ class ValidationViewController: UITableViewController {
             cell.textLabel?.text = "Request Bid"
             cell.detailTextLabel?.isHidden = false
             cell.detailTextLabel?.text = format(duration)
-        case .bid(let when, _):
+        case .bid(let duration, _):
             cell.textLabel?.text = "Receive Bid"
             cell.detailTextLabel?.isHidden = false
-            cell.detailTextLabel?.text = durationText(for: when)
+            cell.detailTextLabel?.text = format(duration)
         case .bidError(let when, _):
             cell.textLabel?.text = "Error Occurred"
             cell.detailTextLabel?.isHidden = false

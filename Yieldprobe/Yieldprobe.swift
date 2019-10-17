@@ -196,16 +196,4 @@ extension Yieldprobe.Error: LocalizedError {
         }
     }
     
-    public var failureReason: String? {
-        nil
-    }
-    
-    public var recoverySuggestion: String? {
-        nil
-    }
-    
-    public var helpAnchor: String? {
-        nil
-    }
-    
 }

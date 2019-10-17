@@ -26,9 +26,16 @@ public struct Configuration {
     /// Default: `true`
     var personalizeAds: Bool
     
+    /// Additional targeting information that will be present the each bid probe request.
+    ///
+    /// Default: Empty.
+    var extraTargeting: [String: String]
+    
     public init (personalizeAds: Bool = true,
-                 useGeolocation: Bool = true)
+                 useGeolocation: Bool = true,
+                 extraTargeting: [String: String] = [:])
     {
+        self.extraTargeting = extraTargeting
         self.personalizeAds = personalizeAds
         self.useGeolocation = useGeolocation
     }

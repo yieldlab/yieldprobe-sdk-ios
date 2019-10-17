@@ -63,6 +63,8 @@
 		91EC3898235462B4003B9831 /* ExampleSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EC3897235462B4003B9831 /* ExampleSlot.swift */; };
 		91EC389A23548BDF003B9831 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EC389923548BDE003B9831 /* ValidationViewController.swift */; };
 		91EC389B23548C44003B9831 /* HighPrecisionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighPrecisionClock.swift */; };
+		91EF5DFB2357522F0048F06A /* ExtraTargetingDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EF5DFA2357522F0048F06A /* ExtraTargetingDecorator.swift */; };
+		91EF5DFD235752750048F06A /* ExtraTargetingDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EF5DFC235752750048F06A /* ExtraTargetingDecoratorTests.swift */; };
 		91EF5E0223575A270048F06A /* HighPrecisionClock+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EF5DFE2357596E0048F06A /* HighPrecisionClock+YLD.swift */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +166,8 @@
 		91D8646A234794DB006E6563 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 		91EC3897235462B4003B9831 /* ExampleSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSlot.swift; sourceTree = "<group>"; };
 		91EC389923548BDE003B9831 /* ValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewController.swift; sourceTree = "<group>"; };
+		91EF5DFA2357522F0048F06A /* ExtraTargetingDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraTargetingDecorator.swift; sourceTree = "<group>"; };
+		91EF5DFC235752750048F06A /* ExtraTargetingDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraTargetingDecoratorTests.swift; sourceTree = "<group>"; };
 		91EF5DFE2357596E0048F06A /* HighPrecisionClock+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HighPrecisionClock+YLD.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,6 +246,8 @@
 				91B283B6234DB72B0055DB7F /* DefaultConnectivitySourceTests.swift */,
 				91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */,
 				91793D4B234C6E12004DB72D /* DeviceTypeDecoratorTests.swift */,
+				91EF5DFA2357522F0048F06A /* ExtraTargetingDecorator.swift */,
+				91EF5DFC235752750048F06A /* ExtraTargetingDecoratorTests.swift */,
 				915C8AAD234384FC00746E7E /* Info.plist */,
 				915618C7234B257A00D5F530 /* HighPrecisionClock.swift */,
 				915C8ADA2343897600746E7E /* HTTPClient.swift */,
@@ -474,6 +480,7 @@
 				915618E4234B956F00D5F530 /* IDFADecoratorTests.swift in Sources */,
 				9184845223561CF30040C53E /* CacheBusterTests.swift in Sources */,
 				91793D50234CAA4A004DB72D /* UIDeviceTests.swift in Sources */,
+				91EF5DFD235752750048F06A /* ExtraTargetingDecoratorTests.swift in Sources */,
 				91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */,
 				915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */,
 				915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */,
@@ -507,6 +514,7 @@
 				915C8ADB2343897600746E7E /* HTTPClient.swift in Sources */,
 				915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */,
 				91793D4E234C80C3004DB72D /* UIDevice+YLD.swift in Sources */,
+				91EF5DFB2357522F0048F06A /* ExtraTargetingDecorator.swift in Sources */,
 				91B283B5234DB6770055DB7F /* DefaultConnectivitySource.swift in Sources */,
 				91C40885234F30B800D0DC71 /* PIIDDecoratorFilter.swift in Sources */,
 				91C40887234F7EFE00D0DC71 /* Bid.swift in Sources */,

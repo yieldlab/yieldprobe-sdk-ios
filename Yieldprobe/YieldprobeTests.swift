@@ -236,6 +236,25 @@ class YieldprobeTests: XCTestCase {
                       "Unexpected device type: \(deviceType)")
     }
     
+    func testExtraTargeting () {
+        // Arrange:
+        let configuration = Configuration(extraTargeting: ["key" : "value"])
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http)
+        sut.configure(using: configuration)
+        
+        // Act:
+        sut.probe(slot: 1234) { _ in }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        http.calls.first?.process { url in
+            XCTAssertEqual(url.queryValues(for: "t"), ["key=value"])
+            
+            throw Yieldprobe.Error.noFill
+        }
+    }
+    
     func testGeolocation () {
         struct DummyLocationSource: LocationSource {
             

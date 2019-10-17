@@ -7,21 +7,14 @@
 
 import Foundation
 
-extension UInt64 {
-    
-    init(ticks: UInt64) {
-        self.init(ticks)
-    }
-    
-    var ticks: UInt64 {
-        self
-    }
-    
-}
-
 class HighPrecisionClock {
     
-    typealias Time = UInt64
+    struct Time {
+        
+        let ticks: UInt64
+        
+    }
+    
     private let scale: mach_timebase_info_data_t
     
     init() {

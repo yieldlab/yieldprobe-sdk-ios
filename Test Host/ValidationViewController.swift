@@ -20,13 +20,13 @@ class ValidationViewController: UITableViewController {
     // MARK: - Types
     
     enum Activity {
-        case started(when: UInt64)
-        case configure(when: UInt64)
-        case requestBid(when: UInt64)
-        case bid(when: UInt64, Bid)
-        case bidError(when: UInt64, Error)
-        case targeting(when: UInt64, [String: Any])
-        case targetingError(when: UInt64, Error)
+        case started(when: HighPrecisionClock.Time)
+        case configure(when: HighPrecisionClock.Time)
+        case requestBid(when: HighPrecisionClock.Time)
+        case bid(when: HighPrecisionClock.Time, Bid)
+        case bidError(when: HighPrecisionClock.Time, Error)
+        case targeting(when: HighPrecisionClock.Time, [String: Any])
+        case targetingError(when: HighPrecisionClock.Time, Error)
     }
     
     enum ConfigureRows: Int, CaseIterable {
@@ -53,7 +53,7 @@ class ValidationViewController: UITableViewController {
     
     var useGeolocation = true
     
-    private(set) var started: UInt64!
+    private(set) var started: HighPrecisionClock.Time!
     
     let yieldprobe = Yieldprobe.shared
     
@@ -249,7 +249,7 @@ class ValidationViewController: UITableViewController {
         return cell
     }
     
-    func durationText (for timestamp: UInt64) -> String {
+    func durationText (for timestamp: HighPrecisionClock.Time) -> String {
         let timeInterval = clock.timeInterval(from: started, to: timestamp)
         
         if timeInterval < 0.000_001 {

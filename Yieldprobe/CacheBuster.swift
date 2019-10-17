@@ -15,7 +15,7 @@ struct CacheBuster: URLDecorator {
         return URLComponents(url: subject, resolvingAgainstBaseURL: true)!
             .transformQueryItems { before in
                 return before + [
-                    URLQueryItem(name: "ts", value: "\(clock.now())")
+                    URLQueryItem(name: "ts", value: "\(clock.now().ticks)")
                 ]
             }.url!
     }

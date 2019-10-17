@@ -22,7 +22,7 @@ class ValidationViewController: UITableViewController {
     enum Activity {
         case started(when: HighPrecisionClock.Time)
         case configure(duration: TimeInterval)
-        case requestBid(when: HighPrecisionClock.Time)
+        case requestBid(duration: TimeInterval, when: HighPrecisionClock.Time)
         case bid(when: HighPrecisionClock.Time, Bid)
         case bidError(when: HighPrecisionClock.Time, Error)
         case targeting(when: HighPrecisionClock.Time, [String: Any])
@@ -98,9 +98,11 @@ class ValidationViewController: UITableViewController {
     }
     
     func requestBid () {
-        activities.append(.requestBid(when: clock.now()))
-        
+        let start = clock.now()
         yieldprobe.probe(slot: adSlot, completionHandler: receive(bid:))
+        let end = clock.now()
+        
+        activities.append(.requestBid(duration: end &- start, when: start))
     }
     
     func receive(bid result: Result<Bid,Error>) {
@@ -226,10 +228,10 @@ class ValidationViewController: UITableViewController {
             cell.textLabel?.text = "Configure SDK"
             cell.detailTextLabel?.isHidden = false
             cell.detailTextLabel?.text = format(duration)
-        case .requestBid(let when):
+        case .requestBid(let duration, _):
             cell.textLabel?.text = "Request Bid"
             cell.detailTextLabel?.isHidden = false
-            cell.detailTextLabel?.text = durationText(for: when)
+            cell.detailTextLabel?.text = format(duration)
         case .bid(let when, _):
             cell.textLabel?.text = "Receive Bid"
             cell.detailTextLabel?.isHidden = false

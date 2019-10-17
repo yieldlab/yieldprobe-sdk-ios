@@ -250,7 +250,7 @@ class ValidationViewController: UITableViewController {
     }
     
     func durationText (for timestamp: HighPrecisionClock.Time) -> String {
-        let timeInterval = clock.timeInterval(from: started, to: timestamp)
+        let timeInterval = timestamp &- started
         
         if timeInterval < 0.000_001 {
             return "\(UInt(timeInterval * 1_000_000_000))ns"

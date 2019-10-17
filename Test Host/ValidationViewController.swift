@@ -24,7 +24,7 @@ class ValidationViewController: UITableViewController {
         case configure(duration: TimeInterval)
         case requestBid(duration: TimeInterval, when: HighPrecisionClock.Time)
         case bid(duration: TimeInterval, Bid)
-        case bidError(when: HighPrecisionClock.Time, Error)
+        case bidError(duration: TimeInterval, Error)
         case targeting(when: HighPrecisionClock.Time, [String: Any])
         case targetingError(when: HighPrecisionClock.Time, Error)
     }
@@ -118,7 +118,7 @@ class ValidationViewController: UITableViewController {
             bid = try result.get()
             activity = .bid(duration: now &- start, bid)
         } catch {
-            activity = .bidError(when: now, error)
+            activity = .bidError(duration: now &- start, error)
         }
         
         DispatchQueue.main.async {
@@ -201,7 +201,7 @@ class ValidationViewController: UITableViewController {
                 }
             }
             return cell
-        case .bidError(when: _, let error):
+        case .bidError(_, let error):
             let cell = tableView.dequeueReusableCell(withIdentifier: "error",
                                                      for: indexPath)
             cell.textLabel?.text = error.localizedDescription
@@ -240,10 +240,10 @@ class ValidationViewController: UITableViewController {
             cell.textLabel?.text = "Receive Bid"
             cell.detailTextLabel?.isHidden = false
             cell.detailTextLabel?.text = format(duration)
-        case .bidError(let when, _):
+        case .bidError(let duration, _):
             cell.textLabel?.text = "Error Occurred"
             cell.detailTextLabel?.isHidden = false
-            cell.detailTextLabel?.text = durationText(for: when)
+            cell.detailTextLabel?.text = format(duration)
         case .targeting(let when, _):
             cell.textLabel?.text = "Custom Targeting"
             cell.detailTextLabel?.isHidden = false

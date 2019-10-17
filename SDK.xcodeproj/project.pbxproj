@@ -63,6 +63,7 @@
 		91EC3898235462B4003B9831 /* ExampleSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EC3897235462B4003B9831 /* ExampleSlot.swift */; };
 		91EC389A23548BDF003B9831 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EC389923548BDE003B9831 /* ValidationViewController.swift */; };
 		91EC389B23548C44003B9831 /* HighPrecisionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighPrecisionClock.swift */; };
+		91EF5E0223575A270048F06A /* HighPrecisionClock+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EF5DFE2357596E0048F06A /* HighPrecisionClock+YLD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +164,7 @@
 		91D8646A234794DB006E6563 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 		91EC3897235462B4003B9831 /* ExampleSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSlot.swift; sourceTree = "<group>"; };
 		91EC389923548BDE003B9831 /* ValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewController.swift; sourceTree = "<group>"; };
+		91EF5DFE2357596E0048F06A /* HighPrecisionClock+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HighPrecisionClock+YLD.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +263,7 @@
 				915C8ABF234385D400746E7E /* AppDelegate.swift */,
 				915C8AC8234385DA00746E7E /* Assets.xcassets */,
 				91EC3897235462B4003B9831 /* ExampleSlot.swift */,
+				91EF5DFE2357596E0048F06A /* HighPrecisionClock+YLD.swift */,
 				915C8ACD234385DA00746E7E /* Info.plist */,
 				915C8ACA234385DA00746E7E /* LaunchScreen.storyboard */,
 				915C8AC5234385D400746E7E /* Main.storyboard */,
@@ -517,6 +520,7 @@
 				91EC389B23548C44003B9831 /* HighPrecisionClock.swift in Sources */,
 				915C8AC4234385D400746E7E /* SetupViewController.swift in Sources */,
 				915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */,
+				91EF5E0223575A270048F06A /* HighPrecisionClock+YLD.swift in Sources */,
 				91ACB8C42355D884002FD908 /* SwitchCell.swift in Sources */,
 				91EC3898235462B4003B9831 /* ExampleSlot.swift in Sources */,
 				915C8AC2234385D400746E7E /* SceneDelegate.swift in Sources */,

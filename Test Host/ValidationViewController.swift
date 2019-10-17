@@ -21,7 +21,7 @@ class ValidationViewController: UITableViewController {
     
     enum Activity {
         case started(when: HighPrecisionClock.Time)
-        case configure(when: HighPrecisionClock.Time)
+        case configure(duration: TimeInterval)
         case requestBid(when: HighPrecisionClock.Time)
         case bid(when: HighPrecisionClock.Time, Bid)
         case bidError(when: HighPrecisionClock.Time, Error)
@@ -87,11 +87,12 @@ class ValidationViewController: UITableViewController {
     }
     
     func configure () {
-        activities.append(.configure(when: clock.now()))
-        
         let configuration = Configuration(personalizeAds: personalizeAds,
                                           useGeolocation: useGeolocation)
+        let start = clock.now()
         yieldprobe.configure(using: configuration)
+        let end = clock.now()
+        activities.append(.configure(duration: end &- start))
         
         requestBid()
     }
@@ -221,10 +222,10 @@ class ValidationViewController: UITableViewController {
         case .started:
             cell.textLabel?.text = "Start"
             cell.detailTextLabel?.isHidden = true
-        case .configure(let when):
+        case .configure(let duration):
             cell.textLabel?.text = "Configure SDK"
             cell.detailTextLabel?.isHidden = false
-            cell.detailTextLabel?.text = durationText(for: when)
+            cell.detailTextLabel?.text = format(duration)
         case .requestBid(let when):
             cell.textLabel?.text = "Request Bid"
             cell.detailTextLabel?.isHidden = false
@@ -252,20 +253,24 @@ class ValidationViewController: UITableViewController {
     func durationText (for timestamp: HighPrecisionClock.Time) -> String {
         let timeInterval = timestamp &- started
         
-        if timeInterval < 0.000_001 {
-            return "\(UInt(timeInterval * 1_000_000_000))ns"
+        return format(timeInterval)
+    }
+    
+    func format (_ duration: TimeInterval) -> String {
+        if duration < 0.000_001 {
+            return "\(UInt(duration * 1_000_000_000))ns"
         }
         
-        if timeInterval < 0.001 {
-            return "\(UInt(timeInterval * 1_000_000))µs"
+        if duration < 0.001 {
+            return "\(UInt(duration * 1_000_000))µs"
         }
         
-        if timeInterval < 1 {
-            return "\(UInt(timeInterval * 1_000))ms"
+        if duration < 1 {
+            return "\(UInt(duration * 1_000))ms"
         }
         
         let secondFormatter = NumberFormatter()
-        return secondFormatter.string(from: timeInterval as NSNumber)! + "s"
+        return secondFormatter.string(from: duration as NSNumber)! + "s"
     }
 
     /*

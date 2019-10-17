@@ -7,6 +7,18 @@
 
 import Foundation
 
+extension UInt64 {
+    
+    init(ticks: UInt64) {
+        self.init(ticks)
+    }
+    
+    var ticks: UInt64 {
+        self
+    }
+    
+}
+
 class HighPrecisionClock {
     
     typealias Time = UInt64
@@ -19,11 +31,11 @@ class HighPrecisionClock {
     }
     
     func now () -> Time {
-        return mach_absolute_time()
+        Time(ticks: mach_absolute_time())
     }
     
     func timeInterval(from start: Time, to end: Time) -> TimeInterval {
-        return TimeInterval(end - start) * TimeInterval(scale.numer) / TimeInterval(scale.denom) / 1_000_000_000
+        TimeInterval(end.ticks - start.ticks) * TimeInterval(scale.numer) / TimeInterval(scale.denom) / 1_000_000_000
     }
     
 }

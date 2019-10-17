@@ -26,7 +26,7 @@ class ValidationViewController: UITableViewController {
         case bid(duration: TimeInterval, Bid)
         case bidError(duration: TimeInterval, Error)
         case targeting(duration: TimeInterval, [String: Any])
-        case targetingError(when: HighPrecisionClock.Time, Error)
+        case targetingError(duration: TimeInterval, Error)
     }
     
     enum ConfigureRows: Int, CaseIterable {
@@ -138,7 +138,8 @@ class ValidationViewController: UITableViewController {
             let end = clock.now()
             activities.append(.targeting(duration: end &- start, targeting))
         } catch {
-            activities.append(.targetingError(when: start, error))
+            let end = clock.now()
+            activities.append(.targetingError(duration: end &- start, error))
         }
     }
 
@@ -250,18 +251,12 @@ class ValidationViewController: UITableViewController {
             cell.textLabel?.text = "Custom Targeting"
             cell.detailTextLabel?.isHidden = false
             cell.detailTextLabel?.text = format(duration)
-        case .targetingError(let when, _):
+        case .targetingError(let duration, _):
             cell.textLabel?.text = "Error Occurred"
             cell.detailTextLabel?.isHidden = false
-            cell.detailTextLabel?.text = durationText(for: when)
+            cell.detailTextLabel?.text = format(duration)
         }
         return cell
-    }
-    
-    func durationText (for timestamp: HighPrecisionClock.Time) -> String {
-        let timeInterval = timestamp &- started
-        
-        return format(timeInterval)
     }
     
     func format (_ duration: TimeInterval) -> String {

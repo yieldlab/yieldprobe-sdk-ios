@@ -298,7 +298,7 @@ class YieldprobeTests: XCTestCase {
         let connection = DummyConnectivitySource(connectionType: .cellular)
         let http = HTTPMock()
         let sut = Yieldprobe(http: http, connectivitySource: connection)
-        sut.configure(using: Configuration(adPersonalization: false))
+        sut.configure(using: Configuration(personalizeAds: false))
         
         // Act:
         sut.probe(slot: 1234) { _ in
@@ -317,7 +317,7 @@ class YieldprobeTests: XCTestCase {
         // Arrange:
         let http = HTTPMock()
         let sut = Yieldprobe(http: http, device: DummyDevice.iPhone7Plus)
-        sut.configure(using: Configuration(adPersonalization: false))
+        sut.configure(using: Configuration(personalizeAds: false))
         
         // Act:
         sut.probe(slot: 1234) { _ in
@@ -338,7 +338,7 @@ class YieldprobeTests: XCTestCase {
         let idfa = UUID()
         let sut = Yieldprobe(http: http,
                              idfa: DummyIDFASource(idfa: idfa))
-        sut.configure(using: Configuration(adPersonalization: false))
+        sut.configure(using: Configuration(personalizeAds: false))
         
         // Act:
         sut.probe(slot: 1234) { _ in
@@ -372,7 +372,7 @@ class YieldprobeTests: XCTestCase {
         let http = HTTPMock()
         let locationSource = DummyLocationSource.self
         let sut = Yieldprobe(http: http, locationSource: locationSource)
-        sut.configure(using: Configuration(adPersonalization: false))
+        sut.configure(using: Configuration(personalizeAds: false))
         
         // Act:
         sut.probe(slot: 1234) { _ in

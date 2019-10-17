@@ -47,7 +47,7 @@ class ValidationViewController: UITableViewController {
     
     var adSlot: Int!
 
-    let clock = HighResolutionClock()
+    let clock = HighPrecisionClock()
     
     var personalizeAds = true
     

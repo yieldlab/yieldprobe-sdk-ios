@@ -9,7 +9,7 @@ import Foundation
 
 struct CacheBuster: URLDecorator {
     
-    let clock = HighResolutionClock()
+    let clock = HighPrecisionClock()
     
     func decorate(_ subject: URL) -> URL {
         return URLComponents(url: subject, resolvingAgainstBaseURL: true)!

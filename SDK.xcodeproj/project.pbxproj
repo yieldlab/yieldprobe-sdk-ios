@@ -10,7 +10,7 @@
 		91264F362350B9D90012D871 /* URLReply+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F352350B9D90012D871 /* URLReply+YLD.swift */; };
 		91264F382350C6160012D871 /* Result+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F372350C6160012D871 /* Result+YLD.swift */; };
 		91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F392350C7E60012D871 /* ResultTests.swift */; };
-		915618C8234B257A00D5F530 /* HighResolutionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighResolutionClock.swift */; };
+		915618C8234B257A00D5F530 /* HighPrecisionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighPrecisionClock.swift */; };
 		915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C9234B25A200D5F530 /* CacheBuster.swift */; };
 		915618CC234B299C00D5F530 /* URLComponents+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CB234B299C00D5F530 /* URLComponents+YLD.swift */; };
 		915618CE234B29AD00D5F530 /* URLComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CD234B29AD00D5F530 /* URLComponentsTests.swift */; };
@@ -60,7 +60,7 @@
 		91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646A234794DB006E6563 /* URLSessionTests.swift */; };
 		91EC3898235462B4003B9831 /* ExampleSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EC3897235462B4003B9831 /* ExampleSlot.swift */; };
 		91EC389A23548BDF003B9831 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EC389923548BDE003B9831 /* ValidationViewController.swift */; };
-		91EC389B23548C44003B9831 /* HighResolutionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighResolutionClock.swift */; };
+		91EC389B23548C44003B9831 /* HighPrecisionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighPrecisionClock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +105,7 @@
 		91264F352350B9D90012D871 /* URLReply+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLReply+YLD.swift"; sourceTree = "<group>"; };
 		91264F372350C6160012D871 /* Result+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+YLD.swift"; sourceTree = "<group>"; };
 		91264F392350C7E60012D871 /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
-		915618C7234B257A00D5F530 /* HighResolutionClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighResolutionClock.swift; sourceTree = "<group>"; };
+		915618C7234B257A00D5F530 /* HighPrecisionClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighPrecisionClock.swift; sourceTree = "<group>"; };
 		915618C9234B25A200D5F530 /* CacheBuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheBuster.swift; sourceTree = "<group>"; };
 		915618CB234B299C00D5F530 /* URLComponents+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+YLD.swift"; sourceTree = "<group>"; };
 		915618CD234B29AD00D5F530 /* URLComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsTests.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 				91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */,
 				91793D4B234C6E12004DB72D /* DeviceTypeDecoratorTests.swift */,
 				915C8AAD234384FC00746E7E /* Info.plist */,
-				915618C7234B257A00D5F530 /* HighResolutionClock.swift */,
+				915618C7234B257A00D5F530 /* HighPrecisionClock.swift */,
 				915C8ADA2343897600746E7E /* HTTPClient.swift */,
 				915618E1234B954800D5F530 /* IDFADecorator.swift */,
 				915618E3234B956E00D5F530 /* IDFADecoratorTests.swift */,
@@ -480,7 +480,7 @@
 				915618D6234B3DDF00D5F530 /* URL+YLD.swift in Sources */,
 				91B283B9234DC1520055DB7F /* NWPathMonitor+YLD.swift in Sources */,
 				915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */,
-				915618C8234B257A00D5F530 /* HighResolutionClock.swift in Sources */,
+				915618C8234B257A00D5F530 /* HighPrecisionClock.swift in Sources */,
 				915618E2234B954800D5F530 /* IDFADecorator.swift in Sources */,
 				91C40883234F2AAC00D0DC71 /* Configuration.swift in Sources */,
 				91793D52234CB0D6004DB72D /* ConnectivityDecorator.swift in Sources */,
@@ -506,7 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91EC389B23548C44003B9831 /* HighResolutionClock.swift in Sources */,
+				91EC389B23548C44003B9831 /* HighPrecisionClock.swift in Sources */,
 				915C8AC4234385D400746E7E /* SetupViewController.swift in Sources */,
 				915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */,
 				91ACB8C42355D884002FD908 /* SwitchCell.swift in Sources */,

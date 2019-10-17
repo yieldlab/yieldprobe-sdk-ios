@@ -1,5 +1,5 @@
 //
-//  HighResolutionClock.swift
+//  HighPrecisionClock.swift
 //  Yieldprobe
 //
 //  Created by Sven Herzberg on 07.10.19.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HighResolutionClock {
+class HighPrecisionClock {
     
     private let scale: mach_timebase_info_data_t
     

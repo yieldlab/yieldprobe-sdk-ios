@@ -9,6 +9,7 @@ import Foundation
 
 class HighPrecisionClock {
     
+    typealias Time = UInt64
     private let scale: mach_timebase_info_data_t
     
     init() {
@@ -17,11 +18,11 @@ class HighPrecisionClock {
         scale = info
     }
     
-    func now () -> UInt64 {
+    func now () -> Time {
         return mach_absolute_time()
     }
     
-    func timeInterval(from start: UInt64, to end: UInt64) -> TimeInterval {
+    func timeInterval(from start: Time, to end: Time) -> TimeInterval {
         return TimeInterval(end - start) * TimeInterval(scale.numer) / TimeInterval(scale.denom) / 1_000_000_000
     }
     

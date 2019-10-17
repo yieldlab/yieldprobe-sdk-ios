@@ -25,7 +25,7 @@ class ValidationViewController: UITableViewController {
         case requestBid(duration: TimeInterval, when: HighPrecisionClock.Time)
         case bid(duration: TimeInterval, Bid)
         case bidError(duration: TimeInterval, Error)
-        case targeting(when: HighPrecisionClock.Time, [String: Any])
+        case targeting(duration: TimeInterval, [String: Any])
         case targetingError(when: HighPrecisionClock.Time, Error)
     }
     
@@ -131,12 +131,14 @@ class ValidationViewController: UITableViewController {
     }
     
     func getTargeting (from bid: Bid) {
-        let now = clock.now()
+        let start = clock.now()
         
         do {
-            try activities.append(.targeting(when: now, bid.customTargeting()))
+            let targeting = try bid.customTargeting()
+            let end = clock.now()
+            activities.append(.targeting(duration: end &- start, targeting))
         } catch {
-            activities.append(.targetingError(when: now, error))
+            activities.append(.targetingError(when: start, error))
         }
     }
 
@@ -158,7 +160,7 @@ class ValidationViewController: UITableViewController {
             return 1
         case .bidError:
             return 2
-        case .targeting(when: _, let info):
+        case .targeting(_, let info):
             return 1 + info.count
         case .targetingError:
             fatalError()
@@ -206,7 +208,7 @@ class ValidationViewController: UITableViewController {
                                                      for: indexPath)
             cell.textLabel?.text = error.localizedDescription
             return cell
-        case .targeting(when: _, let targeting):
+        case .targeting(_, let targeting):
             let key = targeting.keys.sorted()[indexPath.row - 1]
             let value = targeting[key]
             let cell = tableView.dequeueReusableCell(withIdentifier: "key-value",
@@ -244,10 +246,10 @@ class ValidationViewController: UITableViewController {
             cell.textLabel?.text = "Error Occurred"
             cell.detailTextLabel?.isHidden = false
             cell.detailTextLabel?.text = format(duration)
-        case .targeting(let when, _):
+        case .targeting(let duration, _):
             cell.textLabel?.text = "Custom Targeting"
             cell.detailTextLabel?.isHidden = false
-            cell.detailTextLabel?.text = durationText(for: when)
+            cell.detailTextLabel?.text = format(duration)
         case .targetingError(let when, _):
             cell.textLabel?.text = "Error Occurred"
             cell.detailTextLabel?.isHidden = false

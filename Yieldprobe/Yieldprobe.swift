@@ -109,8 +109,11 @@ public class Yieldprobe: NSObject {
     
     // MARK: Bid Requests
     
-    public func probe (slot slotID: Int, completionHandler: @escaping (Result<Bid,Swift.Error>) -> Void) {
-        probe(slots: [slotID]) { result in
+    public func probe (slot slotID: Int,
+                       queue: DispatchQueue? = nil,
+                       completionHandler: @escaping (Result<Bid,Swift.Error>) -> Void)
+    {
+        probe(slots: [slotID], queue: queue) { result in
             completionHandler(result.tryMap {
                 guard let result = $0.first else {
                     throw Error.noFill
@@ -121,9 +124,14 @@ public class Yieldprobe: NSObject {
         }
     }
     
-    func probe (slots: Set<Int>, completionHandler: @escaping (Result<[Bid],Swift.Error>) -> Void) {
+    func probe (slots: Set<Int>,
+                queue: DispatchQueue? = nil,
+                completionHandler: @escaping (Result<[Bid],Swift.Error>) -> Void)
+    {
+        let queue = queue ?? .main
+        
         guard !slots.isEmpty else {
-            return DispatchQueue.main.async {
+            return queue.async {
                 completionHandler(Result {
                     throw Yieldprobe.Error.noSlot
                 })
@@ -131,7 +139,7 @@ public class Yieldprobe: NSObject {
         }
         
         guard slots.count <= 10 else {
-            return DispatchQueue.main.async {
+            return queue.async {
                 completionHandler(Result {
                     throw Yieldprobe.Error.tooManySlots
                 })
@@ -143,7 +151,7 @@ public class Yieldprobe: NSObject {
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
             .decorate(cacheBuster, connectivity, consent, deviceTypeDecorator, extraTargetingDecorator, locationDecorator, idfaDecorator)
         http.get(url: url) { result in
-            completionHandler(Result {
+            let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()
                 
                 if let http = reply.response as? HTTPURLResponse {
@@ -175,7 +183,11 @@ public class Yieldprobe: NSObject {
                     return Bid(slotID: decoded.id,
                                customTargeting: bid)
                 }
-            })
+            }
+            
+            queue.async {
+                completionHandler(result)
+            }
         }
     }
     

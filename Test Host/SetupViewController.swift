@@ -8,8 +8,6 @@
 import CoreLocation
 import UIKit
 
-#warning("FIXME: Add custom ad slot option.")
-
 let checkmark = "\u{2713}" // U+2713, CHECKMARK: ✓
 
 class SetupViewController: UITableViewController {
@@ -37,6 +35,10 @@ class SetupViewController: UITableViewController {
                                      with: .automatic)
         }
     }
+    
+    var customAdSlot: Int? // Only used while editing.
+    
+    let formatter = NumberFormatter()
     
     private(set) var personalizeAds = true
     
@@ -80,7 +82,7 @@ class SetupViewController: UITableViewController {
         case .sdk:
             return SDKRow.allCases.count
         case .adSlot:
-            return 3
+            return ExampleSlot.allCases.count + 1
         case .submit:
             return 1
         case nil:
@@ -114,19 +116,24 @@ class SetupViewController: UITableViewController {
         case .adSlot:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
                                                      for: indexPath)
-
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Banner: 300×250"
                 cell.accessoryView?.isHidden = adSlot != .banner300x250
             case 1:
-                cell.textLabel?.text = "Banner: 728x90"
+                cell.textLabel?.text = "Banner: 728×90"
                 cell.accessoryView?.isHidden = adSlot != .banner728x90
             case 2:
                 cell.textLabel?.text = "Video"
                 cell.accessoryView?.isHidden = adSlot != .video
             default:
-                preconditionFailure()
+                if case .custom(let id) = adSlot {
+                    cell.textLabel?.text = "Custom: \(id)"
+                    cell.accessoryView?.isHidden = false
+                } else {
+                    cell.textLabel?.text = "Custom"
+                    cell.accessoryView?.isHidden = true
+                }
             }
 
             return cell
@@ -140,7 +147,7 @@ class SetupViewController: UITableViewController {
             preconditionFailure()
         }
     }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -194,15 +201,22 @@ class SetupViewController: UITableViewController {
     {
         switch Section(rawValue: indexPath.section) {
         case .adSlot:
-            switch indexPath.row {
-            case 0:
-                adSlot = .banner300x250
-            case 1:
-                adSlot = .banner728x90
-            case 2:
-                adSlot = .video
-            default:
-                preconditionFailure()
+            if indexPath.row < ExampleSlot.allCases.count {
+                adSlot = ExampleSlot.allCases[indexPath.row]
+            } else {
+                let vc = UIAlertController(title: "Custom Ad Slot",
+                                           message: "Enter the Ad Slot you want to test.",
+                                           preferredStyle: .alert)
+                vc.addTextField { textField in
+                    textField.delegate = self
+                    textField.keyboardType = .numberPad
+                    textField.placeholder = "Custom Ad Slot ID"
+                }
+                vc.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                vc.addAction(UIAlertAction(title: "Done", style: .default) { _ in
+                    self.adSlot = self.customAdSlot.flatMap(ExampleSlot.init(rawValue:))
+                })
+                present(vc, animated: true, completion: nil)
             }
         case .sdk, .submit:
             break
@@ -239,6 +253,25 @@ class SetupViewController: UITableViewController {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
                                       options: [:], completionHandler: nil)
         }
+    }
+    
+}
+
+extension SetupViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String)
+        -> Bool
+    {
+        let text = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        if let adSlotID = text.flatMap(formatter.number(from:)) {
+            textField.textColor = .darkText
+            self.customAdSlot = adSlotID.intValue
+        } else {
+            textField.textColor = .systemRed
+        }
+        return true
     }
     
 }

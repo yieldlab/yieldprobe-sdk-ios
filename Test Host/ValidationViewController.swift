@@ -156,7 +156,7 @@ class ValidationViewController: UITableViewController {
         case .configure:
             return 1 + ConfigureRows.allCases.count
         case .requestBid:
-            return 1
+            return 2
         case .bid:
             return 1
         case .bidError:
@@ -216,6 +216,12 @@ class ValidationViewController: UITableViewController {
                                                      for: indexPath)
             cell.textLabel?.text = key
             cell.detailTextLabel?.text = value.map(String.init(describing:)) ?? "null"
+            return cell
+        case .requestBid:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "key-value",
+                                                     for: indexPath)
+            cell.textLabel?.text = "Ad Slot ID"
+            cell.detailTextLabel?.text = adSlot.map(String.init(describing:))
             return cell
         case let `default`:
             fatalError("FIXME: Handle: \(`default`)")

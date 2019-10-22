@@ -120,6 +120,27 @@ class SetupViewController: UITableViewController {
                                   keyPath: \SetupViewController.useGeolocation)
         }
     }
+    
+    func tableView (_ tableView: UITableView,
+                    exampleSlot: ExampleSlot,
+                    cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
+                                                 for: indexPath)
+        switch exampleSlot {
+        case .banner300x250:
+            cell.textLabel?.text = "Banner: 300×250"
+        case .banner728x90:
+            cell.textLabel?.text = "Banner: 728×90"
+        case .video:
+            cell.textLabel?.text = "Video"
+        default:
+            preconditionFailure()
+        }
+        cell.accessoryType = adSlot == exampleSlot ? .checkmark : .none
+        return cell
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
@@ -128,22 +149,7 @@ class SetupViewController: UITableViewController {
         case (Section.sdk.rawValue, _):
             return self.tableView(tableView, sdkCellForRowAt: indexPath)
         case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
-                                                     for: indexPath)
-            switch row {
-            case 0:
-                cell.textLabel?.text = "Banner: 300×250"
-                cell.accessoryType = adSlot == .banner300x250 ? .checkmark : .none
-            case 1:
-                cell.textLabel?.text = "Banner: 728×90"
-                cell.accessoryType = adSlot == .banner728x90 ? .checkmark : .none
-            case 2:
-                cell.textLabel?.text = "Video"
-                cell.accessoryType = adSlot == .video ? .checkmark : .none
-            default:
-                preconditionFailure()
-            }
-            return cell
+            return self.tableView(tableView, exampleSlot: ExampleSlot.allCases[row], cellForRowAt: indexPath)
         case (Section.adSlot.rawValue, ExampleSlot.allCases.count):
             let cell = tableView.dequeueReusableCell(withIdentifier: "key-value",
                                                      for: indexPath)

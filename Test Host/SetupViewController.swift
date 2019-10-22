@@ -127,7 +127,7 @@ class SetupViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (Section.sdk.rawValue, _):
             return self.tableView(tableView, sdkCellForRowAt: indexPath)
-        case (Section.adSlot.rawValue, let row):
+        case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
                                                      for: indexPath)
             switch row {
@@ -141,17 +141,21 @@ class SetupViewController: UITableViewController {
                 cell.textLabel?.text = "Video"
                 cell.accessoryType = adSlot == .video ? .checkmark : .none
             default:
-                if case .custom(let id) = adSlot {
-                    cell.textLabel?.text = "Custom: \(id)"
-                    cell.accessoryView?.isHidden = false
-                    cell.accessoryType = .checkmark
-                } else {
-                    cell.textLabel?.text = "Custom…"
-                    cell.accessoryView?.isHidden = true
-                    cell.accessoryType = .disclosureIndicator
-                }
+                preconditionFailure()
             }
-
+            return cell
+        case (Section.adSlot.rawValue, ExampleSlot.allCases.count):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
+                                                     for: indexPath)
+            if case .custom(let id) = adSlot {
+                cell.textLabel?.text = "Custom: \(id)"
+                cell.accessoryView?.isHidden = false
+                cell.accessoryType = .checkmark
+            } else {
+                cell.textLabel?.text = "Custom…"
+                cell.accessoryView?.isHidden = true
+                cell.accessoryType = .disclosureIndicator
+            }
             return cell
         case (Section.submit.rawValue, 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "submit",

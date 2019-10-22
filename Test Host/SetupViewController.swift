@@ -145,16 +145,19 @@ class SetupViewController: UITableViewController {
             }
             return cell
         case (Section.adSlot.rawValue, ExampleSlot.allCases.count):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
+            let cell = tableView.dequeueReusableCell(withIdentifier: "key-value",
                                                      for: indexPath)
+            cell.textLabel?.text = "Custom"
             if case .custom(let id) = adSlot {
-                cell.textLabel?.text = "Custom: \(id)"
                 cell.accessoryView?.isHidden = false
                 cell.accessoryType = .checkmark
+                cell.detailTextLabel?.text = "\(id)"
+                cell.detailTextLabel?.textColor = nil
             } else {
-                cell.textLabel?.text = "Custom…"
                 cell.accessoryView?.isHidden = true
                 cell.accessoryType = .disclosureIndicator
+                cell.detailTextLabel?.text = "none"
+                cell.detailTextLabel?.textColor = .yld_secondaryLabel
             }
             return cell
         case (Section.submit.rawValue, 0):

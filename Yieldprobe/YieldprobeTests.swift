@@ -143,6 +143,25 @@ class YieldprobeTests: XCTestCase {
     
     // MARK: Bid Request Parameters
     
+    func testAppName () {
+        // Arrange:
+        let configuration = Configuration(appName: "Amazing App")
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http)
+        sut.configure(using: configuration)
+        
+        // Act:
+        sut.probe(slot: 1234) { _ in }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        http.calls.first?.process { url in
+            XCTAssertEqual(url.queryValues(for: "pubappname"), ["Amazing App"])
+            
+            throw URLError(.notConnectedToInternet)
+        }
+    }
+    
     func testBundleID () {
         // Arrange:
         let configuration = Configuration(bundleID: "com.example.some-test")

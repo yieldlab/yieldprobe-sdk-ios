@@ -22,6 +22,7 @@ class SetupViewController: UITableViewController {
     }
     
     enum SDKRow: Int, CaseIterable {
+        case appName
         case bundleID
         case personalizeAds
         case useGeolocation
@@ -35,6 +36,15 @@ class SetupViewController: UITableViewController {
             
             tableView.reloadSections([Section.adSlot.rawValue, Section.submit.rawValue],
                                      with: .automatic)
+        }
+    }
+    
+    var appName: String? {
+        didSet {
+            dispatchPrecondition(condition: .onQueue(.main))
+            
+            tableView.reloadRows(at: [IndexPath(row: SDKRow.appName.rawValue, section: Section.sdk.rawValue)],
+                                 with: .automatic)
         }
     }
     
@@ -121,6 +131,19 @@ class SetupViewController: UITableViewController {
     
     func tableView(_ tableView: UITableView, sdkCellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch SDKRow(rawValue: indexPath.row)! {
+        case .appName:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "key-value", for: indexPath)
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = "App Name"
+            
+            if let appName = self.appName {
+                cell.detailTextLabel?.text = appName
+                cell.detailTextLabel?.textColor = nil
+            } else {
+                cell.detailTextLabel?.text = "none"
+                cell.detailTextLabel?.textColor = .yld_secondaryLabel
+            }
+            return cell
         case .bundleID:
             let cell = tableView.dequeueReusableCell(withIdentifier: "key-value", for: indexPath)
             cell.accessoryType = .disclosureIndicator
@@ -251,14 +274,46 @@ class SetupViewController: UITableViewController {
         return indexPath
     }
     
+    func presentAlert (title: String,
+                       message: String,
+                       placeholder: String,
+                       textHandler: @escaping (String?) -> Void)
+    {
+        let vc = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        vc.addTextField { textField in
+            textField.placeholder = placeholder
+            textField.delegate = self
+            self.textHandler = textHandler
+        }
+        
+        vc.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            textHandler(nil)
+            self.textHandler = nil
+        }))
+        
+        vc.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+            self.textHandler = nil
+        }))
+        
+        present(vc, animated: true, completion: nil)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         switch (indexPath.section, indexPath.row) {
+        case (Section.sdk.rawValue, SDKRow.appName.rawValue):
+            presentAlert(title: "Custom App Name",
+                         message: "Enter the app name you want to test.",
+                         placeholder: "Amazing App") { [weak self] text in
+                            self?.appName = text
+            }
         case (Section.sdk.rawValue, SDKRow.bundleID.rawValue):
             let vc = UIAlertController(title: "Custom Bundle ID",
                                        message: "Enter the bundle ID you want to test.",
                                        preferredStyle: .alert)
             vc.addTextField { textField in
+                textField.placeholder = "com.example.Amazing-App"
                 textField.delegate = self
                 self.textHandler = { text in
                     self.bundleID = text
@@ -317,7 +372,8 @@ class SetupViewController: UITableViewController {
         switch segue.destination {
         case let vc as ValidationViewController:
             vc.adSlot = adSlot?.rawValue
-            vc.configuration = Configuration(bundleID: bundleID,
+            vc.configuration = Configuration(appName: appName,
+                                             bundleID: bundleID,
                                              personalizeAds: personalizeAds,
                                              useGeolocation: useGeolocation)
         default:

@@ -9,6 +9,11 @@ import Foundation
 
 public struct Configuration {
     
+    /// Specify the app name to be transmitted to Yieldprobe.
+    ///
+    /// Default: `nil`
+    public var appName: String?
+    
     /// Specify a bundle ID to be transmitted to Yieldprobe.
     ///
     /// Default: `nil`
@@ -36,11 +41,13 @@ public struct Configuration {
     /// Default: Empty.
     var extraTargeting: [String: String]
     
-    public init (bundleID: String? = nil,
+    public init (appName: String? = nil,
+                 bundleID: String? = nil,
                  personalizeAds: Bool = true,
                  useGeolocation: Bool = true,
                  extraTargeting: [String: String] = [:])
     {
+        self.appName = appName
         self.bundleID = bundleID
         self.extraTargeting = extraTargeting
         self.personalizeAds = personalizeAds

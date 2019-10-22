@@ -43,6 +43,8 @@ public class Yieldprobe: NSObject {
     
     // MARK: Properties
     
+    private(set) var appNameDecorator: AppNameDecorator
+    
     private(set) var bundleIDDecorator: BundleIDDecorator
     
     let cacheBuster = CacheBuster()
@@ -83,6 +85,7 @@ public class Yieldprobe: NSObject {
     {
         let configuration = Configuration()
         
+        appNameDecorator = AppNameDecorator(configuration: configuration)
         bundleIDDecorator = BundleIDDecorator(configuration: configuration)
         
         self.http = http ?? Yieldprobe.defaultClient
@@ -93,7 +96,7 @@ public class Yieldprobe: NSObject {
         let deviceTypeDecorator = DeviceTypeDecorator(device: device)
         self.deviceTypeDecorator = PIIDDecoratorFilter(configuration: configuration,
                                                        wrapped: deviceTypeDecorator)
-        self.extraTargetingDecorator = ExtraTargetingDecorator(configuration: configuration)
+        extraTargetingDecorator = ExtraTargetingDecorator(configuration: configuration)
         idfaDecorator = PIIDDecoratorFilter(configuration: configuration,
                                             wrapped: IDFADecorator(source: idfa))
         let locationDecorator = LocationDecorator(locationSource: locationSource,
@@ -103,6 +106,7 @@ public class Yieldprobe: NSObject {
     }
     
     public func configure(using configuration: Configuration) {
+        appNameDecorator.configuration = configuration
         bundleIDDecorator.configuration = configuration
         connectivity.configuration = configuration
         deviceTypeDecorator.configuration = configuration
@@ -154,7 +158,7 @@ public class Yieldprobe: NSObject {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true&sdk=1")!
         let url = baseURL
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
-            .decorate(bundleIDDecorator, cacheBuster, connectivity, consent, deviceTypeDecorator, extraTargetingDecorator, locationDecorator, idfaDecorator)
+            .decorate(appNameDecorator, bundleIDDecorator, cacheBuster, connectivity, consent, deviceTypeDecorator, extraTargetingDecorator, locationDecorator, idfaDecorator)
         http.get(url: url) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()

@@ -9,6 +9,7 @@ import Foundation
 
 enum ConnectionType {
     case unknown
+    case ethernet
     case wifi
     case cellular
     
@@ -17,6 +18,8 @@ enum ConnectionType {
         switch self {
         case .unknown:
             value = "0"
+        case .ethernet:
+            value = "1"
         case .wifi:
             value = "2"
         case .cellular:

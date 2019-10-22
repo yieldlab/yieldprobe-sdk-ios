@@ -76,7 +76,7 @@ class DefaultConnectivitySourceTests: XCTestCase {
     
     func testPaths () {
         let tests: [NWInterface.InterfaceType: ConnectionType] = [
-            .wiredEthernet: .unknown,
+            .wiredEthernet: .ethernet,
             .wifi: .wifi,
             .cellular: .cellular,
             .other: .unknown,

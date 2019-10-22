@@ -34,7 +34,7 @@ struct DefaultConnectivitySource<PathMonitor>: ConnectivitySource
         
         if path.status == .satisfied {
             let types: [(NWInterface.InterfaceType, ConnectionType)] = [
-                // (.wiredEthernet, .unknown),
+                (.wiredEthernet, .ethernet),
                 (.wifi, .wifi),
                 (.cellular, .cellular),
                 // (.loopback, .unknown),

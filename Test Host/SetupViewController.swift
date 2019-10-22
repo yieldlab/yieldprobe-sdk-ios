@@ -218,27 +218,26 @@ class SetupViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
             adSlot = ExampleSlot.allCases[indexPath.row]
+        case (Section.adSlot.rawValue, _):
+            let vc = UIAlertController(title: "Custom Ad Slot",
+                                       message: "Enter the Ad Slot you want to test.",
+                                       preferredStyle: .alert)
+            vc.addTextField { textField in
+                textField.delegate = self
+                textField.keyboardType = .numberPad
+                textField.placeholder = "Custom Ad Slot ID"
+            }
+            vc.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            vc.addAction(UIAlertAction(title: "Done", style: .default) { _ in
+                self.adSlot = self.customAdSlot.flatMap(ExampleSlot.init(rawValue:))
+            })
+            present(vc, animated: true, completion: nil)
         default:
             break
         }
         switch Section(rawValue: indexPath.section) {
         case .adSlot:
-            if indexPath.row < ExampleSlot.allCases.count {
-            } else {
-                let vc = UIAlertController(title: "Custom Ad Slot",
-                                           message: "Enter the Ad Slot you want to test.",
-                                           preferredStyle: .alert)
-                vc.addTextField { textField in
-                    textField.delegate = self
-                    textField.keyboardType = .numberPad
-                    textField.placeholder = "Custom Ad Slot ID"
-                }
-                vc.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                vc.addAction(UIAlertAction(title: "Done", style: .default) { _ in
-                    self.adSlot = self.customAdSlot.flatMap(ExampleSlot.init(rawValue:))
-                })
-                present(vc, animated: true, completion: nil)
-            }
+            break
         case .sdk, .submit:
             break
         case nil:

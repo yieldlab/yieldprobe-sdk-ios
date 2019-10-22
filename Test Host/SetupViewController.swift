@@ -133,20 +133,22 @@ class SetupViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Banner: 300×250"
-                cell.accessoryView?.isHidden = adSlot != .banner300x250
+                cell.accessoryType = adSlot == .banner300x250 ? .checkmark : .none
             case 1:
                 cell.textLabel?.text = "Banner: 728×90"
-                cell.accessoryView?.isHidden = adSlot != .banner728x90
+                cell.accessoryType = adSlot == .banner728x90 ? .checkmark : .none
             case 2:
                 cell.textLabel?.text = "Video"
-                cell.accessoryView?.isHidden = adSlot != .video
+                cell.accessoryType = adSlot == .video ? .checkmark : .none
             default:
                 if case .custom(let id) = adSlot {
                     cell.textLabel?.text = "Custom: \(id)"
                     cell.accessoryView?.isHidden = false
+                    cell.accessoryType = .checkmark
                 } else {
                     cell.textLabel?.text = "Custom…"
                     cell.accessoryView?.isHidden = true
+                    cell.accessoryType = .disclosureIndicator
                 }
             }
 

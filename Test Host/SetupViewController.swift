@@ -309,24 +309,11 @@ class SetupViewController: UITableViewController {
                             self?.appName = text
             }
         case (Section.sdk.rawValue, SDKRow.bundleID.rawValue):
-            let vc = UIAlertController(title: "Custom Bundle ID",
-                                       message: "Enter the bundle ID you want to test.",
-                                       preferredStyle: .alert)
-            vc.addTextField { textField in
-                textField.placeholder = "com.example.Amazing-App"
-                textField.delegate = self
-                self.textHandler = { text in
-                    self.bundleID = text
-                }
+            presentAlert(title: "Custom Bundle ID",
+                         message: "Enter the bundle ID you want to test.",
+                         placeholder: "com.example.Amazing-App") { [weak self] text in
+                            self?.bundleID = text
             }
-            vc.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                self.bundleID = nil
-                self.textHandler = nil
-            }))
-            vc.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
-                self.textHandler = nil
-            }))
-            present(vc, animated: true, completion: nil)
         case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
             adSlot = ExampleSlot.allCases[indexPath.row]
         case (Section.adSlot.rawValue, _):

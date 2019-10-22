@@ -63,7 +63,7 @@ class SetupViewController: UITableViewController {
     
     private(set) var personalizeAds = true
     
-    var textHandler: Optional<(String?) -> Void> = nil
+    var textHandler: Optional<(String?, UITextField) -> Void> = nil
     
     private(set) var useGeolocation = true
 
@@ -276,24 +276,30 @@ class SetupViewController: UITableViewController {
     
     func presentAlert (title: String,
                        message: String,
+                       keyboardType: UIKeyboardType? = nil,
                        placeholder: String,
-                       textHandler: @escaping (String?) -> Void)
+                       submitHandler: @escaping () -> Void = {},
+                       textHandler: @escaping (String?, UITextField?) -> Void)
     {
         let vc = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         vc.addTextField { textField in
-            textField.placeholder = placeholder
             textField.delegate = self
+            if let keyboardType = keyboardType {
+                textField.keyboardType = keyboardType
+            }
+            textField.placeholder = placeholder
             self.textHandler = textHandler
         }
         
         vc.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            textHandler(nil)
+            textHandler(nil, nil)
             self.textHandler = nil
         }))
         
         vc.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
             self.textHandler = nil
+            submitHandler()
         }))
         
         present(vc, animated: true, completion: nil)
@@ -305,43 +311,38 @@ class SetupViewController: UITableViewController {
         case (Section.sdk.rawValue, SDKRow.appName.rawValue):
             presentAlert(title: "Custom App Name",
                          message: "Enter the app name you want to test.",
-                         placeholder: "Amazing App") { [weak self] text in
+                         placeholder: "Amazing App") { [weak self] text, textField in
                             self?.appName = text
             }
         case (Section.sdk.rawValue, SDKRow.bundleID.rawValue):
             presentAlert(title: "Custom Bundle ID",
                          message: "Enter the bundle ID you want to test.",
-                         placeholder: "com.example.Amazing-App") { [weak self] text in
+                         placeholder: "com.example.Amazing-App") { [weak self] text, textField in
                             self?.bundleID = text
             }
         case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
             adSlot = ExampleSlot.allCases[indexPath.row]
         case (Section.adSlot.rawValue, _):
-            let vc = UIAlertController(title: "Custom Ad Slot",
-                                       message: "Enter the Ad Slot you want to test.",
-                                       preferredStyle: .alert)
-            vc.addTextField { textField in
-                textField.delegate = self
-                textField.keyboardType = .numberPad
-                textField.placeholder = "Custom Ad Slot ID"
-                
-                self.textHandler = { text in
-                    if let adSlotID = text.flatMap(self.formatter.number(from:)) {
-                        textField.textColor = .darkText
-                        self.customAdSlot = adSlotID.intValue
-                    } else {
-                        textField.textColor = .systemRed
-                    }
+            presentAlert(title: "Custom Ad Slot",
+                         message: "Enter the Ad Slot you want to test.",
+                         keyboardType: .numberPad,
+                         placeholder: "Custom Ad Slot ID",
+                         submitHandler: { [weak self] in
+                            guard let self = self else {
+                                return
+                            }
+                            self.adSlot = self.customAdSlot.flatMap(ExampleSlot.init(rawValue:))
+            }) { [weak self] text, textField in
+                guard let self = self else {
+                    return
+                }
+                if let adSlotID = text.flatMap(self.formatter.number(from:)) {
+                    textField?.textColor = .darkText
+                    self.customAdSlot = adSlotID.intValue
+                } else {
+                    textField?.textColor = .systemRed
                 }
             }
-            vc.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                self.textHandler = nil
-            })
-            vc.addAction(UIAlertAction(title: "Done", style: .default) { _ in
-                self.textHandler = nil
-                self.adSlot = self.customAdSlot.flatMap(ExampleSlot.init(rawValue:))
-            })
-            present(vc, animated: true, completion: nil)
         case (Section.sdk.rawValue, _),
              (Section.submit.rawValue, _):
             break
@@ -392,7 +393,7 @@ extension SetupViewController: UITextFieldDelegate {
         -> Bool
     {
         let text = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-        textHandler?(text)
+        textHandler?(text, textField)
         return true
     }
     

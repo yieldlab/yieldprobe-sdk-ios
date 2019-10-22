@@ -89,30 +89,44 @@ class SetupViewController: UITableViewController {
             return 0
         }
     }
+    
+    func tableView(_ tableView: UITableView,
+                   switchCellForRowAt indexPath: IndexPath,
+                   title: String,
+                   keyPath: ReferenceWritableKeyPath<SetupViewController,Bool>)
+        -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "switch",
+                                                 for: indexPath) as! SwitchCell
+        cell.textLabel?.text = title
+        cell.switch.isOn = self[keyPath: keyPath]
+        cell.onToggle = { flag in
+            self[keyPath: keyPath] = flag
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, sdkCellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch SDKRow(rawValue: indexPath.row)! {
+        case .personalizeAds:
+            return self.tableView(tableView,
+                                  switchCellForRowAt: indexPath,
+                                  title: "Personalized Ads",
+                                  keyPath: \SetupViewController.personalizeAds)
+        case .useGeolocation:
+            return self.tableView(tableView,
+                                  switchCellForRowAt: indexPath,
+                                  title: "Use Geolocation",
+                                  keyPath: \SetupViewController.useGeolocation)
+        }
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
         switch Section(rawValue: indexPath.section) {
         case .sdk:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "switch",
-                                                     for: indexPath) as! SwitchCell
-            let keyPath: ReferenceWritableKeyPath<SetupViewController,Bool>
-            let title: String
-            switch SDKRow(rawValue: indexPath.row)! {
-            case .personalizeAds:
-                title = "Personalized Ads"
-                keyPath = \SetupViewController.personalizeAds
-            case .useGeolocation:
-                title = "Use Geolocation"
-                keyPath = \SetupViewController.useGeolocation
-            }
-            cell.textLabel?.text = title
-            cell.switch.isOn = self[keyPath: keyPath]
-            cell.onToggle = { flag in
-                self[keyPath: keyPath] = flag
-            }
-            return cell
+            return self.tableView(tableView, sdkCellForRowAt: indexPath)
         case .adSlot:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
                                                      for: indexPath)
@@ -131,7 +145,7 @@ class SetupViewController: UITableViewController {
                     cell.textLabel?.text = "Custom: \(id)"
                     cell.accessoryView?.isHidden = false
                 } else {
-                    cell.textLabel?.text = "Custom"
+                    cell.textLabel?.text = "Custom…"
                     cell.accessoryView?.isHidden = true
                 }
             }

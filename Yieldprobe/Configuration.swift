@@ -10,6 +10,8 @@ import Foundation
 public struct Configuration {
     
     /// Specify a bundle ID to be transmitted to Yieldprobe.
+    ///
+    /// Default: `nil`
     var bundleID: String?
     
     /// Specify whether Yieldprobe should use Geolocation data.

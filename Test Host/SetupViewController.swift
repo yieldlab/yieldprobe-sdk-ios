@@ -127,19 +127,10 @@ class SetupViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (Section.sdk.rawValue, _):
             return self.tableView(tableView, sdkCellForRowAt: indexPath)
-        case (Section.submit.rawValue, 0):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "submit",
-                                                     for: indexPath)
-            cell.textLabel?.isEnabled = adSlot != nil
-            return cell
-        default:
-            break
-        }
-        switch Section(rawValue: indexPath.section) {
-        case .adSlot:
+        case (Section.adSlot.rawValue, let row):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
                                                      for: indexPath)
-            switch indexPath.row {
+            switch row {
             case 0:
                 cell.textLabel?.text = "Banner: 300×250"
                 cell.accessoryType = adSlot == .banner300x250 ? .checkmark : .none
@@ -162,7 +153,12 @@ class SetupViewController: UITableViewController {
             }
 
             return cell
-        case .sdk, .submit, nil:
+        case (Section.submit.rawValue, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "submit",
+                                                     for: indexPath)
+            cell.textLabel?.isEnabled = adSlot != nil
+            return cell
+        default:
             preconditionFailure()
         }
     }

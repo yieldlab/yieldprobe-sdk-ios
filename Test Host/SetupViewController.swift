@@ -127,6 +127,11 @@ class SetupViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (Section.sdk.rawValue, _):
             return self.tableView(tableView, sdkCellForRowAt: indexPath)
+        case (Section.submit.rawValue, 0):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "submit",
+                                                     for: indexPath)
+            cell.textLabel?.isEnabled = adSlot != nil
+            return cell
         default:
             break
         }
@@ -157,13 +162,7 @@ class SetupViewController: UITableViewController {
             }
 
             return cell
-        case .submit:
-            precondition(indexPath.row == 0)
-            let cell = tableView.dequeueReusableCell(withIdentifier: "submit",
-                                                     for: indexPath)
-            cell.textLabel?.isEnabled = adSlot != nil
-            return cell
-        case .sdk, nil:
+        case .sdk, .submit, nil:
             preconditionFailure()
         }
     }

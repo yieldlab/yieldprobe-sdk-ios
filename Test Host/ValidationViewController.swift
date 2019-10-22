@@ -30,6 +30,7 @@ class ValidationViewController: UITableViewController {
     }
     
     enum ConfigureRows: Int, CaseIterable {
+        case bundleID
         case personalizeAds
         case useGeolocation
     }
@@ -176,6 +177,9 @@ class ValidationViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "key-value",
                                                      for: indexPath)
             switch ConfigureRows(rawValue: indexPath.row - 1)! {
+            case .bundleID:
+                cell.textLabel?.text = "Bundle ID"
+                cell.detailTextLabel?.text = configuration.bundleID?.debugDescription ?? "none"
             case .personalizeAds:
                 cell.textLabel?.text = "Personalize Ads"
                 cell.detailTextLabel?.text = configuration.personalizeAds ? "yes" : "no"

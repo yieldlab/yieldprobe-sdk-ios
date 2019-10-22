@@ -22,6 +22,7 @@ class SetupViewController: UITableViewController {
     }
     
     enum SDKRow: Int, CaseIterable {
+        case bundleID
         case personalizeAds
         case useGeolocation
     }
@@ -34,6 +35,15 @@ class SetupViewController: UITableViewController {
             
             tableView.reloadSections([Section.adSlot.rawValue, Section.submit.rawValue],
                                      with: .automatic)
+        }
+    }
+    
+    var bundleID: String? {
+        didSet {
+            dispatchPrecondition(condition: .onQueue(.main))
+            
+            tableView.reloadRows(at: [IndexPath(row: SDKRow.bundleID.rawValue, section: Section.sdk.rawValue)],
+                                 with: .automatic)
         }
     }
     
@@ -111,6 +121,19 @@ class SetupViewController: UITableViewController {
     
     func tableView(_ tableView: UITableView, sdkCellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch SDKRow(rawValue: indexPath.row)! {
+        case .bundleID:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "key-value", for: indexPath)
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = "Bundle ID"
+            
+            if let bundleID = self.bundleID {
+                cell.detailTextLabel?.text = bundleID
+                cell.detailTextLabel?.textColor = nil
+            } else {
+                cell.detailTextLabel?.text = "none"
+                cell.detailTextLabel?.textColor = .yld_secondaryLabel
+            }
+            return cell
         case .personalizeAds:
             return self.tableView(tableView,
                                   switchCellForRowAt: indexPath,
@@ -231,6 +254,24 @@ class SetupViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         switch (indexPath.section, indexPath.row) {
+        case (Section.sdk.rawValue, SDKRow.bundleID.rawValue):
+            let vc = UIAlertController(title: "Custom Bundle ID",
+                                       message: "Enter the bundle ID you want to test.",
+                                       preferredStyle: .alert)
+            vc.addTextField { textField in
+                textField.delegate = self
+                self.textHandler = { text in
+                    self.bundleID = text
+                }
+            }
+            vc.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                self.bundleID = nil
+                self.textHandler = nil
+            }))
+            vc.addAction(UIAlertAction(title: "Done", style: .default, handler: { _ in
+                self.textHandler = nil
+            }))
+            present(vc, animated: true, completion: nil)
         case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
             adSlot = ExampleSlot.allCases[indexPath.row]
         case (Section.adSlot.rawValue, _):
@@ -276,7 +317,8 @@ class SetupViewController: UITableViewController {
         switch segue.destination {
         case let vc as ValidationViewController:
             vc.adSlot = adSlot?.rawValue
-            vc.configuration = Configuration(personalizeAds: personalizeAds,
+            vc.configuration = Configuration(bundleID: bundleID,
+                                             personalizeAds: personalizeAds,
                                              useGeolocation: useGeolocation)
         default:
             break

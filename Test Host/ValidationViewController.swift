@@ -49,9 +49,7 @@ class ValidationViewController: UITableViewController {
 
     let clock = HighPrecisionClock()
     
-    var personalizeAds = true
-    
-    var useGeolocation = true
+    var configuration: Configuration!
     
     private(set) var started: HighPrecisionClock.Time!
     
@@ -87,8 +85,6 @@ class ValidationViewController: UITableViewController {
     }
     
     func configure () {
-        let configuration = Configuration(personalizeAds: personalizeAds,
-                                          useGeolocation: useGeolocation)
         let start = clock.now()
         yieldprobe.configure(using: configuration)
         let end = clock.now()
@@ -182,15 +178,14 @@ class ValidationViewController: UITableViewController {
             switch ConfigureRows(rawValue: indexPath.row - 1)! {
             case .personalizeAds:
                 cell.textLabel?.text = "Personalize Ads"
-                cell.detailTextLabel?.text = personalizeAds ? "yes" : "no"
+                cell.detailTextLabel?.text = configuration.personalizeAds ? "yes" : "no"
             case .useGeolocation:
                 cell.textLabel?.text = "Geolocation"
-                if !useGeolocation {
+                if !configuration.useGeolocation {
                     cell.detailTextLabel?.text = "no"
                 } else {
                     switch CLLocationManager.authorizationStatus() {
                     case .authorizedAlways, .authorizedWhenInUse:
-                        cell.detailTextLabel?.text = "authorized"
                         cell.detailTextLabel?.text = "authorized"
                     case .denied:
                         cell.detailTextLabel?.text = "denied"

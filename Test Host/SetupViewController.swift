@@ -7,6 +7,7 @@
 
 import CoreLocation
 import UIKit
+import Yieldprobe
 
 let checkmark = "\u{2713}" // U+2713, CHECKMARK: ✓
 
@@ -275,8 +276,8 @@ class SetupViewController: UITableViewController {
         switch segue.destination {
         case let vc as ValidationViewController:
             vc.adSlot = adSlot?.rawValue
-            vc.personalizeAds = personalizeAds
-            vc.useGeolocation = useGeolocation
+            vc.configuration = Configuration(personalizeAds: personalizeAds,
+                                             useGeolocation: useGeolocation)
         default:
             break
         }

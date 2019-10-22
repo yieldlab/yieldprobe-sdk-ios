@@ -12,7 +12,7 @@ public struct Configuration {
     /// Specify a bundle ID to be transmitted to Yieldprobe.
     ///
     /// Default: `nil`
-    var bundleID: String?
+    public var bundleID: String?
     
     /// Specify whether Yieldprobe should use Geolocation data.
     ///
@@ -21,7 +21,7 @@ public struct Configuration {
     /// has access to it. Yieldprobe will not cause location permission prompts in your application.
     ///
     /// Default: `true`
-    var useGeolocation: Bool
+    public var useGeolocation: Bool
     
     /// Specify whether Yieldprobe should use personal information.
     ///
@@ -29,7 +29,7 @@ public struct Configuration {
     /// type will not be sent over the network.
     ///
     /// Default: `true`
-    var personalizeAds: Bool
+    public var personalizeAds: Bool
     
     /// Additional targeting information that will be present the each bid probe request.
     ///

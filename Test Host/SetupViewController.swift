@@ -124,6 +124,10 @@ class SetupViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
+        switch (indexPath.section, indexPath.row) {
+        default:
+            break
+        }
         switch Section(rawValue: indexPath.section) {
         case .sdk:
             return self.tableView(tableView, sdkCellForRowAt: indexPath)

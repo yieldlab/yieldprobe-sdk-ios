@@ -42,6 +42,8 @@ class SetupViewController: UITableViewController {
     
     private(set) var personalizeAds = true
     
+    var textHandler: Optional<(String?) -> Void> = nil
+    
     private(set) var useGeolocation = true
 
     override func viewDidLoad() {
@@ -238,21 +240,28 @@ class SetupViewController: UITableViewController {
                 textField.delegate = self
                 textField.keyboardType = .numberPad
                 textField.placeholder = "Custom Ad Slot ID"
+                
+                self.textHandler = { text in
+                    if let adSlotID = text.flatMap(self.formatter.number(from:)) {
+                        textField.textColor = .darkText
+                        self.customAdSlot = adSlotID.intValue
+                    } else {
+                        textField.textColor = .systemRed
+                    }
+                }
             }
-            vc.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            vc.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                self.textHandler = nil
+            })
             vc.addAction(UIAlertAction(title: "Done", style: .default) { _ in
+                self.textHandler = nil
                 self.adSlot = self.customAdSlot.flatMap(ExampleSlot.init(rawValue:))
             })
             present(vc, animated: true, completion: nil)
+        case (Section.sdk.rawValue, _),
+             (Section.submit.rawValue, _):
+            break
         default:
-            break
-        }
-        switch Section(rawValue: indexPath.section) {
-        case .adSlot:
-            break
-        case .sdk, .submit:
-            break
-        case nil:
             preconditionFailure()
         }
         
@@ -297,12 +306,7 @@ extension SetupViewController: UITextFieldDelegate {
         -> Bool
     {
         let text = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-        if let adSlotID = text.flatMap(formatter.number(from:)) {
-            textField.textColor = .darkText
-            self.customAdSlot = adSlotID.intValue
-        } else {
-            textField.textColor = .systemRed
-        }
+        textHandler?(text)
         return true
     }
     

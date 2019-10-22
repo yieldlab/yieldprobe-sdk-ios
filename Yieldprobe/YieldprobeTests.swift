@@ -411,12 +411,16 @@ class YieldprobeTests: XCTestCase {
     
     func testResponseNetworkError () {
         // Arrange:
+        var expectation: Optional = self.expectation(description: "Async HTTP Call")
         let http = HTTPMock()
         var result: Result<Bid,Error>?
         let sut = Yieldprobe(http: http)
         sut.probe(slot: 1234) { _result in
             XCTAssertNil(result)
             result = _result
+            
+            expectation?.fulfill()
+            expectation = nil
         }
         
         // Act:
@@ -425,6 +429,8 @@ class YieldprobeTests: XCTestCase {
         }
         
         // Assert:
+        wait(for: [expectation!], timeout: 0.1)
+        expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
             XCTAssertEqual(error as? URLError, URLError(.notConnectedToInternet))
@@ -433,12 +439,16 @@ class YieldprobeTests: XCTestCase {
     
     func testResponseHTTPError () {
         // Arrange:
+        var expectation: Optional = self.expectation(description: "Async HTTP Call")
         let http = HTTPMock()
         var result: Result<Bid,Error>?
         let sut = Yieldprobe(http: http)
         sut.probe(slot: 1234) { _result in
             XCTAssertNil(result)
             result = _result
+            
+            expectation?.fulfill()
+            expectation = nil
         }
         
         // Act:
@@ -451,6 +461,8 @@ class YieldprobeTests: XCTestCase {
         }
         
         // Assert:
+        wait(for: [expectation!], timeout: 0.1)
+        expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
             XCTAssertEqual(error as? Yieldprobe.Error,
@@ -460,6 +472,7 @@ class YieldprobeTests: XCTestCase {
     
     func testNonJSONContentType () {
         // Arrange:
+        var expectation: Optional = self.expectation(description: "Async HTTP Call")
         let javascript = """
         var yl=yl||{};yl.YpResult=yl.YpResult||function(){var a={};return{add:function(b){a[b.id]=b},get:function(b) {return a[b]},getAll:function(){return a}}}(); yl.YpResult.add({'id':3418,'advertiser':'werbung. de','curl':'https://www.werbung.de'}); yl.YpResult.add({'id':3419,'advertiser':'werbung.de','curl':'https://www.werbung.de'});
         """ // from the API documentation
@@ -469,6 +482,9 @@ class YieldprobeTests: XCTestCase {
         sut.probe(slot: 1234) { _result in
             XCTAssertNil(result)
             result = _result
+            
+            expectation?.fulfill()
+            expectation = nil
         }
         
         // Act:
@@ -481,6 +497,8 @@ class YieldprobeTests: XCTestCase {
         }
         
         // Assert:
+        wait(for: [expectation!], timeout: 0.1)
+        expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
             XCTAssertEqual(error as? Yieldprobe.Error,
@@ -490,12 +508,16 @@ class YieldprobeTests: XCTestCase {
     
     func testUnsupportedFormat () {
         // Arrange:
+        var expectation: Optional = self.expectation(description: "Async HTTP Call")
         let http = HTTPMock()
         var result: Result<Bid,Error>?
         let sut = Yieldprobe(http: http)
         sut.probe(slot: 1234) { _result in
             XCTAssertNil(result)
             result = _result
+            
+            expectation?.fulfill()
+            expectation = nil
         }
         
         // Act:
@@ -508,6 +530,8 @@ class YieldprobeTests: XCTestCase {
         }
         
         // Assert:
+        wait(for: [expectation!], timeout: 0.1)
+        expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
             XCTAssertEqual(error as? Yieldprobe.Error, .unsupportedFormat)
@@ -526,12 +550,16 @@ class YieldprobeTests: XCTestCase {
     
     func testNoFill () {
         // Arrange:
+        var expectation: Optional = self.expectation(description: "Async HTTP Call")
         let http = HTTPMock()
         var result: Result<Bid,Error>?
         let sut = Yieldprobe(http: http)
         sut.probe(slot: 1234) { _result in
             XCTAssertNil(result)
             result = _result
+            
+            expectation?.fulfill()
+            expectation = nil
         }
         
         // Act:
@@ -544,6 +572,8 @@ class YieldprobeTests: XCTestCase {
         }
         
         // Assert:
+        wait(for: [expectation!], timeout: 0.1)
+        expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
             XCTAssertEqual(error as? Yieldprobe.Error, .noFill)
@@ -553,16 +583,21 @@ class YieldprobeTests: XCTestCase {
     func testResponse () {
         // Arrange:
         var bid: Bid?
+        var expectation: Optional = self.expectation(description: "Async HTTP Call")
         let http = HTTPMock()
         let sut = Yieldprobe(http: http)
         
         // Act:
         sut.probe(slot: ExampleSlot.banner300x250.rawValue) { result in
             do {
+                XCTAssertNil(bid)
                 bid = try result.get()
             } catch {
                 XCTFail("Unexpected error: \(error)")
             }
+            
+            expectation?.fulfill()
+            expectation = nil
         }
         http.calls.first?.process { url in
             try URLReply([TestResponse(id: ExampleSlot.banner300x250.rawValue)],
@@ -575,6 +610,8 @@ class YieldprobeTests: XCTestCase {
         }
         
         // Assert:
+        wait(for: [expectation!], timeout: 0.1)
+        expectation = nil
         XCTAssertEqual(bid?.slotID, ExampleSlot.banner300x250.rawValue)
         let customTargeting = bid?.customTargeting()
         XCTAssertEqual(customTargeting?["id"] as? Int, bid?.slotID)

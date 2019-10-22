@@ -216,13 +216,14 @@ class SetupViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         switch (indexPath.section, indexPath.row) {
+        case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
+            adSlot = ExampleSlot.allCases[indexPath.row]
         default:
             break
         }
         switch Section(rawValue: indexPath.section) {
         case .adSlot:
             if indexPath.row < ExampleSlot.allCases.count {
-                adSlot = ExampleSlot.allCases[indexPath.row]
             } else {
                 let vc = UIAlertController(title: "Custom Ad Slot",
                                            message: "Enter the Ad Slot you want to test.",

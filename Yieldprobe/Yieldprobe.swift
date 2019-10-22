@@ -43,6 +43,8 @@ public class Yieldprobe: NSObject {
     
     // MARK: Properties
     
+    private(set) var bundleIDDecorator: BundleIDDecorator
+    
     let cacheBuster = CacheBuster()
     
     #if false
@@ -81,6 +83,8 @@ public class Yieldprobe: NSObject {
     {
         let configuration = Configuration()
         
+        bundleIDDecorator = BundleIDDecorator(configuration: configuration)
+        
         self.http = http ?? Yieldprobe.defaultClient
         let connectivity = ConnectivityDecorator(source: connectivitySource)
         self.connectivity = PIIDDecoratorFilter(configuration: configuration,
@@ -99,6 +103,7 @@ public class Yieldprobe: NSObject {
     }
     
     public func configure(using configuration: Configuration) {
+        bundleIDDecorator.configuration = configuration
         connectivity.configuration = configuration
         deviceTypeDecorator.configuration = configuration
         extraTargetingDecorator.configuration = configuration
@@ -149,7 +154,7 @@ public class Yieldprobe: NSObject {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true&sdk=1")!
         let url = baseURL
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
-            .decorate(cacheBuster, connectivity, consent, deviceTypeDecorator, extraTargetingDecorator, locationDecorator, idfaDecorator)
+            .decorate(bundleIDDecorator, cacheBuster, connectivity, consent, deviceTypeDecorator, extraTargetingDecorator, locationDecorator, idfaDecorator)
         http.get(url: url) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()

@@ -40,6 +40,8 @@
 		915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8ADC234389BA00746E7E /* URLSession+YLD.swift */; };
 		915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE023438BAD00746E7E /* YieldprobeTests.swift */; };
 		915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE223438C0800746E7E /* HTTPMock.swift */; };
+		917488F3235EEAA20099ECDD /* BundleIDDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917488F2235EEAA20099ECDD /* BundleIDDecorator.swift */; };
+		917488F5235EEB3A0099ECDD /* BundleIDDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917488F4235EEB3A0099ECDD /* BundleIDDecoratorTests.swift */; };
 		91793D4A234C6E04004DB72D /* DeviceTypeDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */; };
 		91793D4C234C6E12004DB72D /* DeviceTypeDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D4B234C6E12004DB72D /* DeviceTypeDecoratorTests.swift */; };
 		91793D4E234C80C3004DB72D /* UIDevice+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D4D234C80C3004DB72D /* UIDevice+YLD.swift */; };
@@ -144,6 +146,8 @@
 		915C8ADC234389BA00746E7E /* URLSession+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+YLD.swift"; sourceTree = "<group>"; };
 		915C8AE023438BAD00746E7E /* YieldprobeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YieldprobeTests.swift; sourceTree = "<group>"; };
 		915C8AE223438C0800746E7E /* HTTPMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMock.swift; sourceTree = "<group>"; };
+		917488F2235EEAA20099ECDD /* BundleIDDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleIDDecorator.swift; sourceTree = "<group>"; };
+		917488F4235EEB3A0099ECDD /* BundleIDDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleIDDecoratorTests.swift; sourceTree = "<group>"; };
 		91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeDecorator.swift; sourceTree = "<group>"; };
 		91793D4B234C6E12004DB72D /* DeviceTypeDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeDecoratorTests.swift; sourceTree = "<group>"; };
 		91793D4D234C80C3004DB72D /* UIDevice+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+YLD.swift"; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 				915C8AD92343896600746E7E /* Extensions */,
 				91C40886234F7EFE00D0DC71 /* Bid.swift */,
 				91C4088823507B9A00D0DC71 /* BidTests.swift */,
+				917488F2235EEAA20099ECDD /* BundleIDDecorator.swift */,
+				917488F4235EEB3A0099ECDD /* BundleIDDecoratorTests.swift */,
 				915618C9234B25A200D5F530 /* CacheBuster.swift */,
 				9184845123561CF30040C53E /* CacheBusterTests.swift */,
 				91C40882234F2AAC00D0DC71 /* Configuration.swift */,
@@ -472,6 +478,7 @@
 				91AA09372356227D00D521D8 /* Collection+YLD.swift in Sources */,
 				91C4088923507B9A00D0DC71 /* BidTests.swift in Sources */,
 				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
+				917488F5235EEB3A0099ECDD /* BundleIDDecoratorTests.swift in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
 				91793D4C234C6E12004DB72D /* DeviceTypeDecoratorTests.swift in Sources */,
 				915618DE234B6ED600D5F530 /* LocationDecoratorTests.swift in Sources */,
@@ -514,6 +521,7 @@
 				915C8ADB2343897600746E7E /* HTTPClient.swift in Sources */,
 				915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */,
 				91793D4E234C80C3004DB72D /* UIDevice+YLD.swift in Sources */,
+				917488F3235EEAA20099ECDD /* BundleIDDecorator.swift in Sources */,
 				91EF5DFB2357522F0048F06A /* ExtraTargetingDecorator.swift in Sources */,
 				91B283B5234DB6770055DB7F /* DefaultConnectivitySource.swift in Sources */,
 				91C40885234F30B800D0DC71 /* PIIDDecoratorFilter.swift in Sources */,

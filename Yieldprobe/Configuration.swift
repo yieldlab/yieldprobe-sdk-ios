@@ -9,6 +9,9 @@ import Foundation
 
 public struct Configuration {
     
+    /// Specify a bundle ID to be transmitted to Yieldprobe.
+    var bundleID: String?
+    
     /// Specify whether Yieldprobe should use Geolocation data.
     ///
     /// If `false`, Yieldprobe will not try to access geolocation information, even if it is available to the
@@ -31,10 +34,12 @@ public struct Configuration {
     /// Default: Empty.
     var extraTargeting: [String: String]
     
-    public init (personalizeAds: Bool = true,
+    public init (bundleID: String? = nil,
+                 personalizeAds: Bool = true,
                  useGeolocation: Bool = true,
                  extraTargeting: [String: String] = [:])
     {
+        self.bundleID = bundleID
         self.extraTargeting = extraTargeting
         self.personalizeAds = personalizeAds
         self.useGeolocation = useGeolocation

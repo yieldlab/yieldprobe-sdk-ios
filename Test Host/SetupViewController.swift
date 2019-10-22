@@ -125,12 +125,12 @@ class SetupViewController: UITableViewController {
         -> UITableViewCell
     {
         switch (indexPath.section, indexPath.row) {
+        case (Section.sdk.rawValue, _):
+            return self.tableView(tableView, sdkCellForRowAt: indexPath)
         default:
             break
         }
         switch Section(rawValue: indexPath.section) {
-        case .sdk:
-            return self.tableView(tableView, sdkCellForRowAt: indexPath)
         case .adSlot:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ad-slot",
                                                      for: indexPath)
@@ -163,7 +163,7 @@ class SetupViewController: UITableViewController {
                                                      for: indexPath)
             cell.textLabel?.isEnabled = adSlot != nil
             return cell
-        case nil:
+        case .sdk, nil:
             preconditionFailure()
         }
     }

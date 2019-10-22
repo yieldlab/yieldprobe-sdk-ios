@@ -215,6 +215,10 @@ class SetupViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        switch (indexPath.section, indexPath.row) {
+        default:
+            break
+        }
         switch Section(rawValue: indexPath.section) {
         case .adSlot:
             if indexPath.row < ExampleSlot.allCases.count {

@@ -24,6 +24,7 @@ class SetupViewController: UITableViewController {
     enum SDKRow: Int, CaseIterable {
         case appName
         case bundleID
+        case extraTargeting
         case personalizeAds
         case useGeolocation
     }
@@ -58,6 +59,16 @@ class SetupViewController: UITableViewController {
     }
     
     var customAdSlot: Int? // Only used while editing.
+    
+    var extraTargeting = [String: String]() {
+        didSet {
+            dispatchPrecondition(condition: .onQueue(.main))
+            
+            tableView.reloadRows(at: [IndexPath(row: SDKRow.extraTargeting.rawValue,
+                                                section: Section.sdk.rawValue)],
+                                 with: .automatic)
+        }
+    }
     
     let formatter = NumberFormatter()
     
@@ -156,6 +167,14 @@ class SetupViewController: UITableViewController {
                 cell.detailTextLabel?.text = "none"
                 cell.detailTextLabel?.textColor = .yld_secondaryLabel
             }
+            return cell
+        case .extraTargeting:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "key-value", for: indexPath)
+            cell.textLabel?.text = "Extra Targeting"
+            cell.detailTextLabel?.text = String.localizedStringWithFormat(NSLocalizedString("%d key-value pairs", comment: "Number of key-value pairs in the extra targeting dictionary."),
+                                                                          extraTargeting.count)
+            cell.detailTextLabel?.textColor = .yld_secondaryLabel
+            cell.accessoryType = .disclosureIndicator
             return cell
         case .personalizeAds:
             return self.tableView(tableView,
@@ -320,6 +339,8 @@ class SetupViewController: UITableViewController {
                          placeholder: "com.example.Amazing-App") { [weak self] text, textField in
                             self?.bundleID = text
             }
+        case (Section.sdk.rawValue, SDKRow.extraTargeting.rawValue):
+            performSegue(withIdentifier: "extra-targeting", sender: self)
         case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
             adSlot = ExampleSlot.allCases[indexPath.row]
         case (Section.adSlot.rawValue, _):
@@ -363,7 +384,12 @@ class SetupViewController: UITableViewController {
             vc.configuration = Configuration(appName: appName,
                                              bundleID: bundleID,
                                              personalizeAds: personalizeAds,
-                                             useGeolocation: useGeolocation)
+                                             useGeolocation: useGeolocation,
+                                             extraTargeting: extraTargeting)
+        case let vc as ExtraTargetingController:
+            vc.delegate = nil
+            vc.extraTargeting = extraTargeting // this would be so much nicer using bindings.
+            vc.delegate = self
         default:
             break
         }
@@ -386,6 +412,16 @@ class SetupViewController: UITableViewController {
     func didTapSettings (_ sender: UIBarButtonItem) {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
                                   options: [:], completionHandler: nil)
+    }
+    
+}
+
+extension SetupViewController: ExtraTargetingControllerDelegate {
+    
+    func extraTargetingController(_ extraTargetingController: ExtraTargetingController,
+                                  didChange extraTargeting: [String : String])
+    {
+        self.extraTargeting = extraTargeting
     }
     
 }

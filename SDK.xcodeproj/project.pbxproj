@@ -13,6 +13,8 @@
 		91303F3423604EB6009000E0 /* TimeZone+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91303F3323604EB6009000E0 /* TimeZone+YLD.swift */; };
 		91303F3623604ECD009000E0 /* HTTPRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91303F3523604ECD009000E0 /* HTTPRecorder.swift */; };
 		91303F3823605B7B009000E0 /* UIBarButtonItem+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91303F3723605B7B009000E0 /* UIBarButtonItem+YLD.swift */; };
+		91303F3B23607C68009000E0 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 91303F3D23607C68009000E0 /* Localizable.stringsdict */; };
+		91303F4023607EE5009000E0 /* ExtraTargetingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91303F3F23607EE5009000E0 /* ExtraTargetingController.swift */; };
 		913A5819235F176600440DB1 /* AppNameDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A5818235F176600440DB1 /* AppNameDecoratorTests.swift */; };
 		913A581B235F17E500440DB1 /* AppNameDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A581A235F17E500440DB1 /* AppNameDecorator.swift */; };
 		913A581D235F2EB900440DB1 /* UIColor+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A581C235F2EB900440DB1 /* UIColor+YLD.swift */; };
@@ -121,6 +123,8 @@
 		91303F3323604EB6009000E0 /* TimeZone+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+YLD.swift"; sourceTree = "<group>"; };
 		91303F3523604ECD009000E0 /* HTTPRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRecorder.swift; sourceTree = "<group>"; };
 		91303F3723605B7B009000E0 /* UIBarButtonItem+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+YLD.swift"; sourceTree = "<group>"; };
+		91303F3C23607C68009000E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		91303F3F23607EE5009000E0 /* ExtraTargetingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraTargetingController.swift; sourceTree = "<group>"; };
 		913A5818235F176600440DB1 /* AppNameDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNameDecoratorTests.swift; sourceTree = "<group>"; };
 		913A581A235F17E500440DB1 /* AppNameDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNameDecorator.swift; sourceTree = "<group>"; };
 		913A581C235F2EB900440DB1 /* UIColor+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+YLD.swift"; sourceTree = "<group>"; };
@@ -289,6 +293,7 @@
 				915C8ABF234385D400746E7E /* AppDelegate.swift */,
 				915C8AC8234385DA00746E7E /* Assets.xcassets */,
 				91EC3897235462B4003B9831 /* ExampleSlot.swift */,
+				91303F3F23607EE5009000E0 /* ExtraTargetingController.swift */,
 				91EF5DFE2357596E0048F06A /* HighPrecisionClock+YLD.swift */,
 				91303F3523604ECD009000E0 /* HTTPRecorder.swift */,
 				915C8ACD234385DA00746E7E /* Info.plist */,
@@ -296,6 +301,7 @@
 				915C8AC5234385D400746E7E /* Main.storyboard */,
 				915C8AC1234385D400746E7E /* SceneDelegate.swift */,
 				915C8AC3234385D400746E7E /* SetupViewController.swift */,
+				91303F3D23607C68009000E0 /* Localizable.stringsdict */,
 				91ACB8C52355ECAA002FD908 /* Settings.bundle */,
 				91ACB8C32355D884002FD908 /* SwitchCell.swift */,
 				91303F3323604EB6009000E0 /* TimeZone+YLD.swift */,
@@ -479,6 +485,7 @@
 				91ACB8C62355ECAA002FD908 /* Settings.bundle in Resources */,
 				915C8ACC234385DA00746E7E /* LaunchScreen.storyboard in Resources */,
 				915C8AC9234385DA00746E7E /* Assets.xcassets in Resources */,
+				91303F3B23607C68009000E0 /* Localizable.stringsdict in Resources */,
 				915C8AC7234385D400746E7E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +565,7 @@
 				915C8AC4234385D400746E7E /* SetupViewController.swift in Sources */,
 				91303F3423604EB6009000E0 /* TimeZone+YLD.swift in Sources */,
 				915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */,
+				91303F4023607EE5009000E0 /* ExtraTargetingController.swift in Sources */,
 				91EF5E0223575A270048F06A /* HighPrecisionClock+YLD.swift in Sources */,
 				91303F3823605B7B009000E0 /* UIBarButtonItem+YLD.swift in Sources */,
 				913A581D235F2EB900440DB1 /* UIColor+YLD.swift in Sources */,
@@ -589,6 +597,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		91303F3D23607C68009000E0 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				91303F3C23607C68009000E0 /* en */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
 		915C8AC5234385D400746E7E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

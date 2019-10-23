@@ -7,7 +7,7 @@
 
 import CoreLocation
 import UIKit
-import Yieldprobe
+@testable import Yieldprobe
 
 class ValidationViewController: UITableViewController {
     
@@ -17,6 +17,7 @@ class ValidationViewController: UITableViewController {
         case started(when: HighPrecisionClock.Time)
         case configure(duration: TimeInterval)
         case requestBid(duration: TimeInterval, when: HighPrecisionClock.Time)
+        case sendHTTPRequest(url: URL)
         case bid(duration: TimeInterval, Bid)
         case bidError(duration: TimeInterval, Error)
         case targeting(duration: TimeInterval, [String: Any])
@@ -47,9 +48,24 @@ class ValidationViewController: UITableViewController {
     
     var configuration: Configuration!
     
+    let http: HTTPRecorder<URLSession>
+    
     private(set) var started: HighPrecisionClock.Time!
     
-    let yieldprobe = Yieldprobe.shared
+    let yieldprobe: Yieldprobe
+    
+    // MARK: - Object Life-Cycle
+    
+    required init?(coder: NSCoder) {
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
+        http = HTTPRecorder(session)
+        yieldprobe = Yieldprobe(http: http)
+        
+        super.init(coder: coder)
+        
+        http.onRequest = on(request:)
+    }
     
     // MARK: - View Life-Cycle
     
@@ -95,6 +111,10 @@ class ValidationViewController: UITableViewController {
         let end = clock.now()
         
         activities.append(.requestBid(duration: end &- start, when: end))
+    }
+    
+    func on(request url: URL) {
+        activities.append(.sendHTTPRequest(url: url))
     }
     
     func receive(bid result: Result<Bid,Error>) {
@@ -148,6 +168,8 @@ class ValidationViewController: UITableViewController {
         case .configure:
             return 1 + ConfigureRows.allCases.count
         case .requestBid:
+            return 2
+        case .sendHTTPRequest:
             return 2
         case .bid:
             return 1
@@ -220,6 +242,12 @@ class ValidationViewController: UITableViewController {
             cell.textLabel?.text = "Ad Slot ID"
             cell.detailTextLabel?.text = adSlot.map(String.init(describing:))
             return cell
+        case .sendHTTPRequest(let url):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "key-value",
+                                                     for: indexPath)
+            cell.textLabel?.text = "URL"
+            cell.detailTextLabel?.text = url.absoluteString
+            return cell
         case let `default`:
             fatalError("FIXME: Handle: \(`default`)")
         }
@@ -242,6 +270,9 @@ class ValidationViewController: UITableViewController {
             cell.textLabel?.text = "Request Bid"
             cell.detailTextLabel?.isHidden = false
             cell.detailTextLabel?.text = format(duration)
+        case .sendHTTPRequest:
+            cell.textLabel?.text = "Send HTTP Request"
+            cell.detailTextLabel?.isHidden = true
         case .bid(let duration, _):
             cell.textLabel?.text = "Receive Bid"
             cell.detailTextLabel?.isHidden = false
@@ -315,6 +346,14 @@ class ValidationViewController: UITableViewController {
     */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if case .sendHTTPRequest(let url) = activities[indexPath.section], indexPath.row != 0 {
+            let vc = UIAlertController(title: "HTTP Request",
+                                       message: "An HTTP request was sent to:\n\(url.absoluteString)",
+                                       preferredStyle: .alert)
+            vc.addAction(UIAlertAction(title: "Close", style: .default))
+            present(vc, animated: true, completion: nil)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

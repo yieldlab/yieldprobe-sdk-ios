@@ -36,25 +36,27 @@ struct ConsentDecorator: URLDecorator {
     }
     
     func decorate (_ subject: URL) -> URL {
+        guard let consentString = consentSource.consent else {
+            return subject
+        }
+        
+        // Remove trailing `=` padding.
+        var trimmed = consentString[consentString.startIndex...]
+        while trimmed.hasSuffix("=") {
+            trimmed = trimmed.dropLast()
+        }
+        
+        if trimmed.isEmpty ||
+            trimmed.rangeOfCharacter(from: type(of: self).base64URLCharacters.inverted) != nil
+        {
+            return subject
+        }
+        
         return URLComponents(url: subject, resolvingAgainstBaseURL: true)!
             .transformQueryItems { input in
-                guard let consentString = consentSource.consent else {
-                    return input
-                }
-                
-                // Remove trailing `=` padding.
-                var trimmed = consentString[consentString.startIndex...]
-                while trimmed.hasSuffix("=") {
-                    trimmed = trimmed.dropLast()
-                }
-                
-                if trimmed.isEmpty ||
-                    trimmed.rangeOfCharacter(from: type(of: self).base64URLCharacters.inverted) != nil
-                {
-                    return input
-                }
-                
-                return input + [URLQueryItem(name: "consent", value: String(trimmed))]
+                input + [
+                    URLQueryItem(name: "consent", value: String(trimmed))
+                ]
             }.url!
     }
     

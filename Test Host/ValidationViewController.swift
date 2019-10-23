@@ -9,12 +9,6 @@ import CoreLocation
 import UIKit
 import Yieldprobe
 
-extension TimeZone {
-    
-    static let utc = TimeZone(secondsFromGMT: 0)
-    
-}
-
 class ValidationViewController: UITableViewController {
     
     // MARK: - Types

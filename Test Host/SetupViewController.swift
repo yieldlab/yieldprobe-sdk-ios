@@ -73,8 +73,8 @@ class SetupViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let button = UIBarButtonItem.location(target: self, action: #selector(didTapLocation(_:)))
+        self.navigationItem.leftBarButtonItem = button
     }
 
     // MARK: - Table view data source
@@ -373,14 +373,19 @@ class SetupViewController: UITableViewController {
     
     var locationManager = CLLocationManager()
     
-    @IBAction
-    func didTapSettings (_ sender: UIBarButtonItem) {
+    @objc
+    func didTapLocation (_ sender: UIBarButtonItem) {
         if CLLocationManager.authorizationStatus() == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         } else {
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
-                                      options: [:], completionHandler: nil)
+            locationManager.requestLocation()
         }
+    }
+    
+    @IBAction
+    func didTapSettings (_ sender: UIBarButtonItem) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+                                  options: [:], completionHandler: nil)
     }
     
 }

@@ -11,6 +11,7 @@
 		91264F382350C6160012D871 /* Result+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F372350C6160012D871 /* Result+YLD.swift */; };
 		91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F392350C7E60012D871 /* ResultTests.swift */; };
 		91303F3423604EB6009000E0 /* TimeZone+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91303F3323604EB6009000E0 /* TimeZone+YLD.swift */; };
+		91303F3823605B7B009000E0 /* UIBarButtonItem+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91303F3723605B7B009000E0 /* UIBarButtonItem+YLD.swift */; };
 		913A5819235F176600440DB1 /* AppNameDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A5818235F176600440DB1 /* AppNameDecoratorTests.swift */; };
 		913A581B235F17E500440DB1 /* AppNameDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A581A235F17E500440DB1 /* AppNameDecorator.swift */; };
 		913A581D235F2EB900440DB1 /* UIColor+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913A581C235F2EB900440DB1 /* UIColor+YLD.swift */; };
@@ -117,6 +118,7 @@
 		91264F372350C6160012D871 /* Result+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+YLD.swift"; sourceTree = "<group>"; };
 		91264F392350C7E60012D871 /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		91303F3323604EB6009000E0 /* TimeZone+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+YLD.swift"; sourceTree = "<group>"; };
+		91303F3723605B7B009000E0 /* UIBarButtonItem+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+YLD.swift"; sourceTree = "<group>"; };
 		913A5818235F176600440DB1 /* AppNameDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNameDecoratorTests.swift; sourceTree = "<group>"; };
 		913A581A235F17E500440DB1 /* AppNameDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNameDecorator.swift; sourceTree = "<group>"; };
 		913A581C235F2EB900440DB1 /* UIColor+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+YLD.swift"; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				91ACB8C52355ECAA002FD908 /* Settings.bundle */,
 				91ACB8C32355D884002FD908 /* SwitchCell.swift */,
 				91303F3323604EB6009000E0 /* TimeZone+YLD.swift */,
+				91303F3723605B7B009000E0 /* UIBarButtonItem+YLD.swift */,
 				913A581C235F2EB900440DB1 /* UIColor+YLD.swift */,
 				91EC389923548BDE003B9831 /* ValidationViewController.swift */,
 			);
@@ -552,6 +555,7 @@
 				91303F3423604EB6009000E0 /* TimeZone+YLD.swift in Sources */,
 				915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */,
 				91EF5E0223575A270048F06A /* HighPrecisionClock+YLD.swift in Sources */,
+				91303F3823605B7B009000E0 /* UIBarButtonItem+YLD.swift in Sources */,
 				913A581D235F2EB900440DB1 /* UIColor+YLD.swift in Sources */,
 				91ACB8C42355D884002FD908 /* SwitchCell.swift in Sources */,
 				91EC3898235462B4003B9831 /* ExampleSlot.swift in Sources */,

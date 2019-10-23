@@ -72,11 +72,27 @@ class SetupViewController: UITableViewController {
     
     let formatter = NumberFormatter()
     
-    private(set) var personalizeAds = true
+    private(set) var personalizeAds = true {
+        didSet {
+            dispatchPrecondition(condition: .onQueue(.main))
+            
+            tableView.reloadRows(at: [IndexPath(row: SDKRow.personalizeAds.rawValue,
+                                                section: Section.sdk.rawValue)],
+                                 with: .automatic)
+        }
+    }
     
     var textHandler: Optional<(String?, UITextField) -> Void> = nil
     
-    private(set) var useGeolocation = true
+    private(set) var useGeolocation = true {
+           didSet {
+               dispatchPrecondition(condition: .onQueue(.main))
+               
+               tableView.reloadRows(at: [IndexPath(row: SDKRow.useGeolocation.rawValue,
+                                                   section: Section.sdk.rawValue)],
+                                    with: .automatic)
+           }
+       }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -341,6 +357,10 @@ class SetupViewController: UITableViewController {
             }
         case (Section.sdk.rawValue, SDKRow.extraTargeting.rawValue):
             performSegue(withIdentifier: "extra-targeting", sender: self)
+        case (Section.sdk.rawValue, SDKRow.personalizeAds.rawValue):
+            personalizeAds.toggle()
+        case (Section.sdk.rawValue, SDKRow.useGeolocation.rawValue):
+            useGeolocation.toggle()
         case (Section.adSlot.rawValue, let row) where row < ExampleSlot.allCases.count:
             adSlot = ExampleSlot.allCases[indexPath.row]
         case (Section.adSlot.rawValue, _):
@@ -364,8 +384,7 @@ class SetupViewController: UITableViewController {
                     textField?.textColor = .systemRed
                 }
             }
-        case (Section.sdk.rawValue, _),
-             (Section.submit.rawValue, _):
+        case (Section.submit.rawValue, _):
             break
         default:
             preconditionFailure()

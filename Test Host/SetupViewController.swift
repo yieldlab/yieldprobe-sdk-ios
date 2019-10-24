@@ -72,6 +72,8 @@ class SetupViewController: UITableViewController {
     
     let formatter = NumberFormatter()
     
+    let locationManager = CLLocationManager()
+    
     private(set) var personalizeAds = true {
         didSet {
             dispatchPrecondition(condition: .onQueue(.main))
@@ -102,6 +104,8 @@ class SetupViewController: UITableViewController {
 
         let button = UIBarButtonItem.location(target: self, action: #selector(didTapLocation(_:)))
         self.navigationItem.leftBarButtonItem = button
+        
+        locationManager.delegate = self
     }
 
     // MARK: - Table view data source
@@ -416,8 +420,6 @@ class SetupViewController: UITableViewController {
     
     // MARK: - Interface Builder Actions
     
-    var locationManager = CLLocationManager()
-    
     @objc
     func didTapLocation (_ sender: UIBarButtonItem) {
         if CLLocationManager.authorizationStatus() == .notDetermined {
@@ -431,6 +433,18 @@ class SetupViewController: UITableViewController {
     func didTapSettings (_ sender: UIBarButtonItem) {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
                                   options: [:], completionHandler: nil)
+    }
+    
+}
+
+extension SetupViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Method is required by CoreLocation. So implement it as no-op.
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Method is required by CoreLocation. So implement it as no-op.
     }
     
 }

@@ -94,24 +94,21 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard let call = http.calls.first else {
-            return
-        }
-        guard case .get(let url, _) = call else {
-            return XCTFail("Unexpected call: \(call)")
-        }
-        XCTAssertEqual(url.scheme, "https")
-        XCTAssertEqual(url.host, "ad.yieldlab.net")
-        XCTAssertEqual(url.pathComponents.count, 3)
-        XCTAssertEqual(url.pathComponents.prefix(upTo: 2), ["/", "yp"])
-        XCTAssertEqual(Set(url.lastPathComponent
-                           .split(separator: ",")
-                           .map(String.init(_:))
-                           .compactMap({ formatter.number(from: $0)?.intValue })),
+        let url = http.calls.first?.url
+        XCTAssertEqual(url?.scheme, "https")
+        XCTAssertEqual(url?.host, "ad.yieldlab.net")
+        XCTAssertEqual(url?.pathComponents.count, 3)
+        XCTAssertEqual(url?.pathComponents.prefix(upTo: 2), ["/", "yp"])
+        XCTAssertEqual(url.map { url in
+            Set(url.lastPathComponent
+                .split(separator: ",")
+                .map(String.init(_:))
+                .compactMap({ formatter.number(from: $0)?.intValue }))
+            },
                        selectedSlots)
-        XCTAssertEqual(url.queryValues(for: "content"), ["json"])
-        XCTAssertEqual(url.queryValues(for: "pvid"), ["true"])
-        XCTAssertEqual(url.queryValues(for: "sdk"), ["1"])
+        XCTAssertEqual(url?.queryValues(for: "content"), ["json"])
+        XCTAssertEqual(url?.queryValues(for: "pvid"), ["true"])
+        XCTAssertEqual(url?.queryValues(for: "sdk"), ["1"])
     }
     
     func testTooManySlots () {
@@ -155,11 +152,7 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        http.calls.first?.process { url in
-            XCTAssertEqual(url.queryValues(for: "pubappname"), ["Amazing App"])
-            
-            throw URLError(.notConnectedToInternet)
-        }
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "pubappname"), ["Amazing App"])
     }
     
     func testBundleID () {
@@ -170,15 +163,13 @@ class YieldprobeTests: XCTestCase {
         sut.configure(using: configuration)
         
         // Act:
-        sut.probe(slot: 1234) { _ in }
+        sut.probe(slot: 1234) { _ in
+            XCTFail("Should not be called")
+        }
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        http.calls.first?.process { url in
-            XCTAssertEqual(url.queryValues(for: "pubbundlename"), ["com.example.some-test"])
-            
-            throw URLError(.notConnectedToInternet)
-        }
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "pubbundlename"), ["com.example.some-test"])
     }
     
     func testCacheBusting () {
@@ -196,21 +187,11 @@ class YieldprobeTests: XCTestCase {
         // Assert:
         XCTAssertEqual(http.calls.count, 3)
         for (i, call) in http.calls.enumerated() {
-            guard case .get(let url, _) = call else {
-                XCTFail("unexpected call: \(call)")
-                continue
-            }
-            let ts = url.queryValues(for: "ts")
+            let ts = call.url.queryValues(for: "ts")
             XCTAssert(!ts.isEmpty)
             for call in http.calls[(i + 1)...] {
-                guard case .get(let url, _) = call else {
-                    XCTFail("unexpected call: \(call)")
-                    continue
-                }
-                
-                XCTAssert(!ts.isEmpty)
-                XCTAssert(!url.queryValues(for: "ts").isEmpty)
-                XCTAssertNotEqual(url.queryValues(for: "ts"), ts)
+                XCTAssert(!call.url.queryValues(for: "ts").isEmpty)
+                XCTAssertNotEqual(call.url.queryValues(for: "ts"), ts)
             }
         }
     }
@@ -228,10 +209,7 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard case .some(.get(let url, _)) = http.calls.first else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        XCTAssertEqual(url.queryValues(for: "yl_rtb_connectiontype"), ["2"])
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "yl_rtb_connectiontype"), ["2"])
     }
     
     func testConsentString () {
@@ -248,10 +226,7 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard case .some(.get(let url, _)) = http.calls.first else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        XCTAssertEqual(url.queryValues(for: "consent"), [consentString])
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "consent"), [consentString])
     }
     
     func testDeviceType () {
@@ -266,12 +241,9 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard case .some(.get(let url, _)) = http.calls.first else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        let deviceType = url.queryValues(for: "yl_rtb_devicetype")
+        let deviceType = http.calls.first?.url.queryValues(for: "yl_rtb_devicetype")
         XCTAssertTrue(deviceType == ["4"] || deviceType == ["5"],
-                      "Unexpected device type: \(deviceType)")
+                      "Unexpected device type: \(deviceType as Any)")
     }
     
     func testExtraTargeting () {
@@ -282,15 +254,13 @@ class YieldprobeTests: XCTestCase {
         sut.configure(using: configuration)
         
         // Act:
-        sut.probe(slot: 1234) { _ in }
+        sut.probe(slot: 1234) { _ in
+            XCTFail("Should not be called.")
+        }
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        http.calls.first?.process { url in
-            XCTAssertEqual(url.queryValues(for: "t"), ["key=value"])
-            
-            throw Yieldprobe.Error.noFill
-        }
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "t"), ["key=value"])
     }
     
     func testGeolocation () {
@@ -321,11 +291,9 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard case .some(.get(let url, _)) = http.calls.first else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        XCTAssertEqual(url.queryValues(for: "lat"), ["53.557038"])
-        XCTAssertEqual(url.queryValues(for: "lng"), ["9.990018"])
+        let url = http.calls.first?.url
+        XCTAssertEqual(url?.queryValues(for: "lat"), ["53.557038"])
+        XCTAssertEqual(url?.queryValues(for: "lng"), ["9.990018"])
     }
     
     func testIDFA () {
@@ -341,10 +309,7 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard case .some(.get(let url, _)) = http.calls.first else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        XCTAssertEqual(url.queryValues(for: "yl_rtb_ifa"),
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "yl_rtb_ifa"),
                        [idfaSource.advertisingIdentifier.uuidString])
     }
     
@@ -364,10 +329,7 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard let call = http.calls.first, case .get(let url, _) = call else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        XCTAssertEqual(url.queryValues(for: "yl_rtb_connectiontype"), [])
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "yl_rtb_connectiontype"), [])
     }
     
     func testNPADisablesDeviceType () {
@@ -383,10 +345,7 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard let call = http.calls.first, case .get(let url, _) = call else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        XCTAssertEqual(url.queryValues(for: "yl_rtb_devicetype"), [])
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "yl_rtb_devicetype"), [])
     }
     
     func testNPADisablesIDFA () {
@@ -404,10 +363,7 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard let call = http.calls.first, case .get(let url, _) = call else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        XCTAssertEqual(url.queryValues(for: "yl_rtb_ifa"), [])
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "yl_rtb_ifa"), [])
     }
     
     func testNPADisablesLocation () {
@@ -438,11 +394,8 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
-        guard let call = http.calls.first, case .get(let url, _) = call else {
-            return XCTFail("Unexpected call: \(http.calls.first as Any)")
-        }
-        XCTAssertEqual(url.queryValues(for: "lat"), [])
-        XCTAssertEqual(url.queryValues(for: "lng"), [])
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "lat"), [])
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "lng"), [])
     }
     
     // MARK: Response Handling

@@ -10,24 +10,53 @@ import XCTest
 
 class HTTPMock: HTTPClient {
     
-    enum Call: HTTPRequest {
+    class Call: HTTPRequest {
         
-        case get(URL, DispatchQueue, CompletionHandler)
+        enum Method {
+            case get
+        }
         
-        var url: URL {
-            switch self {
-            case .get(let url, _, _):
-                return url
-            }
+        enum State {
+            case pending(DispatchQueue, CompletionHandler)
+            case completed
+            case cancelled
+        }
+        
+        static func get(url: URL, queue: DispatchQueue, completionHandler: @escaping CompletionHandler)
+            -> Call
+        {
+            Call(method: .get,
+                 url: url,
+                 state: .pending(queue, completionHandler))
+        }
+        
+        var method: Method
+        
+        var url: URL
+        
+        var state: State
+        
+        init(method: Method, url: URL, state: State) {
+            self.method = method
+            self.state = state
+            self.url = url
         }
         
         func cancel () {
-            fatalError()
+            guard case .pending = state else {
+                fatalError("Unexpected state: \(state)")
+            }
+            state = .cancelled
         }
         
         func process(_ processor: (URL) throws -> URLReply) {
-            switch self {
-            case .get(let url, let queue, let completionHandler):
+            guard case .pending(let queue, let completionHandler) = state else {
+                fatalError("Unexpected state: \(state)")
+            }
+            state = .completed
+            
+            switch method {
+            case .get:
                 let result = Result {
                     try processor(url)
                 }
@@ -42,7 +71,7 @@ class HTTPMock: HTTPClient {
     var calls = [Call]()
     
     func get(url: URL, queue: DispatchQueue, completionHandler: @escaping CompletionHandler) -> HTTPRequest {
-        let request = Call.get(url, queue, completionHandler)
+        let request = Call.get(url: url, queue: queue, completionHandler: completionHandler)
         calls.append(request)
         return request
     }

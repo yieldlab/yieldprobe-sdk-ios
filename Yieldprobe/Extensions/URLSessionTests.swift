@@ -29,6 +29,10 @@ class SpyURLSession: URLSessionProtocol {
             self.url = url
         }
         
+        func cancel () {
+            fatalError()
+        }
+        
         func complete (data: Data, response: URLResponse) {
             precondition(state == .resumed)
             state = .completed

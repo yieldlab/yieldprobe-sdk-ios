@@ -11,6 +11,7 @@ import XCTest
 class HTTPMock: HTTPClient {
     
     enum Call: HTTPRequest {
+        
         case get(URL, DispatchQueue, CompletionHandler)
         
         var url: URL {
@@ -18,6 +19,10 @@ class HTTPMock: HTTPClient {
             case .get(let url, _, _):
                 return url
             }
+        }
+        
+        func cancel () {
+            fatalError()
         }
         
         func process(_ processor: (URL) throws -> URLReply) {

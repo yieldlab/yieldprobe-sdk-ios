@@ -31,4 +31,8 @@ extension HTTPClient {
     
 }
 
-protocol HTTPRequest {}
+protocol HTTPRequest {
+    
+    func cancel()
+    
+}

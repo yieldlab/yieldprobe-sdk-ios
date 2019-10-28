@@ -22,10 +22,10 @@ class HTTPRecorder<T: HTTPClient> {
 
 extension HTTPRecorder: HTTPClient {
     
-    func get(url: URL, completionHandler: @escaping CompletionHandler) {
-        wrapped.get(url: url, completionHandler: completionHandler)
-        
+    func get(url: URL, completionHandler: @escaping CompletionHandler) -> HTTPRequest {
+        let request = wrapped.get(url: url, completionHandler: completionHandler)
         onRequest(url)
+        return request
     }
     
 }

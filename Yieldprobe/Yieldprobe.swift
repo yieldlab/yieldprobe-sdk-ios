@@ -159,7 +159,7 @@ public class Yieldprobe: NSObject {
         let url = baseURL
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
             .decorate(appNameDecorator, bundleIDDecorator, cacheBuster, connectivity, consent, deviceTypeDecorator, extraTargetingDecorator, locationDecorator, idfaDecorator)
-        http.get(url: url) { result in
+        _ = http.get(url: url) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()
                 

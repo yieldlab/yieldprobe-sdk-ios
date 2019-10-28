@@ -19,6 +19,8 @@ protocol HTTPClient {
     
     typealias CompletionHandler = (Result<URLReply,Error>) -> Void
     
-    func get (url: URL, completionHandler: @escaping CompletionHandler)
+    func get (url: URL, completionHandler: @escaping CompletionHandler) -> HTTPRequest
     
 }
+
+protocol HTTPRequest {}

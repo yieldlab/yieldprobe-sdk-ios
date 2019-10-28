@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DataTaskProtocol {
+protocol DataTaskProtocol: HTTPRequest {
     
     func resume()
     
@@ -23,8 +23,8 @@ protocol URLSessionProtocol: HTTPClient {
 
 extension URLSessionProtocol {
     
-    func get(url: URL, completionHandler: @escaping HTTPClient.CompletionHandler) {
-        dataTask(with: url, completionHandler: { data, response, error in
+    func get(url: URL, completionHandler: @escaping HTTPClient.CompletionHandler) -> HTTPRequest {
+        let task = dataTask(with: url, completionHandler: { data, response, error in
             completionHandler(Result(catching: { () -> URLReply in
                 guard let data = data, let response = response else {
                     throw error!
@@ -32,7 +32,9 @@ extension URLSessionProtocol {
                 
                 return URLReply(data: data, response: response)
             }))
-        }).resume()
+        })
+        task.resume()
+        return task
     }
     
 }

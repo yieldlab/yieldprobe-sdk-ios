@@ -10,7 +10,7 @@ import XCTest
 
 class HTTPMock: HTTPClient {
     
-    enum Call {
+    enum Call: HTTPRequest {
         case get(URL, CompletionHandler)
         
         func process(_ processor: (URL) throws -> URLReply) {
@@ -23,8 +23,10 @@ class HTTPMock: HTTPClient {
     
     var calls = [Call]()
     
-    func get(url: URL, completionHandler: @escaping CompletionHandler) {
-        calls.append(.get(url, completionHandler))
+    func get(url: URL, completionHandler: @escaping CompletionHandler) -> HTTPRequest {
+        let request = Call.get(url, completionHandler)
+        calls.append(request)
+        return request
     }
     
 }

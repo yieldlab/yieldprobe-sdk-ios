@@ -68,7 +68,7 @@ class URLSessionTests: XCTestCase {
         let sut = SpyURLSession()
         
         // Act:
-        sut.get(url: url) { result in
+        _ = sut.get(url: url) { result in
             XCTFail("not reached")
         }
         
@@ -86,7 +86,7 @@ class URLSessionTests: XCTestCase {
         var result: Result<URLReply,Error>? = nil
         
         // Act:
-        sut.get(url: .example) { _result in
+        _ = sut.get(url: .example) { _result in
             XCTAssertNil(result)
             result = _result
         }
@@ -106,7 +106,7 @@ class URLSessionTests: XCTestCase {
         var result: Result<URLReply, Error>? = nil
         
         // Act:
-        sut.get(url: .example) { _result in
+        _ = sut.get(url: .example) { _result in
             XCTAssertNil(result)
             result = _result
         }

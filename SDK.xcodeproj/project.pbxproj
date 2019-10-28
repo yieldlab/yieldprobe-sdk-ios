@@ -48,6 +48,7 @@
 		915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8ADC234389BA00746E7E /* URLSession+YLD.swift */; };
 		915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE023438BAD00746E7E /* YieldprobeTests.swift */; };
 		915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915C8AE223438C0800746E7E /* HTTPMock.swift */; };
+		916223762366DC7600795C40 /* XCTest+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916223752366DC7600795C40 /* XCTest+YLD.swift */; };
 		917488F3235EEAA20099ECDD /* BundleIDDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917488F2235EEAA20099ECDD /* BundleIDDecorator.swift */; };
 		917488F5235EEB3A0099ECDD /* BundleIDDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917488F4235EEB3A0099ECDD /* BundleIDDecoratorTests.swift */; };
 		91793D4A234C6E04004DB72D /* DeviceTypeDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */; };
@@ -57,12 +58,14 @@
 		91793D52234CB0D6004DB72D /* ConnectivityDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D51234CB0D6004DB72D /* ConnectivityDecorator.swift */; };
 		91793D54234CB0E7004DB72D /* ConnectivityDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91793D53234CB0E7004DB72D /* ConnectivityDecoratorTests.swift */; };
 		9184845223561CF30040C53E /* CacheBusterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9184845123561CF30040C53E /* CacheBusterTests.swift */; };
+		919305802368453E00B4EB87 /* Dispatch+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9193057F2368453E00B4EB87 /* Dispatch+YLD.swift */; };
 		91AA09372356227D00D521D8 /* Collection+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AA09362356227D00D521D8 /* Collection+YLD.swift */; };
 		91ACB8C42355D884002FD908 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ACB8C32355D884002FD908 /* SwitchCell.swift */; };
 		91ACB8C62355ECAA002FD908 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 91ACB8C52355ECAA002FD908 /* Settings.bundle */; };
 		91B283B5234DB6770055DB7F /* DefaultConnectivitySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B283B4234DB6770055DB7F /* DefaultConnectivitySource.swift */; };
 		91B283B7234DB72B0055DB7F /* DefaultConnectivitySourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B283B6234DB72B0055DB7F /* DefaultConnectivitySourceTests.swift */; };
 		91B283B9234DC1520055DB7F /* NWPathMonitor+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B283B8234DC1520055DB7F /* NWPathMonitor+YLD.swift */; };
+		91BB8F382357036E00D01816 /* HTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BB8F372357036E00D01816 /* HTTPClientTests.swift */; };
 		91C40883234F2AAC00D0DC71 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C40882234F2AAC00D0DC71 /* Configuration.swift */; };
 		91C40885234F30B800D0DC71 /* PIIDDecoratorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C40884234F30B800D0DC71 /* PIIDDecoratorFilter.swift */; };
 		91C40887234F7EFE00D0DC71 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C40886234F7EFE00D0DC71 /* Bid.swift */; };
@@ -162,6 +165,7 @@
 		915C8ADC234389BA00746E7E /* URLSession+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+YLD.swift"; sourceTree = "<group>"; };
 		915C8AE023438BAD00746E7E /* YieldprobeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YieldprobeTests.swift; sourceTree = "<group>"; };
 		915C8AE223438C0800746E7E /* HTTPMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMock.swift; sourceTree = "<group>"; };
+		916223752366DC7600795C40 /* XCTest+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+YLD.swift"; sourceTree = "<group>"; };
 		917488F2235EEAA20099ECDD /* BundleIDDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleIDDecorator.swift; sourceTree = "<group>"; };
 		917488F4235EEB3A0099ECDD /* BundleIDDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleIDDecoratorTests.swift; sourceTree = "<group>"; };
 		91793D49234C6E04004DB72D /* DeviceTypeDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeDecorator.swift; sourceTree = "<group>"; };
@@ -171,12 +175,14 @@
 		91793D51234CB0D6004DB72D /* ConnectivityDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityDecorator.swift; sourceTree = "<group>"; };
 		91793D53234CB0E7004DB72D /* ConnectivityDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityDecoratorTests.swift; sourceTree = "<group>"; };
 		9184845123561CF30040C53E /* CacheBusterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheBusterTests.swift; sourceTree = "<group>"; };
+		9193057F2368453E00B4EB87 /* Dispatch+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatch+YLD.swift"; sourceTree = "<group>"; };
 		91AA09362356227D00D521D8 /* Collection+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+YLD.swift"; sourceTree = "<group>"; };
 		91ACB8C32355D884002FD908 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		91ACB8C52355ECAA002FD908 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		91B283B4234DB6770055DB7F /* DefaultConnectivitySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultConnectivitySource.swift; sourceTree = "<group>"; };
 		91B283B6234DB72B0055DB7F /* DefaultConnectivitySourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultConnectivitySourceTests.swift; sourceTree = "<group>"; };
 		91B283B8234DC1520055DB7F /* NWPathMonitor+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+YLD.swift"; sourceTree = "<group>"; };
+		91BB8F372357036E00D01816 /* HTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTests.swift; sourceTree = "<group>"; };
 		91C40882234F2AAC00D0DC71 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		91C40884234F30B800D0DC71 /* PIIDDecoratorFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIIDDecoratorFilter.swift; sourceTree = "<group>"; };
 		91C40886234F7EFE00D0DC71 /* Bid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
@@ -245,6 +251,7 @@
 				915C8A7823437B4500746E7E /* CanaryTests.swift */,
 				915C8AE223438C0800746E7E /* HTTPMock.swift */,
 				915C8A7A23437B4500746E7E /* Info.plist */,
+				916223752366DC7600795C40 /* XCTest+YLD.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -275,6 +282,7 @@
 				915C8AAD234384FC00746E7E /* Info.plist */,
 				915618C7234B257A00D5F530 /* HighPrecisionClock.swift */,
 				915C8ADA2343897600746E7E /* HTTPClient.swift */,
+				91BB8F372357036E00D01816 /* HTTPClientTests.swift */,
 				915618E1234B954800D5F530 /* IDFADecorator.swift */,
 				915618E3234B956E00D5F530 /* IDFADecoratorTests.swift */,
 				915618DB234B483400D5F530 /* LocationDecorator.swift */,
@@ -324,6 +332,7 @@
 			children = (
 				915618E5234B973600D5F530 /* ASIdentifierManager+YLD.swift */,
 				915618DF234B6FC100D5F530 /* CLLocationManager+YLD.swift */,
+				9193057F2368453E00B4EB87 /* Dispatch+YLD.swift */,
 				91B283B8234DC1520055DB7F /* NWPathMonitor+YLD.swift */,
 				91264F372350C6160012D871 /* Result+YLD.swift */,
 				91264F392350C7E60012D871 /* ResultTests.swift */,
@@ -503,6 +512,7 @@
 				91AA09372356227D00D521D8 /* Collection+YLD.swift in Sources */,
 				91C4088923507B9A00D0DC71 /* BidTests.swift in Sources */,
 				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
+				916223762366DC7600795C40 /* XCTest+YLD.swift in Sources */,
 				917488F5235EEB3A0099ECDD /* BundleIDDecoratorTests.swift in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
 				91793D4C234C6E12004DB72D /* DeviceTypeDecoratorTests.swift in Sources */,
@@ -516,6 +526,7 @@
 				91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */,
 				915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */,
 				915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */,
+				91BB8F382357036E00D01816 /* HTTPClientTests.swift in Sources */,
 				915618D2234B30F600D5F530 /* ConsentDecoratorTests.swift in Sources */,
 				913A5819235F176600440DB1 /* AppNameDecoratorTests.swift in Sources */,
 				91793D54234CB0E7004DB72D /* ConnectivityDecoratorTests.swift in Sources */,
@@ -530,6 +541,7 @@
 				913A581B235F17E500440DB1 /* AppNameDecorator.swift in Sources */,
 				915618DC234B483400D5F530 /* LocationDecorator.swift in Sources */,
 				915618D6234B3DDF00D5F530 /* URL+YLD.swift in Sources */,
+				919305802368453E00B4EB87 /* Dispatch+YLD.swift in Sources */,
 				91B283B9234DC1520055DB7F /* NWPathMonitor+YLD.swift in Sources */,
 				915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */,
 				915618C8234B257A00D5F530 /* HighPrecisionClock.swift in Sources */,

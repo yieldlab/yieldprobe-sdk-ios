@@ -44,14 +44,14 @@ class HTTPMock: HTTPClient {
         
         func cancel () {
             guard case .pending = state else {
-                fatalError("Unexpected state: \(state)")
+                return
             }
             state = .cancelled
         }
         
         func process(_ processor: (URL) throws -> URLReply) {
             guard case .pending(let queue, let completionHandler) = state else {
-                fatalError("Unexpected state: \(state)")
+                return
             }
             state = .completed
             

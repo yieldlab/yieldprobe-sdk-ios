@@ -19,7 +19,15 @@ protocol HTTPClient {
     
     typealias CompletionHandler = (Result<URLReply,Error>) -> Void
     
-    func get (url: URL, completionHandler: @escaping CompletionHandler) -> HTTPRequest
+    func get (url: URL, queue: DispatchQueue, completionHandler: @escaping CompletionHandler) -> HTTPRequest
+    
+}
+
+extension HTTPClient {
+    
+    func get (url: URL, completionHandler: @escaping CompletionHandler) -> HTTPRequest {
+        return get(url: url, queue: .global(), completionHandler: completionHandler)
+    }
     
 }
 

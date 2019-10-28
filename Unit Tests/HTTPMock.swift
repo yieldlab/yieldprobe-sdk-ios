@@ -11,27 +11,33 @@ import XCTest
 class HTTPMock: HTTPClient {
     
     enum Call: HTTPRequest {
-        case get(URL, CompletionHandler)
+        case get(URL, DispatchQueue, CompletionHandler)
         
         var url: URL {
             switch self {
-            case .get(let url, _):
+            case .get(let url, _, _):
                 return url
             }
         }
         
         func process(_ processor: (URL) throws -> URLReply) {
             switch self {
-            case .get(let url, let completionHandler):
-                completionHandler(Result(catching: { try processor(url) }))
+            case .get(let url, let queue, let completionHandler):
+                let result = Result {
+                    try processor(url)
+                }
+                
+                queue.async {
+                    completionHandler(result)
+                }
             }
         }
     }
     
     var calls = [Call]()
     
-    func get(url: URL, completionHandler: @escaping CompletionHandler) -> HTTPRequest {
-        let request = Call.get(url, completionHandler)
+    func get(url: URL, queue: DispatchQueue, completionHandler: @escaping CompletionHandler) -> HTTPRequest {
+        let request = Call.get(url, queue, completionHandler)
         calls.append(request)
         return request
     }

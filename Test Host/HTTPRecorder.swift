@@ -22,8 +22,8 @@ class HTTPRecorder<T: HTTPClient> {
 
 extension HTTPRecorder: HTTPClient {
     
-    func get(url: URL, completionHandler: @escaping CompletionHandler) -> HTTPRequest {
-        let request = wrapped.get(url: url, completionHandler: completionHandler)
+    func get(url: URL, queue: DispatchQueue, completionHandler: @escaping CompletionHandler) -> HTTPRequest {
+        let request = wrapped.get(url: url, queue: queue, completionHandler: completionHandler)
         onRequest(url)
         return request
     }

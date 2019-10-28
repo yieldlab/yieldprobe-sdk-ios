@@ -23,15 +23,19 @@ protocol URLSessionProtocol: HTTPClient {
 
 extension URLSessionProtocol {
     
-    func get(url: URL, completionHandler: @escaping HTTPClient.CompletionHandler) -> HTTPRequest {
+    func get(url: URL, queue: DispatchQueue, completionHandler: @escaping HTTPClient.CompletionHandler) -> HTTPRequest {
         let task = dataTask(with: url, completionHandler: { data, response, error in
-            completionHandler(Result(catching: { () -> URLReply in
+            let result = Result { () -> URLReply in
                 guard let data = data, let response = response else {
                     throw error!
                 }
                 
                 return URLReply(data: data, response: response)
-            }))
+            }
+            
+            queue.async {
+                completionHandler(result)
+            }
         })
         task.resume()
         return task

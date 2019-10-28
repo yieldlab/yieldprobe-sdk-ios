@@ -81,18 +81,23 @@ class URLSessionTests: XCTestCase {
     func testGetSuccess () throws {
         // Arrange:
         let data = Data()
+        var expectation: Optional = self.expectation(description: "async response dispatch")
         let response = URLResponse()
-        let sut = SpyURLSession()
         var result: Result<URLReply,Error>? = nil
+        let sut = SpyURLSession()
         
         // Act:
         _ = sut.get(url: .example) { _result in
             XCTAssertNil(result)
             result = _result
+            
+            expectation?.fulfill()
+            expectation = nil
         }
         sut.calls.first?.complete(data: data, response: response)
         
         // Assert:
+        wait(for: [expectation!], timeout: 0.1)
         XCTAssertNotNil(result)
         let reply = try result?.get()
         XCTAssertEqual(reply?.data, data)
@@ -102,25 +107,28 @@ class URLSessionTests: XCTestCase {
     func testGetFailure () {
         // Arrange:
         let error = URLError(.notConnectedToInternet)
-        let sut = SpyURLSession()
+        var expectation: Optional = self.expectation(description: "async response dispatch")
         var result: Result<URLReply, Error>? = nil
-        
+        let sut = SpyURLSession()
+
         // Act:
         _ = sut.get(url: .example) { _result in
             XCTAssertNil(result)
             result = _result
+            
+            expectation?.fulfill()
+            expectation = nil
         }
-        sut.calls.first?.fail(with: error)
+        DispatchQueue.main.async {
+            // Dispatch for `wait()` to be called before completion.
+            sut.calls.first?.fail(with: error)
+        }
         
         // Arrange:
+        wait(for: [expectation!], timeout: 0.1)
         XCTAssertNotNil(result)
-        do {
-            _ = try result?.get()
-            XCTFail("Should not be executed.")
-        } catch URLError.notConnectedToInternet {
-            XCTAssert(true, "passed")
-        } catch {
-            XCTFail("Unexpected error: \(error)")
+        XCTAssertThrowsError(try result?.get()) { caught in
+            XCTAssertEqual(caught as? URLError, error)
         }
     }
     

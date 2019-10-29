@@ -119,10 +119,11 @@ public class Yieldprobe: NSObject {
     // MARK: Bid Requests
     
     public func probe (slot slotID: Int,
+                       timeout: TimeInterval? = nil,
                        queue: DispatchQueue? = nil,
                        completionHandler: @escaping (Result<Bid,Swift.Error>) -> Void)
     {
-        probe(slots: [slotID], queue: queue) { result in
+        probe(slots: [slotID], timeout: timeout, queue: queue) { result in
             completionHandler(result.tryMap {
                 guard let result = $0.first else {
                     throw Error.noFill
@@ -134,11 +135,14 @@ public class Yieldprobe: NSObject {
     }
     
     func probe (slots: Set<Int>,
+                timeout: TimeInterval? = nil,
                 queue: DispatchQueue? = nil,
                 completionHandler: @escaping (Result<[Bid],Swift.Error>) -> Void)
     {
         let queue = queue ?? .main
-        
+        let timeout = timeout ?? 5
+        precondition(timeout >= 0, "\(#function): The timeout interval must be positive.")
+
         guard !slots.isEmpty else {
             return queue.async {
                 completionHandler(Result {
@@ -159,7 +163,7 @@ public class Yieldprobe: NSObject {
         let url = baseURL
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
             .decorate(appNameDecorator, bundleIDDecorator, cacheBuster, connectivity, consent, deviceTypeDecorator, extraTargetingDecorator, locationDecorator, idfaDecorator)
-        _ = http.get(url: url) { result in
+        _ = http.get(url: url, timeout: timeout) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()
                 

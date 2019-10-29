@@ -400,6 +400,29 @@ class YieldprobeTests: XCTestCase {
     
     // MARK: Response Handling
     
+    func testTimeout () {
+        // Arrange:
+        var caught: Result<Bid,Error>?
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http)
+        
+        // Act:
+        await { done in
+            sut.probe(slot: 1234, timeout: 0.000_000_001) { result in
+                XCTAssertNil(caught)
+                caught = result
+                
+                done()
+            }
+        }
+        
+        // Assert:
+        XCTAssertNotNil(caught)
+        XCTAssertThrowsError(caught?.get) { error in
+            XCTAssertEqual(error as? URLError, URLError(.timedOut))
+        }
+    }
+    
     func testResponseNetworkError () {
         // Arrange:
         var expectation: Optional = self.expectation(description: "Async HTTP Call")

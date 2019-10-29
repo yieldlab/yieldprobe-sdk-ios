@@ -98,7 +98,9 @@ class URLSessionTests: XCTestCase {
             expectation?.fulfill()
             expectation = nil
         }
-        sut.calls.first?.complete(data: data, response: response)
+        DispatchQueue.main.async {
+            sut.calls.first?.complete(data: data, response: response)
+        }
         
         // Assert:
         wait(for: [expectation!], timeout: 0.1)

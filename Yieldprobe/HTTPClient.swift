@@ -54,23 +54,27 @@ extension HTTPClient {
         var completion: CompletionHandler? = completionHandler
         var request: HTTPRequest?
         
-        let source = DispatchSource.makeTimerSource(queue: timeoutQueue)
-        source.setEventHandler {
-            #if DEBUG
-            dispatchPrecondition(condition: .onQueue(timeoutQueue))
-            #endif
-            
-            if let completionHandler = completion {
-                completion = nil
-                queue.async {
-                    completionHandler(.failure(URLError(.timedOut)))
+        var timer: DispatchSourceTimer?
+        if timeout > 0 {
+            let source = DispatchSource.makeTimerSource(queue: timeoutQueue)
+            source.setEventHandler {
+                #if DEBUG
+                dispatchPrecondition(condition: .onQueue(timeoutQueue))
+                #endif
+                
+                if let completionHandler = completion {
+                    completion = nil
+                    queue.async {
+                        completionHandler(.failure(URLError(.timedOut)))
+                    }
                 }
+                
+                request?.cancel()
             }
-            
-            request?.cancel()
+            source.schedule(deadline: .now() + timeout)
+            source.activate()
+            timer = source
         }
-        source.schedule(deadline: .now() + timeout)
-        source.activate()
         
         request = get(url: url, queue: timeoutQueue) { result in
             #if DEBUG
@@ -84,7 +88,7 @@ extension HTTPClient {
                 }
             }
             
-            source.cancel()
+            timer?.cancel()
         }
     }
     

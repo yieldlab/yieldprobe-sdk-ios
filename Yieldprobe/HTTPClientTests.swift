@@ -25,7 +25,7 @@ class HTTPClientTests: XCTestCase {
             }
             
             await { done in
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(1)) {
                     sut.calls.first?.process { url in
                         URLReply(data: Data(),
                                  response: HTTPURLResponse(url: url,
@@ -69,6 +69,34 @@ class HTTPClientTests: XCTestCase {
         // Assert:
         wait(for: [expectation!], timeout: 0.1)
         expectation = nil
+        XCTAssertEqual(caught.count, 1)
+        XCTAssertThrowsError(caught.first?.get) { thrown in
+            XCTAssertEqual(thrown as? URLError, error)
+        }
+    }
+    
+    func testZeroTimeoutMeansIndefinitely () {
+        // Arrange:
+        var caught = [Result<URLReply,Error>]()
+        let error = URLError(.notConnectedToInternet)
+        let sut = HTTPMock()
+        
+        // Act:
+        await { done in
+            sut.get(url: .example, timeout: 0) { result in
+                caught.append(result)
+                
+                done()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(1)) {
+                sut.calls.first?.process { url in
+                    throw error
+                }
+            }
+        }
+        
+        // Assert:
         XCTAssertEqual(caught.count, 1)
         XCTAssertThrowsError(caught.first?.get) { thrown in
             XCTAssertEqual(thrown as? URLError, error)

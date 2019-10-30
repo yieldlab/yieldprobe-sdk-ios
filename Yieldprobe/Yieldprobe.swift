@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// The Yieldprobe SDK.
+///
+/// Use this class to request bids from Yieldprobe.
 @available(swift, introduced: 5.0)
 public class Yieldprobe: NSObject {
     
@@ -34,6 +37,9 @@ public class Yieldprobe: NSObject {
 
     // MARK: Class Properties
     
+    /// Yieldprobe Singleton
+    ///
+    /// Use this instance to communicate with the Yieldprobe API.
     @objc(sharedInstance)
     public static let shared = Yieldprobe()
     
@@ -72,6 +78,9 @@ public class Yieldprobe: NSObject {
     
     private(set) var locationDecorator: PIIDDecoratorFilter<LocationDecorator>
     
+    /// Yieldprobe SDK Version
+    ///
+    /// This property will return the version of the current Yieldprobe iOS SDK.
     public var sdkVersion: String {
         Bundle(for: Self.self)
             .object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
@@ -123,6 +132,16 @@ public class Yieldprobe: NSObject {
     
     // MARK: Bid Requests
     
+    /// Request a Bid from Yieldprobe for the specified ad slot ID.
+    ///
+    /// This method will perform an HTTP request to fetch the most recent bid for the ad slot identified by `slotID`.
+    ///
+    /// - Parameters:
+    ///   - slotID: The ad slot ID used to request a bid.
+    ///   - timeout: (*optional*) The maximum time interval to deliver an ad.
+    ///   - queue: (*optional*) The target DispatchQueue for the completion handler.
+    ///   - completionHandler: The code that will be invoked when a request was either successful or failed. Parameters:
+    ///     - result: The result of the bid. Use `try result.get()` to access the bid and handle any errors thrown.
     public func probe (slot slotID: Int,
                        timeout: TimeInterval? = nil,
                        queue: DispatchQueue? = nil,
@@ -229,7 +248,16 @@ extension Yieldprobe {
     
     // MARK: - Objective-C Compatibility
     
-    /// Probe for a bid.
+    /// Request a bid for a specific ad slot ID.
+    ///
+    /// @slotID: Sliff.
+    ///
+    /// - Parameters:
+    ///   - slotID: The ad slot ID for the bid request.
+    ///   - queue: The target queue for `completionHandler`.
+    ///   - completionHandler: The block to be invoked when the request is complete. Parameters:
+    ///       - bid: Successful requests will pass an instance of `YLDBid`.
+    ///       - error: Faild requests will pass an instance of `NSError`.
     ///
     /// Note: `Yieldprobe` will always provide `nil` for exactly one of the two completion handler
     /// arguments.

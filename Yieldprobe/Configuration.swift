@@ -19,14 +19,10 @@ public struct Configuration {
     /// Default: `nil`
     public var bundleID: String?
     
-    /// Specify whether Yieldprobe should use Geolocation data.
+    /// Additional targeting information that will be present the each bid probe request.
     ///
-    /// If `false`, Yieldprobe will not try to access geolocation information, even if it is available to the
-    /// application. If `true`, Yieldprobe will try to access geolocation information only if the app already
-    /// has access to it. Yieldprobe will not cause location permission prompts in your application.
-    ///
-    /// Default: `true`
-    public var useGeolocation: Bool
+    /// Default: Empty.
+    public var extraTargeting: [String: String]
     
     /// Specify whether Yieldprobe should use personal information.
     ///
@@ -36,12 +32,21 @@ public struct Configuration {
     /// Default: `true`
     public var personalizeAds: Bool
     
+    /// Specify the app store URL for this app.
+    ///
+    /// If set, Yieldprobe will include this information in the request to allow for better targeting.
+    ///
+    /// Default: `nil`
     public var storeURL: URL?
     
-    /// Additional targeting information that will be present the each bid probe request.
+    /// Specify whether Yieldprobe should use Geolocation data.
     ///
-    /// Default: Empty.
-    var extraTargeting: [String: String]
+    /// If `false`, Yieldprobe will not try to access geolocation information, even if it is available to the
+    /// application. If `true`, Yieldprobe will try to access geolocation information only if the app already
+    /// has access to it. Yieldprobe will not cause location permission prompts in your application.
+    ///
+    /// Default: `true`
+    public var useGeolocation: Bool
     
     public init (appName: String? = nil,
                  bundleID: String? = nil,
@@ -63,8 +68,10 @@ public struct Configuration {
 @objc(YLDConfiguration)
 public class _ObjCConfiguration: NSObject {
     
-    var configuration = Configuration()
     
+    /// Specify the app name to be transmitted to Yieldprobe.
+    ///
+    /// Default: `nil`
     @available(swift, obsoleted: 1.0,
                message: "This is Objective-C compatibility API only.")
     @objc
@@ -77,6 +84,9 @@ public class _ObjCConfiguration: NSObject {
         }
     }
     
+    /// Specify a bundle ID to be transmitted to Yieldprobe.
+    ///
+    /// Default: `nil`
     @available(swift, obsoleted: 1.0,
                message: "This is Objective-C compatibility API only.")
     @objc
@@ -89,6 +99,9 @@ public class _ObjCConfiguration: NSObject {
         }
     }
     
+    /// Additional targeting information that will be present the each bid probe request.
+    ///
+    /// Default: Empty.
     @available(swift, obsoleted: 1.0,
                message: "This is Objective-C compatibility API only.")
     @objc
@@ -101,6 +114,12 @@ public class _ObjCConfiguration: NSObject {
         }
     }
     
+    /// Specify whether Yieldprobe should use personal information.
+    ///
+    /// If set to `NO`, personal information such as geolocation, IDFA, device type, and connection
+    /// type will not be sent over the network.
+    ///
+    /// Default: `YES`
     @available(swift, obsoleted: 1.0,
                message: "This is Objective-C compatibility API only.")
     @objc
@@ -113,6 +132,11 @@ public class _ObjCConfiguration: NSObject {
         }
     }
     
+    /// Specify the app store URL for this app.
+    ///
+    /// If set, Yieldprobe will include this information in the request to allow for better targeting.
+    ///
+    /// Default: `nil`
     @available(swift, obsoleted: 1.0,
                message: "This is Objective-C compatibility API only.")
     @objc
@@ -125,6 +149,13 @@ public class _ObjCConfiguration: NSObject {
         }
     }
     
+    /// Specify whether Yieldprobe should use Geolocation data.
+    ///
+    /// If `NO`, Yieldprobe will not try to access geolocation information, even if it is available to the
+    /// application. If `YES`, Yieldprobe will try to access geolocation information only if the app already
+    /// has access to it. Yieldprobe will not cause location permission prompts in your application.
+    ///
+    /// Default: `YES`
     @available(swift, obsoleted: 1.0,
                message: "This is Objective-C compatibility API only.")
     @objc
@@ -137,6 +168,9 @@ public class _ObjCConfiguration: NSObject {
         }
     }
     
+    var configuration = Configuration()
+    
+    /// Create a new configuration.
     @available(swift, obsoleted: 1.0)
     public override init() { }
     

@@ -36,7 +36,7 @@ public class Yieldprobe: NSObject {
     
     public static let shared = Yieldprobe()
     
-    static let defaultClient: HTTPClient = {
+    static let defaultClient: URLSession = {
         let configuration = URLSessionConfiguration.default
         return URLSession(configuration: configuration)
     }()

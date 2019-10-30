@@ -57,9 +57,7 @@ class ValidationViewController: UITableViewController {
     // MARK: - Object Life-Cycle
     
     required init?(coder: NSCoder) {
-        let configuration = URLSessionConfiguration.default
-        let session = URLSession(configuration: configuration)
-        http = HTTPRecorder(session)
+        http = HTTPRecorder(Yieldprobe.defaultClient)
         yieldprobe = Yieldprobe(http: http)
         
         super.init(coder: coder)

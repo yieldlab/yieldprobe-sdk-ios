@@ -211,6 +211,56 @@ public class Yieldprobe: NSObject {
     
 }
 
+/// Turn an Objective-C completion handler into a modern one using Swift 5's result type.
+private func modernize<Success>(_ legacy: @escaping (Success?, Swift.Error?) -> Void)
+    -> (Result<Success,Error>) -> Void
+{
+    return { result in
+        do {
+            let bid = try result.get()
+            return legacy(bid, nil)
+        } catch {
+            return legacy(nil, error)
+        }
+    }
+}
+
+extension Yieldprobe {
+    
+    // MARK: - Objective-C Compatibility
+    
+    /// Probe for a bid.
+    ///
+    /// Note: `Yieldprobe` will always provide `nil` for exactly one of the two completion handler
+    /// arguments.
+    @available(swift, obsoleted: 1.0,
+               message: "This is Objective-C compatibility API only.")
+    @objc
+    public func probe (slot slotID: Int,
+                       queue: DispatchQueue,
+                       completionHandler: @escaping (Bid?,Swift.Error?) -> Void)
+    {
+        probe(slot: slotID, queue: queue, completionHandler: modernize(completionHandler))
+    }
+    
+    /// Probe for a bid.
+    ///
+    /// This method is just a convenient replacement for `-probeWithSlot:queue:completionHandler:`.
+    /// The `completionHandler` will be called on the main queue.
+    ///
+    /// Note: `Yieldprobe` will always provide `nil` for exactly one of the two completion handler
+    /// arguments.
+    @available(swift, obsoleted: 1.0,
+               message: "This is Objective-C compatibility API only.")
+    @objc
+    public func probe (slot slotID: Int,
+                       completionHandler: @escaping (Bid?,Swift.Error?) -> Void)
+    {
+        probe(slot: slotID, queue: nil, completionHandler: modernize(completionHandler))
+    }
+    
+}
+
 extension Yieldprobe.Error: LocalizedError {
     
     public var errorDescription: String? {
@@ -223,7 +273,7 @@ extension Yieldprobe.Error: LocalizedError {
             return "No ad slot provided."
         case .tooManySlots:
             return "Too many ad slots provided."
-        case .unsupportedContentType(_):
+        case .unsupportedContentType:
             return "Server returned unexpected data format."
         case .unsupportedFormat:
             return "Server returned invalid data."

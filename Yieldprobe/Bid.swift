@@ -5,7 +5,10 @@
 //  Created by Sven Herzberg on 10.10.19.
 //
 
-public class Bid {
+import Foundation
+
+@objc(YLDBid)
+public class Bid: NSObject {
     
     var slotID: Int
     

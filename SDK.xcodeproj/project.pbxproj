@@ -71,6 +71,8 @@
 		91C40887234F7EFE00D0DC71 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C40886234F7EFE00D0DC71 /* Bid.swift */; };
 		91C4088923507B9A00D0DC71 /* BidTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C4088823507B9A00D0DC71 /* BidTests.swift */; };
 		91C4088B2350A42B00D0DC71 /* Set+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C4088A2350A42B00D0DC71 /* Set+YLD.swift */; };
+		91D7DF2023698CEF002FA2B4 /* AppStoreDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D7DF1F23698CEF002FA2B4 /* AppStoreDecorator.swift */; };
+		91D7DF2223698F31002FA2B4 /* AppStoreDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D7DF2123698F31002FA2B4 /* AppStoreDecoratorTests.swift */; };
 		91D8646923477BF4006E6563 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646823477BF4006E6563 /* URL+YLD.swift */; };
 		91D8646B234794DB006E6563 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8646A234794DB006E6563 /* URLSessionTests.swift */; };
 		91EC3898235462B4003B9831 /* ExampleSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EC3897235462B4003B9831 /* ExampleSlot.swift */; };
@@ -188,6 +190,8 @@
 		91C40886234F7EFE00D0DC71 /* Bid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
 		91C4088823507B9A00D0DC71 /* BidTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidTests.swift; sourceTree = "<group>"; };
 		91C4088A2350A42B00D0DC71 /* Set+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+YLD.swift"; sourceTree = "<group>"; };
+		91D7DF1F23698CEF002FA2B4 /* AppStoreDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreDecorator.swift; sourceTree = "<group>"; };
+		91D7DF2123698F31002FA2B4 /* AppStoreDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreDecoratorTests.swift; sourceTree = "<group>"; };
 		91D8646823477BF4006E6563 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
 		91D8646A234794DB006E6563 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 		91EC3897235462B4003B9831 /* ExampleSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSlot.swift; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 				915C8AD92343896600746E7E /* Extensions */,
 				913A581A235F17E500440DB1 /* AppNameDecorator.swift */,
 				913A5818235F176600440DB1 /* AppNameDecoratorTests.swift */,
+				91D7DF1F23698CEF002FA2B4 /* AppStoreDecorator.swift */,
+				91D7DF2123698F31002FA2B4 /* AppStoreDecoratorTests.swift */,
 				91C40886234F7EFE00D0DC71 /* Bid.swift */,
 				91C4088823507B9A00D0DC71 /* BidTests.swift */,
 				917488F2235EEAA20099ECDD /* BundleIDDecorator.swift */,
@@ -523,6 +529,7 @@
 				9184845223561CF30040C53E /* CacheBusterTests.swift in Sources */,
 				91793D50234CAA4A004DB72D /* UIDeviceTests.swift in Sources */,
 				91EF5DFD235752750048F06A /* ExtraTargetingDecoratorTests.swift in Sources */,
+				91D7DF2223698F31002FA2B4 /* AppStoreDecoratorTests.swift in Sources */,
 				91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */,
 				915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */,
 				915C8A7923437B4500746E7E /* CanaryTests.swift in Sources */,
@@ -549,6 +556,7 @@
 				91C40883234F2AAC00D0DC71 /* Configuration.swift in Sources */,
 				91793D52234CB0D6004DB72D /* ConnectivityDecorator.swift in Sources */,
 				915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */,
+				91D7DF2023698CEF002FA2B4 /* AppStoreDecorator.swift in Sources */,
 				915618E0234B6FC100D5F530 /* CLLocationManager+YLD.swift in Sources */,
 				915618D8234B3F1500D5F530 /* UserDefaults+YLD.swift in Sources */,
 				915618CC234B299C00D5F530 /* URLComponents+YLD.swift in Sources */,

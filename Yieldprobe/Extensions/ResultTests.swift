@@ -29,33 +29,33 @@ class ResultTests: XCTestCase {
         
         // Act:
         let result = sut.tryMap { _ in
-            throw Yieldprobe.Error.unsupportedFormat
+            throw BidError.unsupportedFormat
         }
         
         // Assert:
         XCTAssertThrowsError(try result.get()) { error in
-            XCTAssertEqual(error as? Yieldprobe.Error, .unsupportedFormat)
+            XCTAssertEqual(error as? BidError, .unsupportedFormat)
         }
     }
     
     func testTryMapFailure () {
         // Arrange:
-        let sut = Result<[String],Error>.failure(Yieldprobe.Error.noFill)
+        let sut = Result<[String],Error>.failure(BidError.noFill)
         
         // Act:
         let result = sut.tryMap { _ in
-            throw Yieldprobe.Error.unsupportedFormat
+            throw BidError.unsupportedFormat
         }
         
         // Assert:
         XCTAssertThrowsError(try result.get()) { error in
-            XCTAssertEqual(error as? Yieldprobe.Error, .noFill)
+            XCTAssertEqual(error as? BidError, .noFill)
         }
     }
     
     func testTryMapFailureThrows () {
         // Arrange:
-        let sut = Result<[String],Error>.failure(Yieldprobe.Error.noFill)
+        let sut = Result<[String],Error>.failure(BidError.noFill)
         
         // Act:
         let result = sut.tryMap {
@@ -64,7 +64,7 @@ class ResultTests: XCTestCase {
         
         // Assert:
         XCTAssertThrowsError(try result.get()) { error in
-            XCTAssertEqual(error as? Yieldprobe.Error, .noFill)
+            XCTAssertEqual(error as? BidError, .noFill)
         }
     }
     

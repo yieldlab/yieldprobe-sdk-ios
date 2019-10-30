@@ -66,7 +66,7 @@ class YieldprobeTests: XCTestCase {
         expectation = nil
         
         // Assert:
-        XCTAssertEqual(caught as? Yieldprobe.Error, .noSlot)
+        XCTAssertEqual(caught as? BidError, .noSlot)
     }
     
     func testProbeRequest () {
@@ -135,7 +135,7 @@ class YieldprobeTests: XCTestCase {
         
         // Assert:
         XCTAssertNotNil(caught)
-        XCTAssertEqual(caught as? Yieldprobe.Error, .tooManySlots)
+        XCTAssertEqual(caught as? BidError, .tooManySlots)
     }
     
     // MARK: Bid Request Parameters
@@ -498,7 +498,7 @@ class YieldprobeTests: XCTestCase {
         expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
-            XCTAssertEqual(error as? Yieldprobe.Error,
+            XCTAssertEqual(error as? BidError,
                            .httpError(statusCode: 404, localizedMessage: "not found"))
         }
     }
@@ -534,7 +534,7 @@ class YieldprobeTests: XCTestCase {
         expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
-            XCTAssertEqual(error as? Yieldprobe.Error,
+            XCTAssertEqual(error as? BidError,
                            .unsupportedContentType("text/javascript;charset=UTF-8"))
         }
     }
@@ -567,7 +567,7 @@ class YieldprobeTests: XCTestCase {
         expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
-            XCTAssertEqual(error as? Yieldprobe.Error, .unsupportedFormat)
+            XCTAssertEqual(error as? BidError, .unsupportedFormat)
         }
     }
     
@@ -609,7 +609,7 @@ class YieldprobeTests: XCTestCase {
         expectation = nil
         XCTAssertNotNil(result)
         XCTAssertThrowsError(try result?.get()) { error in
-            XCTAssertEqual(error as? Yieldprobe.Error, .noFill)
+            XCTAssertEqual(error as? BidError, .noFill)
         }
     }
     

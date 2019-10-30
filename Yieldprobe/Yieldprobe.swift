@@ -132,7 +132,7 @@ public class Yieldprobe: NSObject {
         probe(slots: [slotID], timeout: timeout, queue: queue) { result in
             completionHandler(result.tryMap {
                 guard let result = $0.first else {
-                    throw Error.noFill
+                    throw BidError.noFill
                 }
                 
                 return result
@@ -152,7 +152,7 @@ public class Yieldprobe: NSObject {
         guard !slots.isEmpty else {
             return queue.async {
                 completionHandler(Result {
-                    throw Yieldprobe.Error.noSlot
+                    throw BidError.noSlot
                 })
             }
         }
@@ -160,7 +160,7 @@ public class Yieldprobe: NSObject {
         guard slots.count <= 10 else {
             return queue.async {
                 completionHandler(Result {
-                    throw Yieldprobe.Error.tooManySlots
+                    throw BidError.tooManySlots
                 })
             }
         }
@@ -176,18 +176,18 @@ public class Yieldprobe: NSObject {
                 if let http = reply.response as? HTTPURLResponse {
                     if http.statusCode != 200 {
                         let message = HTTPURLResponse.localizedString(forStatusCode: http.statusCode)
-                        throw Error.httpError(statusCode: http.statusCode,
-                                              localizedMessage: message)
+                        throw BidError.httpError(statusCode: http.statusCode,
+                                                 localizedMessage: message)
                     }
                     let contentType = http.allHeaderFields["Content-Type"] as? String
                     if contentType != "application/json;charset=UTF-8" {
-                        throw Error.unsupportedContentType(contentType)
+                        throw BidError.unsupportedContentType(contentType)
                     }
                 }
                 
                 let jsonBids = try JSONSerialization.jsonObject(with: reply.data, options: [])
                 guard let bids = jsonBids as? [[String: Any]] else {
-                    throw Error.unsupportedFormat
+                    throw BidError.unsupportedFormat
                 }
                 struct BidView: Decodable {
                     var id: Int

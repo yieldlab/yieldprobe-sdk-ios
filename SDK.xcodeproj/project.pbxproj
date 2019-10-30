@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		910B67E42369DFF8009895D4 /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E32369DFF8009895D4 /* ConfigurationTests.m */; };
+		910B67E62369E1F3009895D4 /* BidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E52369E1F3009895D4 /* BidError.swift */; };
 		91264F362350B9D90012D871 /* URLReply+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F352350B9D90012D871 /* URLReply+YLD.swift */; };
 		91264F382350C6160012D871 /* Result+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F372350C6160012D871 /* Result+YLD.swift */; };
 		91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F392350C7E60012D871 /* ResultTests.swift */; };
@@ -124,6 +125,7 @@
 
 /* Begin PBXFileReference section */
 		910B67E32369DFF8009895D4 /* ConfigurationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigurationTests.m; sourceTree = "<group>"; };
+		910B67E52369E1F3009895D4 /* BidError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidError.swift; sourceTree = "<group>"; };
 		91264F352350B9D90012D871 /* URLReply+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLReply+YLD.swift"; sourceTree = "<group>"; };
 		91264F372350C6160012D871 /* Result+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+YLD.swift"; sourceTree = "<group>"; };
 		91264F392350C7E60012D871 /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				91D7DF2123698F31002FA2B4 /* AppStoreDecoratorTests.swift */,
 				91C40886234F7EFE00D0DC71 /* Bid.swift */,
 				91C4088823507B9A00D0DC71 /* BidTests.swift */,
+				910B67E52369E1F3009895D4 /* BidError.swift */,
 				917488F2235EEAA20099ECDD /* BundleIDDecorator.swift */,
 				917488F4235EEB3A0099ECDD /* BundleIDDecoratorTests.swift */,
 				915618C9234B25A200D5F530 /* CacheBuster.swift */,
@@ -558,6 +561,7 @@
 				915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */,
 				915618C8234B257A00D5F530 /* HighPrecisionClock.swift in Sources */,
 				915618E2234B954800D5F530 /* IDFADecorator.swift in Sources */,
+				910B67E62369E1F3009895D4 /* BidError.swift in Sources */,
 				91C40883234F2AAC00D0DC71 /* Configuration.swift in Sources */,
 				91793D52234CB0D6004DB72D /* ConnectivityDecorator.swift in Sources */,
 				915C8ADD234389BA00746E7E /* URLSession+YLD.swift in Sources */,

@@ -168,11 +168,21 @@ public class _ObjCConfiguration: NSObject {
         }
     }
     
-    var configuration = Configuration()
+    var configuration: Configuration
     
     /// Create a new configuration.
     @available(swift, obsoleted: 1.0)
-    public override init() { }
+    public override init() {
+        self.configuration = Configuration()
+    }
+    
+    init(configuration: Configuration) {
+        self.configuration = configuration
+    }
+    
+    public override func copy() -> Any {
+        _ObjCConfiguration(configuration: configuration)
+    }
     
 }
 

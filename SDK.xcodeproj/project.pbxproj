@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		910B67E42369DFF8009895D4 /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E32369DFF8009895D4 /* ConfigurationTests.m */; };
 		91264F362350B9D90012D871 /* URLReply+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F352350B9D90012D871 /* URLReply+YLD.swift */; };
 		91264F382350C6160012D871 /* Result+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F372350C6160012D871 /* Result+YLD.swift */; };
 		91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F392350C7E60012D871 /* ResultTests.swift */; };
@@ -122,6 +123,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		910B67E32369DFF8009895D4 /* ConfigurationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigurationTests.m; sourceTree = "<group>"; };
 		91264F352350B9D90012D871 /* URLReply+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLReply+YLD.swift"; sourceTree = "<group>"; };
 		91264F372350C6160012D871 /* Result+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+YLD.swift"; sourceTree = "<group>"; };
 		91264F392350C7E60012D871 /* ResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				915618C9234B25A200D5F530 /* CacheBuster.swift */,
 				9184845123561CF30040C53E /* CacheBusterTests.swift */,
 				91C40882234F2AAC00D0DC71 /* Configuration.swift */,
+				910B67E32369DFF8009895D4 /* ConfigurationTests.m */,
 				91793D51234CB0D6004DB72D /* ConnectivityDecorator.swift */,
 				91793D53234CB0E7004DB72D /* ConnectivityDecoratorTests.swift */,
 				915618CF234B2FDB00D5F530 /* ConsentDecorator.swift */,
@@ -446,6 +449,7 @@
 				TargetAttributes = {
 					915C8A7523437B4500746E7E = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1110;
 						TestTargetID = 915C8ABC234385D400746E7E;
 					};
 					915C8AA9234384FC00746E7E = {
@@ -520,6 +524,7 @@
 				915C8AE323438C0800746E7E /* HTTPMock.swift in Sources */,
 				916223762366DC7600795C40 /* XCTest+YLD.swift in Sources */,
 				917488F5235EEB3A0099ECDD /* BundleIDDecoratorTests.swift in Sources */,
+				910B67E42369DFF8009895D4 /* ConfigurationTests.m in Sources */,
 				915C8AE123438BAD00746E7E /* YieldprobeTests.swift in Sources */,
 				91793D4C234C6E12004DB72D /* DeviceTypeDecoratorTests.swift in Sources */,
 				915618DE234B6ED600D5F530 /* LocationDecoratorTests.swift in Sources */,

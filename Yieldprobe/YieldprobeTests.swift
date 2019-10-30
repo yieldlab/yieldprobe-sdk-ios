@@ -613,7 +613,7 @@ class YieldprobeTests: XCTestCase {
         }
     }
     
-    func testResponse () {
+    func testResponse () throws {
         // Arrange:
         var bid: Bid?
         var expectation: Optional = self.expectation(description: "Async HTTP Call")
@@ -646,7 +646,7 @@ class YieldprobeTests: XCTestCase {
         wait(for: [expectation!], timeout: 0.1)
         expectation = nil
         XCTAssertEqual(bid?.slotID, ExampleSlot.banner300x250.rawValue)
-        let customTargeting = bid?.customTargeting()
+        let customTargeting = try bid?.customTargeting()
         XCTAssertEqual(customTargeting?["id"] as? Int, bid?.slotID)
         XCTAssertEqual(customTargeting?["price"] as? Int, 340)
         XCTAssertEqual(customTargeting?["advertiser"] as? String, "yieldlab")

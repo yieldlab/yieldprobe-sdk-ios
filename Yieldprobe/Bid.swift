@@ -19,7 +19,8 @@ public class Bid: NSObject {
         _customTargeting = customTargeting
     }
     
-    public func customTargeting () -> [String: Any] {
+    @objc(customTargetingWithError:)
+    public func customTargeting () throws -> [String: Any] {
         _customTargeting
     }
     

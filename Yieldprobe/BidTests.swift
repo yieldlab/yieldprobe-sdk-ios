@@ -10,14 +10,14 @@ import XCTest
 
 class BidTests: XCTestCase {
 
-    func testCustomTargeting () {
+    func testCustomTargeting () throws {
         // Arrange:
         let expectedTargeting = ["key" : "value"]
         let sut = Bid(slotID: 1234, customTargeting: expectedTargeting)
         
         // Act:
         let id = sut.slotID
-        let customTargeting = sut.customTargeting()
+        let customTargeting = try sut.customTargeting()
         
         // Assert:
         XCTAssertEqual(id, 1234)

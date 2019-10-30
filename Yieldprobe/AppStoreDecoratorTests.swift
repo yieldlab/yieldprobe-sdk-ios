@@ -23,4 +23,20 @@ class AppStoreDecoratorTests: XCTestCase {
         XCTAssertEqual(output.queryValues(for: "pubstoreurl"), [])
     }
     
+    func testWithURL () {
+        // Arrange:
+        let storeURL = URL.example
+        let configuration = Configuration(storeURL: storeURL)
+        let input = URL.example
+        var sut = AppStoreDecorator()
+        sut.configuration = configuration
+        
+        // Act:
+        let output = sut.decorate(input)
+        
+        // Assert:
+        XCTAssertNotEqual(input, output)
+        XCTAssertEqual(output.queryValues(for: "pubstoreurl"), [storeURL.absoluteString])
+    }
+    
 }

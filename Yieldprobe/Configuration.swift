@@ -36,6 +36,8 @@ public struct Configuration {
     /// Default: `true`
     public var personalizeAds: Bool
     
+    public var storeURL: URL?
+    
     /// Additional targeting information that will be present the each bid probe request.
     ///
     /// Default: Empty.
@@ -43,6 +45,7 @@ public struct Configuration {
     
     public init (appName: String? = nil,
                  bundleID: String? = nil,
+                 storeURL: URL? = nil,
                  personalizeAds: Bool = true,
                  useGeolocation: Bool = true,
                  extraTargeting: [String: String] = [:])
@@ -51,6 +54,7 @@ public struct Configuration {
         self.bundleID = bundleID
         self.extraTargeting = extraTargeting
         self.personalizeAds = personalizeAds
+        self.storeURL = storeURL
         self.useGeolocation = useGeolocation
     }
     

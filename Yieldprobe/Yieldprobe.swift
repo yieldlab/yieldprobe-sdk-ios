@@ -34,6 +34,7 @@ public class Yieldprobe: NSObject {
 
     // MARK: Class Properties
     
+    @objc(sharedInstance)
     public static let shared = Yieldprobe()
     
     static let defaultClient: URLSession = {

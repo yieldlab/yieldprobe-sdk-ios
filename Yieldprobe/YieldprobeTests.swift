@@ -148,11 +148,30 @@ class YieldprobeTests: XCTestCase {
         sut.configure(using: configuration)
         
         // Act:
-        sut.probe(slot: 1234) { _ in }
+        sut.probe(slot: 1234) { _ in
+            XCTFail("Should not be called.")
+        }
         
         // Assert:
         XCTAssertEqual(http.calls.count, 1)
         XCTAssertEqual(http.calls.first?.url.queryValues(for: "pubappname"), ["Amazing App"])
+    }
+    
+    func testAppStoreURL () {
+        // Arrange:
+        let configuration = Configuration(storeURL: .example)
+        let http = HTTPMock()
+        let sut = Yieldprobe(http: http)
+        sut.configure(using: configuration)
+        
+        // Act:
+        sut.probe(slot: 1234) { _ in
+            XCTFail("Should not be called")
+        }
+        
+        // Assert:
+        XCTAssertEqual(http.calls.count, 1)
+        XCTAssertEqual(http.calls.first?.url.queryValues(for: "pubstoreurl"), [URL.example.absoluteString])
     }
     
     func testBundleID () {

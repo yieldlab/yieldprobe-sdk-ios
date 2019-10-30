@@ -13,10 +13,6 @@ import Foundation
 @available(swift, introduced: 5.0)
 public class Yieldprobe: NSObject {
     
-    // MARK: Types
-    
-    typealias Error = BidError
-    
     // MARK: Class Properties
     
     /// Yieldprobe Singleton

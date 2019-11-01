@@ -6,6 +6,20 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		919AC5C7236880F2000CB273 /* Yieldprobe.xcframework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 919AC5CA236880F2000CB273 /* Build configuration list for PBXAggregateTarget "Yieldprobe.xcframework" */;
+			buildPhases = (
+				919AC5CB23688106000CB273 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Yieldprobe.xcframework;
+			productName = Yieldprobe.xcframework;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		910B67E42369DFF8009895D4 /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E32369DFF8009895D4 /* ConfigurationTests.m */; };
 		910B67E62369E1F3009895D4 /* BidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E52369E1F3009895D4 /* BidError.swift */; };
@@ -182,6 +196,7 @@
 		91793D53234CB0E7004DB72D /* ConnectivityDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityDecoratorTests.swift; sourceTree = "<group>"; };
 		9184845123561CF30040C53E /* CacheBusterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheBusterTests.swift; sourceTree = "<group>"; };
 		9193057F2368453E00B4EB87 /* Dispatch+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatch+YLD.swift"; sourceTree = "<group>"; };
+		919AC5CC23688174000CB273 /* build-xcframework.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-xcframework.sh"; sourceTree = "<group>"; };
 		91AA09362356227D00D521D8 /* Collection+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+YLD.swift"; sourceTree = "<group>"; };
 		91ACB8C32355D884002FD908 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		91ACB8C52355ECAA002FD908 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -234,6 +249,7 @@
 		915C8A382343724A00746E7E = {
 			isa = PBXGroup;
 			children = (
+				919AC5CC23688174000CB273 /* build-xcframework.sh */,
 				915C8AAB234384FC00746E7E /* Yieldprobe */,
 				915C8A7723437B4500746E7E /* Unit Tests */,
 				915C8ABE234385D400746E7E /* Test Host */,
@@ -462,6 +478,9 @@
 					915C8ABC234385D400746E7E = {
 						CreatedOnToolsVersion = 11.0;
 					};
+					919AC5C7236880F2000CB273 = {
+						CreatedOnToolsVersion = 11.1;
+					};
 				};
 			};
 			buildConfigurationList = 915C8A3C2343724A00746E7E /* Build configuration list for PBXProject "SDK" */;
@@ -481,6 +500,7 @@
 				915C8ABC234385D400746E7E /* Test Host */,
 				915C8A7523437B4500746E7E /* Unit Tests */,
 				915C8AA9234384FC00746E7E /* Yieldprobe */,
+				919AC5C7236880F2000CB273 /* Yieldprobe.xcframework */,
 			);
 		};
 /* End PBXProject section */
@@ -513,6 +533,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		919AC5CB23688106000CB273 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ". \"${SOURCE_ROOT}/build-xcframework.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		915C8A7223437B4500746E7E /* Sources */ = {
@@ -1157,6 +1198,24 @@
 			};
 			name = Release;
 		};
+		919AC5C8236880F2000CB273 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38R2LLP8AF;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		919AC5C9236880F2000CB273 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38R2LLP8AF;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1192,6 +1251,15 @@
 			buildConfigurations = (
 				915C8ACF234385DA00746E7E /* Debug */,
 				915C8AD0234385DA00746E7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		919AC5CA236880F2000CB273 /* Build configuration list for PBXAggregateTarget "Yieldprobe.xcframework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				919AC5C8236880F2000CB273 /* Debug */,
+				919AC5C9236880F2000CB273 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

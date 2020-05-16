@@ -252,9 +252,9 @@
 			children = (
 				911EA66224700D7300F6E814 /* readme.md */,
 				919AC5CC23688174000CB273 /* build-xcframework.sh */,
-				915C8AAB234384FC00746E7E /* Yieldprobe */,
-				915C8A7723437B4500746E7E /* Unit Tests */,
 				915C8ABE234385D400746E7E /* Test Host */,
+				915C8A7723437B4500746E7E /* Unit Tests */,
+				915C8AAB234384FC00746E7E /* Yieldprobe */,
 				915C8A5E23437B2B00746E7E /* Products */,
 				915C8AD32343871400746E7E /* Frameworks */,
 			);

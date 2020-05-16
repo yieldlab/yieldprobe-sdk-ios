@@ -7,7 +7,6 @@
 * `Tests`: Test Code for Swift Package.
 * `SDK.xcodeproj`: The Xcode project used for development. Contains a test harness.
 * `XcodeWrapper`: A folder containing the Xcode project `Dummy`. This Xcode project depends on the Swift Package.
-* `Yieldprobe`: Source Code and Tests for Xcode.
 
 ## Known Issues
 

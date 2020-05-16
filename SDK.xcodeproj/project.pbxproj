@@ -302,6 +302,7 @@
 		911EA66A2470170600F6E814 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				915C8A7A23437B4500746E7E /* Info.plist */,
 				911EA66B2470170600F6E814 /* YieldprobeTests */,
 			);
 			path = Tests;
@@ -341,7 +342,6 @@
 				911EA6662470170600F6E814 /* Sources */,
 				911EA66A2470170600F6E814 /* Tests */,
 				915C8ABE234385D400746E7E /* Test Host */,
-				91C7E02A2470308A0071CF82 /* Unit Tests */,
 				915C8AAB234384FC00746E7E /* Yieldprobe */,
 				915C8A5E23437B2B00746E7E /* Products */,
 				915C8AD32343871400746E7E /* Frameworks */,
@@ -413,14 +413,6 @@
 				91793D4F234CAA4A004DB72D /* UIDeviceTests.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		91C7E02A2470308A0071CF82 /* Unit Tests */ = {
-			isa = PBXGroup;
-			children = (
-				915C8A7A23437B4500746E7E /* Info.plist */,
-			);
-			path = "Unit Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -847,7 +839,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Unit Tests/Info.plist";
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -915,7 +907,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Unit Tests/Info.plist";
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

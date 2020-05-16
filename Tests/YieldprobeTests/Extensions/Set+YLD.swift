@@ -15,7 +15,7 @@ extension Set {
     }
     
     func randomSubset (using generator: inout RandomNumberGenerator) -> Set<Element> {
-        var nextBit: (inout RandomNumberGenerator) -> Bool = {
+        let nextBit: (inout RandomNumberGenerator) -> Bool = {
             var cached = (value: UInt64(0), bits: 0)
             return { (generator: inout RandomNumberGenerator) -> Bool in
                 if cached.bits < 1 {

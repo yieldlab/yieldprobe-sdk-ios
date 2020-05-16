@@ -1,2 +1,9 @@
+# Swift Package Manager
+.build
+
+# Finder
 .DS_Store
+
+# Xcode
 xcuserdata
+.swiftpm

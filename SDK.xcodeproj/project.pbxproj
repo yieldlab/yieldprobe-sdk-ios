@@ -303,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				915C8A7A23437B4500746E7E /* Info.plist */,
+				91C7E02B247034BC0071CF82 /* ObjectiveCTests */,
 				911EA66B2470170600F6E814 /* YieldprobeTests */,
 			);
 			path = Tests;
@@ -361,7 +362,6 @@
 		915C8AAB234384FC00746E7E /* Yieldprobe */ = {
 			isa = PBXGroup;
 			children = (
-				910B67E32369DFF8009895D4 /* ConfigurationTests.m */,
 				915C8AAD234384FC00746E7E /* Info.plist */,
 			);
 			path = Yieldprobe;
@@ -413,6 +413,14 @@
 				91793D4F234CAA4A004DB72D /* UIDeviceTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		91C7E02B247034BC0071CF82 /* ObjectiveCTests */ = {
+			isa = PBXGroup;
+			children = (
+				910B67E32369DFF8009895D4 /* ConfigurationTests.m */,
+			);
+			path = ObjectiveCTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

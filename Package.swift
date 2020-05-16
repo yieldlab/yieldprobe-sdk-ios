@@ -25,6 +25,9 @@ let package = Package(
             name: "Yieldprobe",
             dependencies: []),
         .testTarget(
+            name: "ObjectiveCTests",
+            dependencies: ["Yieldprobe"]),
+        .testTarget(
             name: "YieldprobeTests",
             dependencies: ["Yieldprobe"]),
     ]

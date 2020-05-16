@@ -250,6 +250,7 @@
 		911EA6662470170600F6E814 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				915C8ABE234385D400746E7E /* Test Host */,
 				911EA6672470170600F6E814 /* Yieldprobe */,
 			);
 			path = Sources;
@@ -343,7 +344,6 @@
 				919AC5CC23688174000CB273 /* build-xcframework.sh */,
 				911EA6662470170600F6E814 /* Sources */,
 				911EA66A2470170600F6E814 /* Tests */,
-				915C8ABE234385D400746E7E /* Test Host */,
 				915C8A5E23437B2B00746E7E /* Products */,
 				915C8AD32343871400746E7E /* Frameworks */,
 			);
@@ -1139,7 +1139,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Test Host/Info.plist";
+				INFOPLIST_FILE = "Sources/Test Host/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1205,7 +1205,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Test Host/Info.plist";
+				INFOPLIST_FILE = "Sources/Test Host/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

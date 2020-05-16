@@ -258,6 +258,7 @@
 		911EA6672470170600F6E814 /* Yieldprobe */ = {
 			isa = PBXGroup;
 			children = (
+				915C8AAD234384FC00746E7E /* Info.plist */,
 				911EA6692470170600F6E814 /* Extensions */,
 				913A581A235F17E500440DB1 /* AppNameDecorator.swift */,
 				91D7DF1F23698CEF002FA2B4 /* AppStoreDecorator.swift */,
@@ -343,7 +344,6 @@
 				911EA6662470170600F6E814 /* Sources */,
 				911EA66A2470170600F6E814 /* Tests */,
 				915C8ABE234385D400746E7E /* Test Host */,
-				915C8AAB234384FC00746E7E /* Yieldprobe */,
 				915C8A5E23437B2B00746E7E /* Products */,
 				915C8AD32343871400746E7E /* Frameworks */,
 			);
@@ -357,14 +357,6 @@
 				915C8ABD234385D400746E7E /* Test Host.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		915C8AAB234384FC00746E7E /* Yieldprobe */ = {
-			isa = PBXGroup;
-			children = (
-				915C8AAD234384FC00746E7E /* Info.plist */,
-			);
-			path = Yieldprobe;
 			sourceTree = "<group>";
 		};
 		915C8ABE234385D400746E7E /* Test Host */ = {
@@ -994,7 +986,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Yieldprobe/Info.plist;
+				INFOPLIST_FILE = Sources/Yieldprobe/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1070,7 +1062,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Yieldprobe/Info.plist;
+				INFOPLIST_FILE = Sources/Yieldprobe/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (

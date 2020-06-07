@@ -42,7 +42,7 @@ public class Yieldprobe: NSObject {
     
     private(set) var idfaDecorator: IDFADecorator
     
-    private(set) var locationDecorator: PIIDDecoratorFilter<LocationDecorator>
+    private(set) var locationDecorator: LocationDecorator
     
     /// Yieldprobe SDK Version
     ///
@@ -68,15 +68,12 @@ public class Yieldprobe: NSObject {
         self.consentSource = consentSource
         self.deviceTypeDecorator = DeviceTypeDecorator(device: device)
         self.idfaDecorator = IDFADecorator(source: idfa)
-        let locationDecorator = LocationDecorator(locationSource: locationSource,
-                                                  configuration: configuration)
-        self.locationDecorator = PIIDDecoratorFilter(configuration: configuration,
-                                                     wrapped: locationDecorator)
+        self.locationDecorator = LocationDecorator(locationSource: locationSource,
+                                                   configuration: configuration)
     }
     
     public func configure(using configuration: Configuration) {
         locationDecorator.configuration = configuration
-        locationDecorator.wrapped.configuration = configuration
     }
     
     // MARK: Bid Requests
@@ -147,7 +144,8 @@ public class Yieldprobe: NSObject {
                       URLDecorators.extraTargeting(from: configuration),
                       URLDecorators.privacyFilter(with: configuration,
                                                   decorator: idfaDecorator),
-                      locationDecorator.decorate)
+                      URLDecorators.privacyFilter(with: configuration,
+                                                  decorator: locationDecorator))
         http.get(url: url, timeout: timeout) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()

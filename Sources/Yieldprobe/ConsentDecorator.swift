@@ -14,7 +14,7 @@ protocol ConsentSource {
 }
 
 /// Decorate a URL to include a parameter `consent` containing the [IAB Consent String](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Mobile%20In-App%20Consent%20APIs%20v1.0%20Final.md#cmp-internal-structure-defined-api-).
-struct ConsentDecorator: URLDecorator {
+struct ConsentDecorator: URLDecoratorProtocol {
     
     static let base64URLCharacters: CharacterSet = {
         // Reference: https://tools.ietf.org/html/rfc4648#section-5

@@ -24,7 +24,7 @@ protocol Device {
 @available(tvOSApplicationExtension, unavailable)
 @available(watchOS, unavailable)
 @available(watchOSApplicationExtension, unavailable)
-struct DeviceTypeDecorator: URLDecorator {
+struct DeviceTypeDecorator: URLDecoratorProtocol {
     
     var device: Device
     

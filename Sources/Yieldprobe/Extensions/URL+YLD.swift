@@ -9,7 +9,7 @@ import Foundation
 
 extension URL {
     
-    func decorate (_ decorators: URLDecorator...) -> URL {
+    func decorate (_ decorators: URLDecoratorProtocol...) -> URL {
         decorators.reduce(self) { url, decorator in
             decorator.decorate(url)
         }

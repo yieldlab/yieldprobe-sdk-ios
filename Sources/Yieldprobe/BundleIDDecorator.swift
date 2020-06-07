@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BundleIDDecorator: URLDecorator {
+struct BundleIDDecorator: URLDecoratorProtocol {
     
     var configuration = Configuration()
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppNameDecorator: URLDecorator {
+struct AppNameDecorator: URLDecoratorProtocol {
     
     var configuration = Configuration()
     

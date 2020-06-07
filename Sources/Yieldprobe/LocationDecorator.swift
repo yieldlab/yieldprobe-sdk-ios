@@ -29,7 +29,7 @@ protocol LocationSource {
     
 }
 
-struct LocationDecorator: URLDecorator {
+struct LocationDecorator: URLDecoratorProtocol {
     
     let application: Application
     

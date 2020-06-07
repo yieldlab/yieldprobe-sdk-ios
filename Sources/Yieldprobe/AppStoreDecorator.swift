@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppStoreDecorator: URLDecorator {
+struct AppStoreDecorator: URLDecoratorProtocol {
     
     var configuration = Configuration()
     

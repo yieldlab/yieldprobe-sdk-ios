@@ -16,7 +16,7 @@ protocol IDFASource {
     
 }
 
-struct IDFADecorator: URLDecorator {
+struct IDFADecorator: URLDecoratorProtocol {
     
     var source: IDFASource
     

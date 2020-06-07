@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CacheBuster: URLDecorator {
+struct CacheBuster: URLDecoratorProtocol {
     
     let clock = HighPrecisionClock()
     

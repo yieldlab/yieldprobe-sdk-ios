@@ -40,7 +40,7 @@
 		915618CE234B29AD00D5F530 /* URLComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CD234B29AD00D5F530 /* URLComponentsTests.swift */; };
 		915618D0234B2FDB00D5F530 /* ConsentDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618CF234B2FDB00D5F530 /* ConsentDecorator.swift */; };
 		915618D2234B30F600D5F530 /* ConsentDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D1234B30F600D5F530 /* ConsentDecoratorTests.swift */; };
-		915618D4234B3D9100D5F530 /* URLDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D3234B3D9100D5F530 /* URLDecorator.swift */; };
+		915618D4234B3D9100D5F530 /* URLDecoratorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D3234B3D9100D5F530 /* URLDecoratorProtocol.swift */; };
 		915618D6234B3DDF00D5F530 /* URL+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D5234B3DDF00D5F530 /* URL+YLD.swift */; };
 		915618D8234B3F1500D5F530 /* UserDefaults+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D7234B3F1500D5F530 /* UserDefaults+YLD.swift */; };
 		915618DA234B409200D5F530 /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618D9234B409200D5F530 /* UserDefaultsTests.swift */; };
@@ -157,7 +157,7 @@
 		915618CD234B29AD00D5F530 /* URLComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsTests.swift; sourceTree = "<group>"; };
 		915618CF234B2FDB00D5F530 /* ConsentDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDecorator.swift; sourceTree = "<group>"; };
 		915618D1234B30F600D5F530 /* ConsentDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDecoratorTests.swift; sourceTree = "<group>"; };
-		915618D3234B3D9100D5F530 /* URLDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDecorator.swift; sourceTree = "<group>"; };
+		915618D3234B3D9100D5F530 /* URLDecoratorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDecoratorProtocol.swift; sourceTree = "<group>"; };
 		915618D5234B3DDF00D5F530 /* URL+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+YLD.swift"; sourceTree = "<group>"; };
 		915618D7234B3F1500D5F530 /* UserDefaults+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+YLD.swift"; sourceTree = "<group>"; };
 		915618D9234B409200D5F530 /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 				915618E1234B954800D5F530 /* IDFADecorator.swift */,
 				915618DB234B483400D5F530 /* LocationDecorator.swift */,
 				91C40884234F30B800D0DC71 /* PIIDDecoratorFilter.swift */,
-				915618D3234B3D9100D5F530 /* URLDecorator.swift */,
+				915618D3234B3D9100D5F530 /* URLDecoratorProtocol.swift */,
 				915C8AB72343855400746E7E /* Yieldprobe.swift */,
 			);
 			path = Yieldprobe;
@@ -641,7 +641,7 @@
 				915618D0234B2FDB00D5F530 /* ConsentDecorator.swift in Sources */,
 				915618E6234B973600D5F530 /* ASIdentifierManager+YLD.swift in Sources */,
 				91264F382350C6160012D871 /* Result+YLD.swift in Sources */,
-				915618D4234B3D9100D5F530 /* URLDecorator.swift in Sources */,
+				915618D4234B3D9100D5F530 /* URLDecoratorProtocol.swift in Sources */,
 				915C8ADB2343897600746E7E /* HTTPClient.swift in Sources */,
 				915C8AB82343855400746E7E /* Yieldprobe.swift in Sources */,
 				91793D4E234C80C3004DB72D /* UIDevice+YLD.swift in Sources */,

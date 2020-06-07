@@ -35,7 +35,7 @@ protocol ConnectivitySource {
     
 }
 
-struct ConnectivityDecorator: URLDecorator {
+struct ConnectivityDecorator: URLDecoratorProtocol {
     
     var connectivitySource: ConnectivitySource
     

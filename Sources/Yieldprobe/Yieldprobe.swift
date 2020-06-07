@@ -28,9 +28,7 @@ public class Yieldprobe: NSObject {
     
     // MARK: Properties
     
-    var configuration: Configuration {
-        locationDecorator.configuration
-    }
+    var configuration: Configuration = Configuration()
     
     private(set) var connectivitySource: ConnectivitySource?
     
@@ -42,7 +40,7 @@ public class Yieldprobe: NSObject {
     
     private(set) var idfaSource: IDFASource?
     
-    private(set) var locationDecorator: LocationDecorator
+    private(set) var locationSource: LocationSource.Type?
     
     /// Yieldprobe SDK Version
     ///
@@ -61,19 +59,16 @@ public class Yieldprobe: NSObject {
           idfa: IDFASource? = nil,
           locationSource: LocationSource.Type? = nil)
     {
-        let configuration = Configuration()
-        
         self.http = http ?? Yieldprobe.defaultClient
         self.connectivitySource = connectivitySource
         self.consentSource = consentSource
         self.device = device
         self.idfaSource = idfa
-        self.locationDecorator = LocationDecorator(locationSource: locationSource,
-                                                   configuration: configuration)
+        self.locationSource = locationSource
     }
     
     public func configure(using configuration: Configuration) {
-        locationDecorator.configuration = configuration
+        self.configuration = configuration
     }
     
     // MARK: Bid Requests
@@ -148,7 +143,9 @@ public class Yieldprobe: NSObject {
                                                   decorator: URLDecorators
                                                     .idfa(from: idfaSource)),
                       URLDecorators.privacyFilter(with: configuration,
-                                                  decorator: locationDecorator))
+                                                  decorator: URLDecorators
+                                                    .geolocation(from: locationSource,
+                                                                 with: configuration)))
         http.get(url: url, timeout: timeout) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()

@@ -88,3 +88,16 @@ struct LocationDecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func geolocation (from source: LocationSource.Type?,
+                             with configuration: Configuration)
+        -> URLDecorator
+    {
+        LocationDecorator(locationSource: source,
+                          configuration: configuration)
+            .decorate(_:)
+    }
+    
+}

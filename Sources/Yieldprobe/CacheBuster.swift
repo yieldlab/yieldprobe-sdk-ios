@@ -21,3 +21,11 @@ struct CacheBuster: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func cacheBuster () -> URLDecorator {
+        CacheBuster().decorate(_:)
+    }
+    
+}

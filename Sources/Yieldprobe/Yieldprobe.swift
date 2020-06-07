@@ -28,8 +28,6 @@ public class Yieldprobe: NSObject {
     
     // MARK: Properties
     
-    let cacheBuster = CacheBuster()
-    
     var configuration: Configuration {
         locationDecorator.configuration
     }
@@ -152,7 +150,7 @@ public class Yieldprobe: NSObject {
             .decorate(URLDecorators.appName(from: configuration),
                       URLDecorators.appStoreURL(from: configuration),
                       URLDecorators.bundleID(from: configuration),
-                      cacheBuster.decorate,
+                      URLDecorators.cacheBuster(),
                       connectivity.decorate,
                       consent.decorate,
                       deviceTypeDecorator.decorate,

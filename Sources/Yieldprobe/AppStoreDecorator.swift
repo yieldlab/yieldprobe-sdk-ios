@@ -26,3 +26,11 @@ struct AppStoreDecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func appStoreURL (from configuration: Configuration) -> URLDecorator {
+        AppStoreDecorator(configuration: configuration).decorate(_:)
+    }
+    
+}

@@ -39,3 +39,11 @@ struct ExtraTargetingDecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func extraTargeting (from configuration: Configuration) -> URLDecorator {
+        ExtraTargetingDecorator(configuration: configuration).decorate(_:)
+    }
+    
+}

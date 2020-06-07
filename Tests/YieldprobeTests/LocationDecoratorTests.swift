@@ -27,7 +27,7 @@ class LocationDecoratorTests: XCTestCase {
     
     func testDefaultLocationSource () {
         // Arrange:
-        let sut = LocationDecorator(configuration: Configuration())
+        let sut = LocationDecorator()
         
         // Act:
         let source = sut.locationSource
@@ -53,8 +53,7 @@ class LocationDecoratorTests: XCTestCase {
         
         // Arrange:
         let url = URL(string: "https://example.com/")!
-        let sut = LocationDecorator(locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
+        let sut = LocationDecorator(locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)
@@ -80,8 +79,7 @@ class LocationDecoratorTests: XCTestCase {
         
         // Arrange:
         let url = URL(string: "https://example.com/")!
-        let sut = LocationDecorator(locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
+        let sut = LocationDecorator(locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)
@@ -113,8 +111,7 @@ class LocationDecoratorTests: XCTestCase {
         
         // Arrange:
         let url = URL(string: "https://example.com/")!
-        let sut = LocationDecorator(locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
+        let sut = LocationDecorator(locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)
@@ -142,8 +139,7 @@ class LocationDecoratorTests: XCTestCase {
         
         // Arrange:
         let url = URL(string: "https://example.com/")!
-        let sut = LocationDecorator(locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
+        let sut = LocationDecorator(locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)
@@ -174,8 +170,7 @@ class LocationDecoratorTests: XCTestCase {
         // Arrange:
         let url = URL(string: "https://example.com/")!
         let sut = LocationDecorator(application: DummyApplication(applicationState: .background),
-                                    locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
+                                    locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)
@@ -204,8 +199,7 @@ class LocationDecoratorTests: XCTestCase {
         // Arrange:
         let url = URL(string: "https://example.com/")!
         let sut = LocationDecorator(application: DummyApplication(applicationState: .active),
-                                    locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
+                                    locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)
@@ -236,8 +230,7 @@ class LocationDecoratorTests: XCTestCase {
         // Arrange:
         let url = URL(string: "https://example.com/")!
         let sut = LocationDecorator(application: DummyApplication(applicationState: .active),
-                                    locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
+                                    locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)
@@ -266,8 +259,7 @@ class LocationDecoratorTests: XCTestCase {
         // Arrange:
         let url = URL(string: "https://example.com/")!
         let sut = LocationDecorator(application: DummyApplication(applicationState: .active),
-                                    locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
+                                    locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)
@@ -296,41 +288,7 @@ class LocationDecoratorTests: XCTestCase {
         // Arrange:
         let url = URL(string: "https://example.com/")!
         let sut = LocationDecorator(application: DummyApplication(applicationState: .active),
-                                    locationSource: DummyLocationSource.self,
-                                    configuration: Configuration())
-        
-        // Act:
-        let result = sut.decorate(url)
-        
-        // Assert:
-        XCTAssertEqual(result, url)
-    }
-    
-    func testConfigurationDisablesGeolocation () {
-        class DummyLocationSource: LocationSource {
-            var location: CLLocation? {
-                fatalError()
-            }
-            
-            static func authorizationStatus() -> CLAuthorizationStatus {
-                fatalError()
-            }
-            
-            static func locationServicesEnabled() -> Bool {
-                fatalError()
-            }
-            
-            required init () {
-                fatalError()
-            }
-        }
-        
-        // Arrange:
-        let url = URL(string: "https://example.com/")!
-        let configuration = Configuration(useGeolocation: false)
-        let sut = LocationDecorator(application: DummyApplication(applicationState: .active),
-                                    locationSource: DummyLocationSource.self,
-                                    configuration: configuration)
+                                    locationSource: DummyLocationSource.self)
         
         // Act:
         let result = sut.decorate(url)

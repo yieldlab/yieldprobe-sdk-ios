@@ -33,24 +33,16 @@ struct LocationDecorator: URLDecoratorProtocol {
     
     let application: Application
     
-    var configuration: Configuration
-    
     let locationSource: LocationSource.Type
     
     init (application: Application? = nil,
-          locationSource: LocationSource.Type? = nil,
-          configuration: Configuration)
+          locationSource: LocationSource.Type? = nil)
     {
         self.application = application ?? UIApplication.shared
-        self.configuration = configuration
         self.locationSource = locationSource ?? CLLocationManager.self
     }
     
     func currentLocation () -> CLLocation? {
-        guard configuration.useGeolocation else {
-            return nil
-        }
-        
         guard locationSource.locationServicesEnabled() else {
             return nil
         }
@@ -91,12 +83,10 @@ struct LocationDecorator: URLDecoratorProtocol {
 
 extension URLDecorators {
     
-    static func geolocation (from source: LocationSource.Type?,
-                             with configuration: Configuration)
+    static func geolocation (from source: LocationSource.Type?)
         -> URLDecorator
     {
-        LocationDecorator(locationSource: source,
-                          configuration: configuration)
+        LocationDecorator(locationSource: source)
             .decorate(_:)
     }
     

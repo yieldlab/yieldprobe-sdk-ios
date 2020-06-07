@@ -140,10 +140,9 @@ public class Yieldprobe: NSObject {
                       URLDecorators.extraTargeting(from: configuration),
                       URLDecorators.personalize(if: configuration.personalizeAds,
                                                 URLDecorators.idfa(from: idfaSource)),
-                      URLDecorators.personalize(if: configuration.personalizeAds,
+                      URLDecorators.personalize(if: configuration.personalizeAds && configuration.useGeolocation,
                                                 URLDecorators
-                                                    .geolocation(from: locationSource,
-                                                                 with: configuration)))
+                                                    .geolocation(from: locationSource)))
         http.get(url: url, timeout: timeout) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()

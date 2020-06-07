@@ -15,6 +15,11 @@ struct PIIDDecoratorFilter<Wrapped: URLDecoratorProtocol>: URLDecoratorProtocol 
     
     var wrapped: Wrapped
     
+    init (configuration: Configuration, wrapped: Wrapped) {
+        self.configuration = configuration
+        self.wrapped = wrapped
+    }
+    
     func decorate(_ subject: URL) -> URL {
         guard configuration.personalizeAds else {
             return subject

@@ -61,3 +61,11 @@ struct ConsentDecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func consent (from source: ConsentSource?) -> URLDecorator {
+        ConsentDecorator(consentSource: source).decorate(_:)
+    }
+    
+}

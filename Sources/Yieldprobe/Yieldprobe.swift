@@ -34,7 +34,7 @@ public class Yieldprobe: NSObject {
     
     private(set) var connectivity: PIIDDecoratorFilter<ConnectivityDecorator>
     
-    let consent: ConsentDecorator
+    private var consentSource: ConsentSource?
     
     private(set) var deviceTypeDecorator: PIIDDecoratorFilter<DeviceTypeDecorator>
     
@@ -69,7 +69,7 @@ public class Yieldprobe: NSObject {
         let connectivity = ConnectivityDecorator(source: connectivitySource)
         self.connectivity = PIIDDecoratorFilter(configuration: configuration,
                                                 wrapped: connectivity)
-        consent = ConsentDecorator(consentSource: consentSource)
+        self.consentSource = consentSource
         let deviceTypeDecorator = DeviceTypeDecorator(device: device)
         self.deviceTypeDecorator = PIIDDecoratorFilter(configuration: configuration,
                                                        wrapped: deviceTypeDecorator)
@@ -152,7 +152,7 @@ public class Yieldprobe: NSObject {
                       URLDecorators.bundleID(from: configuration),
                       URLDecorators.cacheBuster(),
                       connectivity.decorate,
-                      consent.decorate,
+                      URLDecorators.consent(from: consentSource),
                       deviceTypeDecorator.decorate,
                       extraTargetingDecorator.decorate,
                       locationDecorator.decorate,

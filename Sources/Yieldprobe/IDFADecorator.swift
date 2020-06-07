@@ -39,3 +39,11 @@ struct IDFADecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func idfa (from source: IDFASource?) -> URLDecorator {
+        IDFADecorator(source: source).decorate(_:)
+    }
+    
+}

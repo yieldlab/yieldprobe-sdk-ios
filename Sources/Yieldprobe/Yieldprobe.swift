@@ -40,7 +40,7 @@ public class Yieldprobe: NSObject {
     
     let http: HTTPClient
     
-    private(set) var idfaDecorator: PIIDDecoratorFilter<IDFADecorator>
+    private(set) var idfaDecorator: IDFADecorator
     
     private(set) var locationDecorator: PIIDDecoratorFilter<LocationDecorator>
     
@@ -67,8 +67,7 @@ public class Yieldprobe: NSObject {
         self.connectivity = ConnectivityDecorator(source: connectivitySource)
         self.consentSource = consentSource
         self.deviceTypeDecorator = DeviceTypeDecorator(device: device)
-        idfaDecorator = PIIDDecoratorFilter(configuration: configuration,
-                                            wrapped: IDFADecorator(source: idfa))
+        self.idfaDecorator = IDFADecorator(source: idfa)
         let locationDecorator = LocationDecorator(locationSource: locationSource,
                                                   configuration: configuration)
         self.locationDecorator = PIIDDecoratorFilter(configuration: configuration,
@@ -76,7 +75,6 @@ public class Yieldprobe: NSObject {
     }
     
     public func configure(using configuration: Configuration) {
-        idfaDecorator.configuration = configuration
         locationDecorator.configuration = configuration
         locationDecorator.wrapped.configuration = configuration
     }
@@ -147,8 +145,9 @@ public class Yieldprobe: NSObject {
                       URLDecorators.privacyFilter(with: configuration,
                                                   decorator: deviceTypeDecorator),
                       URLDecorators.extraTargeting(from: configuration),
-                      locationDecorator.decorate,
-                      idfaDecorator.decorate)
+                      URLDecorators.privacyFilter(with: configuration,
+                                                  decorator: idfaDecorator),
+                      locationDecorator.decorate)
         http.get(url: url, timeout: timeout) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()

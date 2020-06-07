@@ -36,7 +36,7 @@ public class Yieldprobe: NSObject {
     
     private var consentSource: ConsentSource?
     
-    private(set) var deviceTypeDecorator: PIIDDecoratorFilter<DeviceTypeDecorator>
+    private(set) var deviceTypeDecorator: DeviceTypeDecorator
     
     let http: HTTPClient
     
@@ -66,9 +66,7 @@ public class Yieldprobe: NSObject {
         self.http = http ?? Yieldprobe.defaultClient
         self.connectivity = ConnectivityDecorator(source: connectivitySource)
         self.consentSource = consentSource
-        let deviceTypeDecorator = DeviceTypeDecorator(device: device)
-        self.deviceTypeDecorator = PIIDDecoratorFilter(configuration: configuration,
-                                                       wrapped: deviceTypeDecorator)
+        self.deviceTypeDecorator = DeviceTypeDecorator(device: device)
         idfaDecorator = PIIDDecoratorFilter(configuration: configuration,
                                             wrapped: IDFADecorator(source: idfa))
         let locationDecorator = LocationDecorator(locationSource: locationSource,
@@ -78,7 +76,6 @@ public class Yieldprobe: NSObject {
     }
     
     public func configure(using configuration: Configuration) {
-        deviceTypeDecorator.configuration = configuration
         idfaDecorator.configuration = configuration
         locationDecorator.configuration = configuration
         locationDecorator.wrapped.configuration = configuration
@@ -147,7 +144,8 @@ public class Yieldprobe: NSObject {
                       URLDecorators.privacyFilter(with: configuration,
                                                   decorator: connectivity),
                       URLDecorators.consent(from: consentSource),
-                      deviceTypeDecorator.decorate,
+                      URLDecorators.privacyFilter(with: configuration,
+                                                  decorator: deviceTypeDecorator),
                       URLDecorators.extraTargeting(from: configuration),
                       locationDecorator.decorate,
                       idfaDecorator.decorate)

@@ -131,19 +131,17 @@ public class Yieldprobe: NSObject {
                       URLDecorators.appStoreURL(from: configuration),
                       URLDecorators.bundleID(from: configuration),
                       URLDecorators.cacheBuster(),
-                      URLDecorators.privacyFilter(with: configuration,
-                                                  decorator: URLDecorators
-                                                      .connectivity(from: connectivitySource)),
+                      URLDecorators.personalize(if: configuration.personalizeAds,
+                                                URLDecorators
+                                                    .connectivity(from: connectivitySource)),
                       URLDecorators.consent(from: consentSource),
-                      URLDecorators.privacyFilter(with: configuration,
-                                                  decorator: URLDecorators
-                                                    .type(of: device)),
+                      URLDecorators.personalize(if: configuration.personalizeAds,
+                                                URLDecorators.type(of: device)),
                       URLDecorators.extraTargeting(from: configuration),
-                      URLDecorators.privacyFilter(with: configuration,
-                                                  decorator: URLDecorators
-                                                    .idfa(from: idfaSource)),
-                      URLDecorators.privacyFilter(with: configuration,
-                                                  decorator: URLDecorators
+                      URLDecorators.personalize(if: configuration.personalizeAds,
+                                                URLDecorators.idfa(from: idfaSource)),
+                      URLDecorators.personalize(if: configuration.personalizeAds,
+                                                URLDecorators
                                                     .geolocation(from: locationSource,
                                                                  with: configuration)))
         http.get(url: url, timeout: timeout) { result in

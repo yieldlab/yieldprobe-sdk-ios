@@ -36,7 +36,7 @@ public class Yieldprobe: NSObject {
     
     private var consentSource: ConsentSource?
     
-    private(set) var deviceTypeDecorator: DeviceTypeDecorator
+    private(set) var device: Device?
     
     let http: HTTPClient
     
@@ -66,7 +66,7 @@ public class Yieldprobe: NSObject {
         self.http = http ?? Yieldprobe.defaultClient
         self.connectivitySource = connectivitySource
         self.consentSource = consentSource
-        self.deviceTypeDecorator = DeviceTypeDecorator(device: device)
+        self.device = device
         self.idfaDecorator = IDFADecorator(source: idfa)
         self.locationDecorator = LocationDecorator(locationSource: locationSource,
                                                    configuration: configuration)
@@ -141,7 +141,8 @@ public class Yieldprobe: NSObject {
                                                       .connectivity(from: connectivitySource)),
                       URLDecorators.consent(from: consentSource),
                       URLDecorators.privacyFilter(with: configuration,
-                                                  decorator: deviceTypeDecorator),
+                                                  decorator: URLDecorators
+                                                    .type(of: device)),
                       URLDecorators.extraTargeting(from: configuration),
                       URLDecorators.privacyFilter(with: configuration,
                                                   decorator: idfaDecorator),

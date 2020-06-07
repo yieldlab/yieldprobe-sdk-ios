@@ -47,3 +47,11 @@ struct DeviceTypeDecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func type (of device: Device?) -> URLDecorator {
+        DeviceTypeDecorator(device: device).decorate(_:)
+    }
+    
+}

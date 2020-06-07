@@ -32,7 +32,7 @@ public class Yieldprobe: NSObject {
         locationDecorator.configuration
     }
     
-    private(set) var connectivity: ConnectivityDecorator
+    private(set) var connectivitySource: ConnectivitySource?
     
     private var consentSource: ConsentSource?
     
@@ -64,7 +64,7 @@ public class Yieldprobe: NSObject {
         let configuration = Configuration()
         
         self.http = http ?? Yieldprobe.defaultClient
-        self.connectivity = ConnectivityDecorator(source: connectivitySource)
+        self.connectivitySource = connectivitySource
         self.consentSource = consentSource
         self.deviceTypeDecorator = DeviceTypeDecorator(device: device)
         self.idfaDecorator = IDFADecorator(source: idfa)
@@ -137,7 +137,8 @@ public class Yieldprobe: NSObject {
                       URLDecorators.bundleID(from: configuration),
                       URLDecorators.cacheBuster(),
                       URLDecorators.privacyFilter(with: configuration,
-                                                  decorator: connectivity),
+                                                  decorator: URLDecorators
+                                                      .connectivity(from: connectivitySource)),
                       URLDecorators.consent(from: consentSource),
                       URLDecorators.privacyFilter(with: configuration,
                                                   decorator: deviceTypeDecorator),

@@ -54,3 +54,11 @@ struct ConnectivityDecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func connectivity (from source: ConnectivitySource?) -> URLDecorator {
+        ConnectivityDecorator(source: source).decorate(_:)
+    }
+    
+}

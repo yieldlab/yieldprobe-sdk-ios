@@ -43,5 +43,11 @@ extension URLDecorators {
     ) -> URLDecorator {
         PIIDDecoratorFilter(configuration: configuration, wrapped: decorator).decorate(_:)
     }
+
+    static func privacyFilter (with configuration: Configuration,
+                               decorator: @escaping URLDecorator) -> URLDecorator
+    {
+        PIIDDecoratorFilter(configuration: configuration, wrapped: decorator).decorate(_:)
+    }
     
 }

@@ -28,19 +28,15 @@ public class Yieldprobe: NSObject {
     
     // MARK: Properties
     
-    private(set) var appNameDecorator: AppNameDecorator
-    
     private(set) var appStoreDecorator: AppStoreDecorator
     
     private(set) var bundleIDDecorator: BundleIDDecorator
     
     let cacheBuster = CacheBuster()
     
-    #if false
     var configuration: Configuration {
         locationDecorator.configuration
     }
-    #endif
     
     private(set) var connectivity: PIIDDecoratorFilter<ConnectivityDecorator>
     
@@ -75,7 +71,6 @@ public class Yieldprobe: NSObject {
     {
         let configuration = Configuration()
         
-        appNameDecorator = AppNameDecorator(configuration: configuration)
         appStoreDecorator = AppStoreDecorator(configuration: configuration)
         bundleIDDecorator = BundleIDDecorator(configuration: configuration)
         
@@ -97,7 +92,6 @@ public class Yieldprobe: NSObject {
     }
     
     public func configure(using configuration: Configuration) {
-        appNameDecorator.configuration = configuration
         appStoreDecorator.configuration = configuration
         bundleIDDecorator.configuration = configuration
         connectivity.configuration = configuration
@@ -164,7 +158,7 @@ public class Yieldprobe: NSObject {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true&sdk=1")!
         let url = baseURL
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
-            .decorate(appNameDecorator.decorate,
+            .decorate(URLDecorators.appName(from: configuration),
                       appStoreDecorator.decorate,
                       bundleIDDecorator.decorate,
                       cacheBuster.decorate,

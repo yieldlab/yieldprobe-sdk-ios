@@ -26,3 +26,11 @@ struct AppNameDecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+
+    static func appName (from configuration: Configuration) -> URLDecorator {
+        AppNameDecorator(configuration: configuration).decorate(_:)
+    }
+
+}

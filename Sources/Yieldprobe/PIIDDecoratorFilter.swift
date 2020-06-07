@@ -9,15 +9,20 @@ import Foundation
 
 /// Disables the wrapped `URLDecorator` if ad personalization is not permitted. This will protect
 /// personally identifyable information data from leaking out of the device even though it should not.
-struct PIIDDecoratorFilter<Wrapped: URLDecoratorProtocol>: URLDecoratorProtocol {
+struct PIIDDecoratorFilter: URLDecoratorProtocol {
     
     var configuration: Configuration
     
-    var wrapped: Wrapped
+    var wrapped: URLDecorator
     
-    init (configuration: Configuration, wrapped: Wrapped) {
+    init (configuration: Configuration, wrapped: @escaping URLDecorator) {
         self.configuration = configuration
         self.wrapped = wrapped
+    }
+    
+    init<Wrapped: URLDecoratorProtocol> (configuration: Configuration, wrapped: Wrapped) {
+        self.configuration = configuration
+        self.wrapped = wrapped.decorate(_:)
     }
     
     func decorate(_ subject: URL) -> URL {
@@ -25,7 +30,7 @@ struct PIIDDecoratorFilter<Wrapped: URLDecoratorProtocol>: URLDecoratorProtocol 
             return subject
         }
         
-        return wrapped.decorate(subject)
+        return wrapped(subject)
     }
     
 }

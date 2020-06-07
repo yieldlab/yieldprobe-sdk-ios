@@ -26,3 +26,11 @@ struct BundleIDDecorator: URLDecoratorProtocol {
     }
     
 }
+
+extension URLDecorators {
+    
+    static func bundleID (from configuration: Configuration) -> URLDecorator {
+        BundleIDDecorator(configuration: configuration).decorate(_:)
+    }
+    
+}

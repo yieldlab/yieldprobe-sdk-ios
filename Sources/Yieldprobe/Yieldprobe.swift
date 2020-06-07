@@ -28,8 +28,6 @@ public class Yieldprobe: NSObject {
     
     // MARK: Properties
     
-    private(set) var bundleIDDecorator: BundleIDDecorator
-    
     let cacheBuster = CacheBuster()
     
     var configuration: Configuration {
@@ -69,8 +67,6 @@ public class Yieldprobe: NSObject {
     {
         let configuration = Configuration()
         
-        bundleIDDecorator = BundleIDDecorator(configuration: configuration)
-        
         self.http = http ?? Yieldprobe.defaultClient
         let connectivity = ConnectivityDecorator(source: connectivitySource)
         self.connectivity = PIIDDecoratorFilter(configuration: configuration,
@@ -89,7 +85,6 @@ public class Yieldprobe: NSObject {
     }
     
     public func configure(using configuration: Configuration) {
-        bundleIDDecorator.configuration = configuration
         connectivity.configuration = configuration
         deviceTypeDecorator.configuration = configuration
         extraTargetingDecorator.configuration = configuration
@@ -156,7 +151,7 @@ public class Yieldprobe: NSObject {
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
             .decorate(URLDecorators.appName(from: configuration),
                       URLDecorators.appStoreURL(from: configuration),
-                      bundleIDDecorator.decorate,
+                      URLDecorators.bundleID(from: configuration),
                       cacheBuster.decorate,
                       connectivity.decorate,
                       consent.decorate,

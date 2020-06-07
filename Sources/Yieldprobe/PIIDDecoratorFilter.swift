@@ -24,3 +24,14 @@ struct PIIDDecoratorFilter<Wrapped: URLDecoratorProtocol>: URLDecoratorProtocol 
     }
     
 }
+
+extension URLDecorators {
+    
+    static func privacyFilter<Wrapped: URLDecoratorProtocol> (
+        with configuration: Configuration,
+        decorator: Wrapped
+    ) -> URLDecorator {
+        PIIDDecoratorFilter(configuration: configuration, wrapped: decorator).decorate(_:)
+    }
+    
+}

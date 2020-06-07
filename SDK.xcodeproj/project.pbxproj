@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		910B67E42369DFF8009895D4 /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E32369DFF8009895D4 /* ConfigurationTests.m */; };
 		910B67E62369E1F3009895D4 /* BidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E52369E1F3009895D4 /* BidError.swift */; };
+		9117223F248D2F97009E53A8 /* URLDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9117223D248D2F23009E53A8 /* URLDecorator.swift */; };
 		91264F362350B9D90012D871 /* URLReply+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F352350B9D90012D871 /* URLReply+YLD.swift */; };
 		91264F382350C6160012D871 /* Result+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F372350C6160012D871 /* Result+YLD.swift */; };
 		91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F392350C7E60012D871 /* ResultTests.swift */; };
@@ -139,6 +140,7 @@
 /* Begin PBXFileReference section */
 		910B67E32369DFF8009895D4 /* ConfigurationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigurationTests.m; sourceTree = "<group>"; };
 		910B67E52369E1F3009895D4 /* BidError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidError.swift; sourceTree = "<group>"; };
+		9117223D248D2F23009E53A8 /* URLDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDecorator.swift; sourceTree = "<group>"; };
 		911EA66224700D7300F6E814 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		91264F352350B9D90012D871 /* URLReply+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLReply+YLD.swift"; sourceTree = "<group>"; };
 		91264F372350C6160012D871 /* Result+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+YLD.swift"; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				915618E1234B954800D5F530 /* IDFADecorator.swift */,
 				915618DB234B483400D5F530 /* LocationDecorator.swift */,
 				91C40884234F30B800D0DC71 /* PIIDDecoratorFilter.swift */,
+				9117223D248D2F23009E53A8 /* URLDecorator.swift */,
 				915618D3234B3D9100D5F530 /* URLDecoratorProtocol.swift */,
 				915C8AB72343855400746E7E /* Yieldprobe.swift */,
 			);
@@ -626,6 +629,7 @@
 				915618D6234B3DDF00D5F530 /* URL+YLD.swift in Sources */,
 				919305802368453E00B4EB87 /* Dispatch+YLD.swift in Sources */,
 				91B283B9234DC1520055DB7F /* NWPathMonitor+YLD.swift in Sources */,
+				9117223F248D2F97009E53A8 /* URLDecorator.swift in Sources */,
 				915618CA234B25A200D5F530 /* CacheBuster.swift in Sources */,
 				915618C8234B257A00D5F530 /* HighPrecisionClock.swift in Sources */,
 				915618E2234B954800D5F530 /* IDFADecorator.swift in Sources */,

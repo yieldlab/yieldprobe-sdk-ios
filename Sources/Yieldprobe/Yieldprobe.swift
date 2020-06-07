@@ -164,8 +164,17 @@ public class Yieldprobe: NSObject {
         let baseURL = URL(string: "https://ad.yieldlab.net/yp/?content=json&pvid=true&sdk=1")!
         let url = baseURL
             .appendingPathComponent(slots.map(String.init(_:)).joined(separator: ","))
-            .decorate(appNameDecorator, appStoreDecorator, bundleIDDecorator, cacheBuster, connectivity, consent, deviceTypeDecorator, extraTargetingDecorator, locationDecorator, idfaDecorator)
-        _ = http.get(url: url, timeout: timeout) { result in
+            .decorate(appNameDecorator.decorate,
+                      appStoreDecorator.decorate,
+                      bundleIDDecorator.decorate,
+                      cacheBuster.decorate,
+                      connectivity.decorate,
+                      consent.decorate,
+                      deviceTypeDecorator.decorate,
+                      extraTargetingDecorator.decorate,
+                      locationDecorator.decorate,
+                      idfaDecorator.decorate)
+        http.get(url: url, timeout: timeout) { result in
             let result = Result<[Bid],Swift.Error> {
                 let reply = try result.get()
                 

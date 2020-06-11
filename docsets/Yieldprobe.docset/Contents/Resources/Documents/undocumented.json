@@ -1,6 +1,54 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/sven.herzberg/Workspace/yieldprobe-sdk-ios/Sources/Yieldprobe/BidError.swift",
+      "line": 10,
+      "symbol": "BidError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sven.herzberg/Workspace/yieldprobe-sdk-ios/Sources/Yieldprobe/BidError.swift",
+      "line": 30,
+      "symbol": "BidError",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sven.herzberg/Workspace/yieldprobe-sdk-ios/Sources/Yieldprobe/Configuration.swift",
+      "line": 10,
+      "symbol": "Configuration",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sven.herzberg/Workspace/yieldprobe-sdk-ios/Sources/Yieldprobe/Configuration.swift",
+      "line": 51,
+      "symbol": "Configuration.init(appName:bundleID:storeURL:personalizeAds:useGeolocation:extraTargeting:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sven.herzberg/Workspace/yieldprobe-sdk-ios/Sources/Yieldprobe/Configuration.swift",
+      "line": 69,
+      "symbol": "_ObjCConfiguration",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sven.herzberg/Workspace/yieldprobe-sdk-ios/Sources/Yieldprobe/Configuration.swift",
+      "line": 183,
+      "symbol": "_ObjCConfiguration.copy()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sven.herzberg/Workspace/yieldprobe-sdk-ios/Sources/Yieldprobe/Yieldprobe.swift",
+      "line": 70,
+      "symbol": "Yieldprobe.configure(using:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/sven.herzberg/Workspace/yieldprobe-sdk-ios"
 }

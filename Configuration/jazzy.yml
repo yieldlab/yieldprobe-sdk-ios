@@ -1,0 +1,7 @@
+author: Yieldlab GmbH
+author_url: https://yieldlab.de/
+build_tool_arguments:
+  - -target
+  - Yieldprobe
+module: Yieldprobe
+readme: ../readme.md

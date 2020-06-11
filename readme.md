@@ -1,30 +1,54 @@
-# Yieldprobe SDK for iOS
+# Yieldprobe for iOS
 
-## Repository Layout
+The module `Yieldprobe` provides an API to access the [Yieldprobe Optimization Service](https://www.yieldlab.com/publisher/#yield-optimisation). 
 
-* `Package.swift`: Meta Data for Swift Package Manager.
-* `Sources`: Source code for Swift Package.
-* `Tests`: Test Code for Swift Package.
-* `SDK.xcodeproj`: The Xcode project used for development. Contains a test harness.
-* `XcodeWrapper`: A folder containing the Xcode project `Dummy`. This Xcode project depends on the Swift Package.
+## Integration
 
-## Known Issues
+1. Select your Xcode project in the sidebar
+2. Select the project above the list of targets
+3. Select the tab *“Swift Packages”*
+4. Enter this value in the search bar `https://github.com/yieldlab/yieldprobe-sdk-ios.git`
+5. Click *“Next”*
+6. Select *“Branch”* → *“master”*
+7. Click *“Next”*
+8. In the list *“Choose package product and targets:”* make sure you add *“Yieldprobe, Library”* to your app target.
+9. Import Yieldprobe into your code: `import Yieldprobe`
+10. Start using the Yieldprobe API.
 
-### `swift build` in the Command Line
+Yieldprobe works with full
+[App Transport Security (ATS)](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html)
+enabled. However, it's likely that other components require you to disable ATS. See the documentation of affected components for details.
 
-`swift build` is known to be incapable of building standalone packages for iOS:
+## Configuration
 
+```swift
+// Configure the SDK
+var config = Yielprobe.Configuration()
+config.appName = "My App"
+config.bundleID = "com.example.my-app"
+config.personalizeAds = true // see data privacy section for details
+Yieldprobe.shared.configure(using: config)
 ```
-$ swift build
-Sources/Yieldprobe/Extensions/UIDevice+YLD.swift:8:8: error: no such module 'UIKit'
-import UIKit
-       ^
-…
-# 
+
+## Header Bidding
+
+```swift
+Yieldprobe.shared.probe(slot: <#adSlotID#>) { result in
+    do {
+        let bid = try result.get()
+        let dfp = DFPRequest()
+        dfp.customTargeting = try bid.customTargeting() 
+        // TODO: Apply targeting to ad server request.
+    } catch {
+        // TODO: Handle errors like no bids, network failures, etc. 
+    }
+}
 ```
 
-For command line builds, use the provided `XcodeWrapper`:
+## Data Privacy
 
-```
-$ xcodebuild build -project XcodeWrapper/Dummy.xcodeproj -scheme Dummy
-```
+In order to comply with data privacy regulations, Yieldprobe provides a way to configure its behavior in certain ways:
+
+1. Use `Configuration.personalizeAds` to specify whether (or not) to pass personal data to the server.
+2. Use `Configuration.useGeolocation` to restrict access to geolocation data (will not be used if `personalizeAds` is `false`).
+3. An [IAB Consent String](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Mobile%20In-App%20Consent%20APIs%20v1.0%20Final.md) will be read from `UserDefaults` and – if found – will be forwarded to the Yieldprobe servers. If you use an IAB compliant CMP, this will be picked up automatically.

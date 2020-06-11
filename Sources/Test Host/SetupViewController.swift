@@ -404,11 +404,13 @@ class SetupViewController: UITableViewController {
         switch segue.destination {
         case let vc as ValidationViewController:
             vc.adSlot = adSlot?.rawValue
-            vc.configuration = Configuration(appName: appName,
-                                             bundleID: bundleID,
-                                             personalizeAds: personalizeAds,
-                                             useGeolocation: useGeolocation,
-                                             extraTargeting: extraTargeting)
+            var configuration = Configuration()
+            configuration.appName = appName
+            configuration.bundleID = bundleID
+            configuration.personalizeAds = personalizeAds
+            configuration.useGeolocation = useGeolocation
+            configuration.extraTargeting = extraTargeting
+            vc.configuration = configuration
         case let vc as ExtraTargetingController:
             vc.delegate = nil
             vc.extraTargeting = extraTargeting // this would be so much nicer using bindings.

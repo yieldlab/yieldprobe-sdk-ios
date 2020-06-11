@@ -24,6 +24,9 @@
 		910B67E42369DFF8009895D4 /* ConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E32369DFF8009895D4 /* ConfigurationTests.m */; };
 		910B67E62369E1F3009895D4 /* BidError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910B67E52369E1F3009895D4 /* BidError.swift */; };
 		9117223F248D2F97009E53A8 /* URLDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9117223D248D2F23009E53A8 /* URLDecorator.swift */; };
+		91172237248BA45F009E53A8 /* HighPrecisionClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915618C7234B257A00D5F530 /* HighPrecisionClock.swift */; };
+		9117223A248BA9C5009E53A8 /* Configuration+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91172238248BA997009E53A8 /* Configuration+ObjC.swift */; };
+		9117223C248BAB7A009E53A8 /* develop.md in Resources */ = {isa = PBXBuildFile; fileRef = 9117223B248BAB7A009E53A8 /* develop.md */; };
 		91264F362350B9D90012D871 /* URLReply+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F352350B9D90012D871 /* URLReply+YLD.swift */; };
 		91264F382350C6160012D871 /* Result+YLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F372350C6160012D871 /* Result+YLD.swift */; };
 		91264F3A2350C7E60012D871 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91264F392350C7E60012D871 /* ResultTests.swift */; };
@@ -141,6 +144,8 @@
 		910B67E32369DFF8009895D4 /* ConfigurationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigurationTests.m; sourceTree = "<group>"; };
 		910B67E52369E1F3009895D4 /* BidError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidError.swift; sourceTree = "<group>"; };
 		9117223D248D2F23009E53A8 /* URLDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDecorator.swift; sourceTree = "<group>"; };
+		91172238248BA997009E53A8 /* Configuration+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Configuration+ObjC.swift"; sourceTree = "<group>"; };
+		9117223B248BAB7A009E53A8 /* develop.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = develop.md; sourceTree = "<group>"; };
 		911EA66224700D7300F6E814 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		91264F352350B9D90012D871 /* URLReply+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLReply+YLD.swift"; sourceTree = "<group>"; };
 		91264F372350C6160012D871 /* Result+YLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+YLD.swift"; sourceTree = "<group>"; };
@@ -270,6 +275,7 @@
 				917488F2235EEAA20099ECDD /* BundleIDDecorator.swift */,
 				915618C9234B25A200D5F530 /* CacheBuster.swift */,
 				91C40882234F2AAC00D0DC71 /* Configuration.swift */,
+				91172238248BA997009E53A8 /* Configuration+ObjC.swift */,
 				91793D51234CB0D6004DB72D /* ConnectivityDecorator.swift */,
 				915618CF234B2FDB00D5F530 /* ConsentDecorator.swift */,
 				91B283B4234DB6770055DB7F /* DefaultConnectivitySource.swift */,
@@ -342,6 +348,7 @@
 		915C8A382343724A00746E7E = {
 			isa = PBXGroup;
 			children = (
+				9117223B248BAB7A009E53A8 /* develop.md */,
 				911EA66224700D7300F6E814 /* readme.md */,
 				91C7E028247024A70071CF82 /* Package.swift */,
 				919AC5CC23688174000CB273 /* build-xcframework.sh */,
@@ -558,6 +565,7 @@
 				915C8ACC234385DA00746E7E /* LaunchScreen.storyboard in Resources */,
 				915C8AC9234385DA00746E7E /* Assets.xcassets in Resources */,
 				91303F3B23607C68009000E0 /* Localizable.stringsdict in Resources */,
+				9117223C248BAB7A009E53A8 /* develop.md in Resources */,
 				915C8AC7234385D400746E7E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -624,6 +632,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9117223A248BA9C5009E53A8 /* Configuration+ObjC.swift in Sources */,
 				913A581B235F17E500440DB1 /* AppNameDecorator.swift in Sources */,
 				915618DC234B483400D5F530 /* LocationDecorator.swift in Sources */,
 				915618D6234B3DDF00D5F530 /* URL+YLD.swift in Sources */,
@@ -663,6 +672,7 @@
 			files = (
 				91303F3623604ECD009000E0 /* HTTPRecorder.swift in Sources */,
 				915C8AC4234385D400746E7E /* SetupViewController.swift in Sources */,
+				91172237248BA45F009E53A8 /* HighPrecisionClock.swift in Sources */,
 				91303F3423604EB6009000E0 /* TimeZone+YLD.swift in Sources */,
 				915C8AC0234385D400746E7E /* AppDelegate.swift in Sources */,
 				91303F4023607EE5009000E0 /* ExtraTargetingController.swift in Sources */,

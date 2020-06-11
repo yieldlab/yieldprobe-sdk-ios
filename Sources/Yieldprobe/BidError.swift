@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Errors from bidding
 public enum BidError: Swift.Error, Equatable {
     /// The app did not request a single advertising slot.
     case noSlot

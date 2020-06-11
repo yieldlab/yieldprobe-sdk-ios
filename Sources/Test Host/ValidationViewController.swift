@@ -7,7 +7,11 @@
 
 import CoreLocation
 import UIKit
+#if DEBUG
 @testable import Yieldprobe
+#else
+import Yieldprobe
+#endif
 
 class ValidationViewController: UITableViewController {
     
@@ -48,7 +52,9 @@ class ValidationViewController: UITableViewController {
     
     var configuration: Configuration!
     
+    #if DEBUG
     let http: HTTPRecorder<URLSession>
+    #endif
     
     private(set) var started: HighPrecisionClock.Time!
     
@@ -57,12 +63,18 @@ class ValidationViewController: UITableViewController {
     // MARK: - Object Life-Cycle
     
     required init?(coder: NSCoder) {
+        #if DEBUG
         http = HTTPRecorder(Yieldprobe.defaultClient)
         yieldprobe = Yieldprobe(http: http)
+        #else
+        yieldprobe = .shared
+        #endif
         
         super.init(coder: coder)
         
+        #if DEBUG
         http.onRequest = on(request:)
+        #endif
     }
     
     // MARK: - View Life-Cycle

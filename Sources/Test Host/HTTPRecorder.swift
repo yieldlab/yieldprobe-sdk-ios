@@ -5,6 +5,7 @@
 //  Created by Sven Herzberg on 23.10.19.
 //
 
+#if DEBUG
 import Foundation
 @testable import Yieldprobe
 
@@ -29,3 +30,4 @@ extension HTTPRecorder: HTTPClient {
     }
     
 }
+#endif

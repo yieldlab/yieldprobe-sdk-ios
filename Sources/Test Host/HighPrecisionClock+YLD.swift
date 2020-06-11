@@ -6,7 +6,6 @@
 //
 
 import Foundation
-@testable import Yieldprobe
 
 extension HighPrecisionClock.Time {
     

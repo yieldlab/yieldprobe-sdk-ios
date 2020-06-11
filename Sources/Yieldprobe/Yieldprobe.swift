@@ -67,6 +67,9 @@ public class Yieldprobe: NSObject {
         self.locationSource = locationSource
     }
     
+    /// Configure Yieldprobe
+    ///
+    /// Pass a `Configuration` to modify the behavior of Yieldprobe.
     public func configure(using configuration: Configuration) {
         self.configuration = configuration
     }

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Yieldprobe Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Yieldprobe" class="dashAnchor"></a>
+    <a title="Yieldprobe Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Yieldprobe Docs</a> (75% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Yieldprobe Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Yieldprobe Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Bid.html">Bid</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Yieldprobe.html">Yieldprobe</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/_ObjCConfiguration.html">_ObjCConfiguration</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/BidError.html">BidError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Configuration.html">Configuration</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Yieldprobe</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">swift</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">Yieldprobe</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>The Yieldprobe SDK.</p>
+
+<p>Use this class to request bids from Yieldprobe.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Class%20Properties"></a>
+                <a name="//apple_ref/swift/Section/Class Properties" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Class%20Properties"></a>
+                  <h3 class="section-name"><p>Class Properties</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Yieldprobe@objc(cs)Yieldprobe(cpy)sharedInstance"></a>
+                    <a name="//apple_ref/swift/Variable/shared" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Yieldprobe@objc(cs)Yieldprobe(cpy)sharedInstance">shared</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Yieldprobe Singleton</p>
+
+<p>Use this instance to communicate with the Yieldprobe API.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span><span class="p">(</span><span class="n">sharedInstance</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span><span class="p">:</span> <span class="kt">Yieldprobe</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Properties"></a>
+                  <h3 class="section-name"><p>Properties</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10YieldprobeAAC10sdkVersionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/sdkVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10YieldprobeAAC10sdkVersionSSvp">sdkVersion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Yieldprobe SDK Version</p>
+
+<p>This property will return the version of the current Yieldprobe iOS SDK.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sdkVersion</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Object%20Life-Cycle"></a>
+                <a name="//apple_ref/swift/Section/Object Life-Cycle" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Object%20Life-Cycle"></a>
+                  <h3 class="section-name"><p>Object Life-Cycle</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10YieldprobeAAC9configure5usingyAA13ConfigurationV_tF"></a>
+                    <a name="//apple_ref/swift/Method/configure(using:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10YieldprobeAAC9configure5usingyAA13ConfigurationV_tF">configure(using:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">using</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/Configuration.html">Configuration</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Bid%20Requests"></a>
+                <a name="//apple_ref/swift/Section/Bid Requests" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Bid%20Requests"></a>
+                  <h3 class="section-name"><p>Bid Requests</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10YieldprobeAAC5probe4slot7timeout5queue17completionHandlerySi_SdSgSo012OS_dispatch_E0CSgys6ResultOyAA3BidCs5Error_pGctF"></a>
+                    <a name="//apple_ref/swift/Method/probe(slot:timeout:queue:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10YieldprobeAAC5probe4slot7timeout5queue17completionHandlerySi_SdSgSo012OS_dispatch_E0CSgys6ResultOyAA3BidCs5Error_pGctF">probe(slot:<wbr>timeout:<wbr>queue:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Request a Bid from Yieldprobe for the specified ad slot ID.</p>
+
+<p>This method will perform an HTTP request to fetch the most recent bid for the ad slot identified by <code>slotID</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">probe</span> <span class="p">(</span><span class="n">slot</span> <span class="nv">slotID</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
+                   <span class="nv">timeout</span><span class="p">:</span> <span class="kt">TimeInterval</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                   <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                   <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/Bid.html">Bid</a></span><span class="p">,</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>slotID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ad slot ID used to request a bid.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeout</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>(<em>optional</em>) The maximum time interval to deliver an ad.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>(<em>optional</em>) The target DispatchQueue for the completion handler.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The code that will be invoked when a request was either successful or failed. Parameters:</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://yieldlab.de/" target="_blank" rel="external">Yieldlab GmbH</a>. All rights reserved. (Last updated: 2020-06-11)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

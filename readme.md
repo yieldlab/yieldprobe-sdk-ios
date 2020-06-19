@@ -1,6 +1,8 @@
 # Yieldprobe for iOS
 
-The module `Yieldprobe` provides an API to access the [Yieldprobe Optimization Service](https://www.yieldlab.com/publisher/#yield-optimisation). 
+The module `Yieldprobe` provides an API to access the [Yieldprobe Optimization Service](https://www.yieldlab.com/publisher/#yield-optimisation).
+
+* [API Reference](https://yieldlab.github.io/yieldprobe-sdk-ios/)
 
 ## Integration
 
@@ -9,7 +11,7 @@ The module `Yieldprobe` provides an API to access the [Yieldprobe Optimization S
 3. Select the tab *“Swift Packages”*
 4. Enter this value in the search bar `https://github.com/yieldlab/yieldprobe-sdk-ios.git`
 5. Click *“Next”*
-6. Select *“Branch”* → *“master”*
+6. Select *“Version”* → *“Up to Next Major”* → *“1.0.0”* (Xcode will prefill *“< 2.0.0”* for you)
 7. Click *“Next”*
 8. In the list *“Choose package product and targets:”* make sure you add *“Yieldprobe, Library”* to your app target.
 9. Import Yieldprobe into your code: `import Yieldprobe`

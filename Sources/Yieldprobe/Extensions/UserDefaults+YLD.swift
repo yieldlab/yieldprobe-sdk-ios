@@ -7,7 +7,7 @@
 
 import Foundation
 
-let iabConsentStringKey = "IABConsent_ConsentString"
+let iabConsentStringKey = "IABTCF_TCString"
 
 protocol UserDefaultsProtocol: ConsentSource {
     

@@ -26,7 +26,7 @@ class UserDefaultsTests: XCTestCase {
         let consent = userDefaults.consent
         
         // Assert:
-        XCTAssertEqual(consent, "IABConsent_ConsentString")
+        XCTAssertEqual(consent, "IABTCF_TCString")
     }
     
 }
